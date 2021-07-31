@@ -1,6 +1,6 @@
 # SpaceX-App
-___
-###Участники
+
+### Участники
 
 * [Антон Ливеров](https://github.com/Liverov/)
 * [Саша Лисицын](https://github.com/SashaLisitsyn)
