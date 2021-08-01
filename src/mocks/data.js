@@ -1,86 +1,81 @@
 export default [{
-    "fairings": null,
-    "links": {
-    "patch": {
-        "small": "https://images2.imgbox.com/eb/0f/Vev7xkUX_o.png",
-            "large": "https://images2.imgbox.com/ab/79/Wyc9K7fv_o.png"
-    },
-    "reddit": {
-        "campaign": "https://www.reddit.com/r/spacex/comments/fjf6rr/dm2_launch_campaign_thread/",
-            "launch": "https://www.reddit.com/r/spacex/comments/glwz6n/rspacex_cctcap_demonstration_mission_2_general",
-            "media": "https://www.reddit.com/r/spacex/comments/gp1gf5/rspacex_dm2_media_thread_photographer_contest/",
-            "recovery": "https://www.reddit.com/r/spacex/comments/gu5gkd/cctcap_demonstration_mission_2_stage_1_recovery/"
-    },
-    "flickr": {
-        "small": [],
-            "original": [
-            "https://live.staticflickr.com/65535/49927519643_b43c6d4c44_o.jpg",
-            "https://live.staticflickr.com/65535/49927519588_8a39a3994f_o.jpg",
-            "https://live.staticflickr.com/65535/49928343022_6fb33cbd9c_o.jpg",
-            "https://live.staticflickr.com/65535/49934168858_cacb00d790_o.jpg",
-            "https://live.staticflickr.com/65535/49934682271_fd6a31becc_o.jpg",
-            "https://live.staticflickr.com/65535/49956109906_f88d815772_o.jpg",
-            "https://live.staticflickr.com/65535/49956109706_cffa847208_o.jpg",
-            "https://live.staticflickr.com/65535/49956109671_859b323ede_o.jpg",
-            "https://live.staticflickr.com/65535/49955609618_4cca01d581_o.jpg",
-            "https://live.staticflickr.com/65535/49956396622_975c116b71_o.jpg",
-            "https://live.staticflickr.com/65535/49955609378_9b77e5c771_o.jpg",
-            "https://live.staticflickr.com/65535/49956396262_ef41c1d9b0_o.jpg"
+    "fairings": {
+        "reused": true,
+        "recovery_attempt": true,
+        "recovered": true,
+        "ships": [
+            "60c8c7a45d4819007ea69871"
         ]
     },
-    "presskit": "https://www.nasa.gov/sites/default/files/atoms/files/commercialcrew_press_kit.pdf",
-        "webcast": "https://youtu.be/xY96v0OIcK4",
-        "youtube_id": "xY96v0OIcK4",
-        "article": "https://spaceflightnow.com/2020/05/30/nasa-astronauts-launch-from-us-soil-for-first-time-in-nine-years/",
-        "wikipedia": "https://en.wikipedia.org/wiki/Crew_Dragon_Demo-2"
-},
-    "static_fire_date_utc": "2020-05-22T17:39:00.000Z",
-    "static_fire_date_unix": 1590169140,
-    "tdb": false,
+    "links": {
+        "patch": {
+            "small": "https://imgur.com/IJWn9pK.png",
+            "large": "https://imgur.com/u49XVx4.png"
+        },
+        "reddit": {
+            "campaign": "https://www.reddit.com/r/spacex/comments/nz7rai/transporter2_launch_campaign_thread/",
+            "launch": "https://www.reddit.com/r/spacex/comments/o9ki7u/rspacex_transporter2_launch_discussion_and/",
+            "media": null,
+            "recovery": "https://www.reddit.com/r/spacex/comments/k2ts1q/rspacex_fleet_updates_discussion_thread/"
+        },
+        "flickr": {
+            "small": [],
+            "original": [
+                "https://live.staticflickr.com/65535/51283430951_a9e5a41141_o.jpg",
+                "https://live.staticflickr.com/65535/51283430936_3852120bbe_o.jpg",
+                "https://live.staticflickr.com/65535/51283604493_d1a088b7c9_o.jpg",
+                "https://live.staticflickr.com/65535/51284454795_591717faee_o.jpg",
+                "https://live.staticflickr.com/65535/51284454810_9fdd0e8db4_o.jpg",
+                "https://live.staticflickr.com/65535/51283604443_6d92fe1231_o.jpg",
+                "https://live.staticflickr.com/65535/51283604428_b24ebf1b5f_o.jpg",
+                "https://live.staticflickr.com/65535/51283604438_7202e2a388_o.jpg"
+            ]
+        },
+        "presskit": null,
+        "webcast": "https://youtu.be/sSiuW1HcGjA",
+        "youtube_id": "sSiuW1HcGjA",
+        "article": null,
+        "wikipedia": null
+    },
+    "static_fire_date_utc": "2021-06-22T15:24:00.000Z",
+    "static_fire_date_unix": 1624375440,
+    "tbd": false,
     "net": false,
     "window": 0,
     "rocket": "5e9d0d95eda69973a809d1ec",
     "success": true,
-    "failures": [],
-    "details": "SpaceX will launch the second demonstration mission of its Crew Dragon vehicle as part of NASA's Commercial Crew Transportation Capability Program (CCtCap), carrying two NASA astronauts to the International Space Station. Barring unexpected developments, this mission will be the first crewed flight to launch from the United States since the end of the Space Shuttle program in 2011. DM-2 demonstrates the Falcon 9 and Crew Dragon's ability to safely transport crew to the space station and back to Earth and it is the last major milestone for certification of Crew Dragon. Initially the mission duration was planned to be no longer than two weeks, however NASA has been considering an extension to as much as six weeks or three months. The astronauts have been undergoing additional training for the possible longer mission.",
-    "crew": [
-    "5ebf1b7323a9a60006e03a7b",
-    "5ebf1a6e23a9a60006e03a7a"
-],
+    "details": "Falcon 9 launches to sun-synchronous polar orbit from Florida as part of SpaceX's Rideshare program dedicated to smallsat customers. The mission lifts off from SLC-40, Cape Canaveral on a southward azimuth and performs a dogleg maneuver. The booster for this mission is expected to return to LZ-1 based on FCC communications filings. This rideshare takes approximately 90 satellites and hosted payloads into orbit on a variety of deployers including three free-flying spacecraft which dispense their customers' satellites after separation from the SpaceX stack.",
     "ships": [
-    "5ea6ed30080df4000697c913",
-    "5ea6ed2f080df4000697c90b",
-    "5ea6ed2f080df4000697c90c",
-    "5ea6ed2e080df4000697c909",
-    "5ea6ed2f080df4000697c90d"
-],
-    "capsules": [
-    "5e9e2c5df359188aba3b2676"
-],
+        "60c8c7a45d4819007ea69871"
+    ],
+    "capsules": [],
     "payloads": [
-    "5eb0e4d1b6c3bb0006eeb257"
-],
-    "launchpad": "5e9e4502f509094188566f88",
+        "608ac397eb3e50044e3630e7"
+    ],
+    "launchpad": "5e9e4501f509094ba4566f84",
     "auto_update": true,
-    "flight_number": 94,
-    "name": "CCtCap Demo Mission 2",
-    "date_utc": "2020-05-30T19:22:00.000Z",
-    "date_unix": 1590866520,
-    "date_local": "2020-05-30T15:22:00-04:00",
+    "launch_library_id": "5d248abe-17ef-43ce-9c04-aef33af40520",
+    "failures": [],
+    "crew": [],
+    "flight_number": 132,
+    "name": "Transporter-2",
+    "date_utc": "2021-06-30T19:31:00.000Z",
+    "date_unix": 1625081460,
+    "date_local": "2021-06-30T15:31:00-04:00",
     "date_precision": "hour",
     "upcoming": false,
     "cores": [
-    {
-        "core": "5e9e28a7f3591817f23b2663",
-        "flight": 1,
-        "gridfins": true,
-        "legs": true,
-        "reused": false,
-        "landing_attempt": true,
-        "landing_success": true,
-        "landing_type": "ASDS",
-        "landpad": "5e9e3032383ecb6bb234e7ca"
-    }
-],
-    "id": "5eb87d46ffd86e000604b388"
+        {
+            "core": "5ef670f10059c33cee4a826c",
+            "flight": 8,
+            "gridfins": true,
+            "legs": true,
+            "reused": true,
+            "landing_attempt": true,
+            "landing_success": true,
+            "landing_type": "RTLS",
+            "landpad": "5e9e3032383ecb267a34e7c7"
+        }
+    ],
+    "id": "600f9b6d8f798e2a4d5f979f"
 }];
