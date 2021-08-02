@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from '../ListItem/ListItem';
 import S from './style.module.css';
 import Search from "../search/search";
-import Date from '../../mocks/data'
+import Data from '../../mocks/data'
 
 function useForceUpdate() {
     const [i, setI] = React.useState(0);
@@ -12,10 +12,9 @@ function useForceUpdate() {
 
 export default function List() {
     const forceUpdate = useForceUpdate()
-    const [items, setItems] = React.useState(Date)
 
     function toggleLike(idx) {
-        items[idx].like = !items[idx].like;
+        Data[idx].like = !Data[idx].like;
         forceUpdate();
     }
     return (
@@ -24,7 +23,7 @@ export default function List() {
                 <Search />
             </div>
             <div className="items">
-                {items.map(({id, title, urlImg, description, like}, idx) => <ListItem
+                {Data.map(({id, title, urlImg, description, like}, idx) => <ListItem
                     key={id}
                     title={title}
                     urlImg={urlImg}
