@@ -4,7 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
-  "homepage": "https://github.com/Liverov/spacex-app",
+  "homepage": "https://github.com/Liverov/<project>/",
   "dependencies": {
     "classnames": "2.3.1",
     "react": "17.0.2",
