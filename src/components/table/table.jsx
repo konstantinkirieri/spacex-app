@@ -1,5 +1,5 @@
 import S from "./styles.module.css"
-import List from "../list/list";
+import List from "../List/list";
 import {Categories} from "../category/category";
 
 export default function Table() {
