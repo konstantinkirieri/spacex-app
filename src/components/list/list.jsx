@@ -1,6 +1,7 @@
 import React from 'react';
 import ListItem from '../ListItem/ListItem';
 import S from './style.module.css';
+import Search from "../search/search";
 
 function useForceUpdate() {
     const [i, setI] = React.useState(0);
@@ -166,7 +167,9 @@ export default function List() {
     }
     return (
         <div className={S.list}>
-            <div className="search" style={{height: 50, fontSize: 24, textAlign: 'center'}}>тут поиск</div>
+            <div className="search" style={{height: 50, fontSize: 24, textAlign: 'center'}}>
+                <Search />
+            </div>
             <div className="items">
                 {items.map(({id, title, urlImg, description, like}, idx) => <ListItem
                     key={id}
