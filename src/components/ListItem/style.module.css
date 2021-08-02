@@ -1,0 +1,55 @@
+.item {
+    height: 50px;
+    display: flex;
+    padding: 5px;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer
+}
+
+.item:not(:last-child) {
+    border-bottom: 1px solid rgb(98, 98, 98);
+}
+
+.item:hover {
+    background: rgb(124, 124, 124);
+}
+
+img {
+    height: 40px;
+    width: 40px;
+}
+
+.body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 5px;
+    max-width: 200px;
+}
+
+.title {
+    font-size: 14px;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.likeActive {
+    color: red;
+}
+
+button {
+    border: none;
+    background: inherit;
+}

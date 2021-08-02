@@ -1,0 +1,33 @@
+.category_wrapper{
+   padding: 20px 13px 0 15px;
+   min-height: 91vh;
+}
+.favourites{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+.favTitle{
+   font-size: 24px;
+   line-height: 28px;
+   margin-left: 13px;
+   font-weight: 400;
+}
+.horLine{
+   display: block;
+   background-color: black;
+}
+.fav_img{
+   height: 30px;
+}
+.item_wrapper{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+.item{
+   font-size: 24px;
+   line-height: 28px;
+   color: #000000;
+   font-weight: 400;
+}

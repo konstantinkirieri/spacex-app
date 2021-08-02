@@ -6,14 +6,3 @@ body {
 .app {
   text-align: left;
 }
-
-.main {
-  display: flex;
-}
-
-.categories {
-  width: 15%;
-  background-color: #ccc;
-  height: 100%;
-  display: block;
-}
