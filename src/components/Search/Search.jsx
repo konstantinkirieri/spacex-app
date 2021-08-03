@@ -1,6 +1,6 @@
 import S from "./search.module.css"
 
-export default function Search() {
+export default function Search () {
     const getPath = window.location.pathname;
     return (
         getPath === '/' ?
