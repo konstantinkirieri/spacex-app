@@ -7,7 +7,7 @@ import { categories } from '../../mocks/categories';
 
 export function Categories () {
    const goTo = (id) => {
-      window.location.pathname = `/spacex-app/${id}`;
+      window.location.pathname = `${id}`;
    }
 
    const allCategories = categories.map((item, i) => {
