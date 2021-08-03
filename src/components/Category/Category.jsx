@@ -5,7 +5,7 @@ import { CategoryItem } from './CategoryItem';
 import { categories } from '../../mocks/categories';
 
 
-export function Categories () {
+export function Categories() {
    const goTo = (id) => {
       window.location.pathname = `${id}`;
    }
