@@ -34,3 +34,8 @@
    color: #000000;
    font-weight: 400;
 }
+.item:hover,
+.favourites:hover {
+   cursor: pointer;
+   color: red
+}

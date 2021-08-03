@@ -1,8 +1,10 @@
 import S from "./search.module.css"
 
 export default function Search() {
+    const getPath = window.location.pathname;
     return (
-        <div className={S.search_wrapper}>
+        getPath === '/' ?
+            <div className={S.search_wrapper}>
             <i className="fas fa-search" />
             <input
                 className={S.search_input}
@@ -11,6 +13,6 @@ export default function Search() {
             <button className={S.search_filter}>
                 <i className="fas fa-filter" />
             </button>
-        </div>
+            </div> : null
     )
 }

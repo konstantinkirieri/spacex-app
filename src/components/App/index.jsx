@@ -1,5 +1,5 @@
-import Header from "../header/header";
-import Table from "../table/table";
+import Header from "../Header/Header";
+import Table from "../Table/Table";
 
 import S from './styles.module.css'
 
