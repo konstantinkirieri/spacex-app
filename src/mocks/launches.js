@@ -1,4 +1,4 @@
-export const launchesData = [
+export const launchesData = JSON.parse(`[
     {
         "fairings": {
             "reused": false,
@@ -696,4 +696,4 @@ export const launchesData = [
         ],
         "id": "5eb87ce1ffd86e000604b333"
     }
-];
+]`);
