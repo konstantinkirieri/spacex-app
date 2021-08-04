@@ -29,7 +29,7 @@ export function Categories({onChangeCategory}) {
             />
             <p
                 className={S.favTitle}
-                onClick={() => onChangeCategory('null')}
+                onClick={() => onChangeCategory(null)}
             >Избранное</p>
          </div>
          <hr className={S.horLine} />
