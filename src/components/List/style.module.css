@@ -1,0 +1,38 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.list {
+    width: 300px;
+    background: rgb(216, 215, 215);
+    overflow-y: scroll;
+}
+
+.search_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search_button {
+    width: 30px;
+    height: inherit;
+}
+.search_button:hover {
+    background: rgb(126, 125, 125);
+}
+
+.search_input {
+    flex: 1;
+    padding: 10px;
+    border: 0;
+    outline: none;
+}
+.search_select {
+    outline: none;
+}
+
+.search_select:hover {
+    cursor: pointer;
+}
