@@ -35,8 +35,8 @@ export default function List({category, onChangeItem}) {
         if(!success) return true;
         if(category === 'Launches') {
             return String(iteme.success) == success
-        }else if(category == 'Rockets') {
-            return String(iteme.active) == success
+        }else if(category === 'Rockets') {
+            return String(iteme.active) === success
         }
     }
     function getCategory(category) {
