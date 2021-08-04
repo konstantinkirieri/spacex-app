@@ -9,12 +9,14 @@ export default function ListItem({urlImg, title, description, like, onToggleLike
                     {title}
                 </h3>
                 <div className={S.description}>
-                    {description}
+                    {description.success ? 'Success' : 'Failure'}.&nbsp;
+                    { description.details && <>{description.details}</>}
                 </div>
             </div>
             <button 
                 className={like ? S.likeActive : null}
-                onClick={onToggleLike}>
+                // onClick={onToggleLike}
+            >
                 {like ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i>}
             </button>
         </div>
