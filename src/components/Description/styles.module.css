@@ -1,0 +1,40 @@
+.description {
+  max-width: 821px;
+  min-height: 638px;
+  display: flex;
+  position: relative;
+}
+
+.description__image {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  margin-left: 41px;
+  margin-top: 40px;
+}
+
+.description__text {
+  margin-left: 29px;
+  margin-top: 40px;
+}
+
+.description__title {
+  margin: 0;
+  max-width: 419px;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.description__about {
+  max-width: 489px;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.description__like {
+  width: 74px;
+  height: 64px;
+  position: absolute;
+  top: 271px;
+  left: 41px;
+}

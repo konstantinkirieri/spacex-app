@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from '../ListItem/ListItem';
 import S from './style.module.css';
-import Search from "../search/search";
+import Search from "../Search/Search";
 import Data from '../../mocks/data'
 
 function useForceUpdate() {
@@ -19,9 +19,7 @@ export default function List() {
     }
     return (
         <div className={S.list}>
-            <div className="search" style={{height: 50, fontSize: 24, textAlign: 'center'}}>
-                <Search />
-            </div>
+            <Search />
             <div className="items">
                 {Data.map(({id, title, urlImg, description, like}, idx) => <ListItem
                     key={id}
