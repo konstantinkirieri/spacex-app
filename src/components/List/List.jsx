@@ -4,25 +4,11 @@ import S from './style.module.css';
 import { launchesData } from '../../mocks/launches.js';
 import { rocketsData } from '../../mocks/rockets'
 
-console.log(launchesData)
-
-function useForceUpdate() {
-    const [i, setI] = useState(0);
-    return () => setI(i+1)
-}
-
-
-export default function List({category}) {
-    const forceUpdate = useForceUpdate()
+export default function List({category, onChangeItem}) {
     const [keyword, setKeyword] = useState('')
     const [text, setText] = useState('')
     const [success, setSuccess] = useState('')
 
-
-    // function toggleLike(idx) {
-    //     Data[idx].like = !Data[idx].like;
-    //     forceUpdate();
-    // }
     function heandleClickSearch() {
         setKeyword(text)
     }
@@ -33,10 +19,10 @@ export default function List({category}) {
     }
     function filterLaunchesSuccess(iteme) {
         if(!success) return true;
-        if(category == 'Launches') {
+        if(category === 'Launches') {
             return String(iteme.success) == success
-        }else if(category == 'Rockets') {
-            return String(iteme.active) == success
+        }else if(category === 'Rockets') {
+            return String(iteme.active) === success
         }
     }
     function getCategory(category) {
@@ -80,10 +66,9 @@ export default function List({category}) {
                     .map(({id, name, links, details, success, description, flickr_images}, idx) => <ListItem
                     key={id}
                     title={name}
-                    urlImg={category == 'Launches' ? links.patch.small : flickr_images[0]}
-                    description={category == 'Launches' ? {details, success} : description}
-                    // like={like}
-                    // onToggleLike={() => toggleLike(idx)}
+                    urlImg={category === 'Launches' ? links.patch.small : flickr_images[0]}
+                    description={category === 'Launches' ? {details, success} : description}
+                    onChangeItem={() => onChangeItem(idx)}
                 />)}
             </div>
         </div>
