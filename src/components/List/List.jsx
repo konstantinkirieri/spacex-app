@@ -2,6 +2,7 @@ import {React, useState} from 'react';
 import ListItem from '../ListItem/ListItem';
 import S from './style.module.css';
 import { launchesData } from '../../mocks/launches.js';
+import { rocketsData } from '../../mocks/rockets'
 
 console.log(launchesData)
 
@@ -11,18 +12,19 @@ function useForceUpdate() {
 }
 
 
-export default function List({category = launchesData}) {
+export default function List({category}) {
     const forceUpdate = useForceUpdate()
     const [keyword, setKeyword] = useState('')
     const [text, setText] = useState('')
     const [success, setSuccess] = useState('')
+
 
     // function toggleLike(idx) {
     //     Data[idx].like = !Data[idx].like;
     //     forceUpdate();
     // }
     function heandleClickSearch() {
-        setText(keyword)
+        setKeyword(text)
     }
     function filterList(iteme) {
         if(!keyword) return true;
@@ -31,12 +33,26 @@ export default function List({category = launchesData}) {
     }
     function filterLaunchesSuccess(iteme) {
         if(!success) return true;
-        return String(iteme.success) == success;
+        if(category == 'Launches') {
+            return String(iteme.success) == success
+        }else if(category == 'Rockets') {
+            return String(iteme.active) == success
+        }
+    }
+    function getCategory(category) {
+        switch (category) {
+            case 'Launches':
+                return launchesData
+            case 'Rockets':
+                return rocketsData
+            default:
+                return []
+        }
     }
     return (
         <div className={S.list}>
             <div className={S.search_wrapper}>
-                <button onClick={heandleClickSearch}>
+                <button className={S.search_button} onClick={heandleClickSearch}>
                     <i className="fas fa-search" />
                 </button>
                 <input
@@ -45,21 +61,27 @@ export default function List({category = launchesData}) {
                     placeholder={`Поиск...`}
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}/>
-                <select className={S.search_filter} value={success} onChange={(e) => setSuccess(e.target.value)}>
-                    <option value='' selected>Launches</option>
-                    <option value='true'>Success</option>
-                    <option value='false'>Failure</option>
+                <select id='select' className={S.search_select} value={success} onChange={(e) => setSuccess(e.target.value)}>
+                    <option value=''>
+                        {category === 'Launches' ? 'Result' : 'Activity'}
+                    </option>
+                    <option value='true'>
+                        {category === 'Launches' ? 'Success' : 'Active'}
+                    </option>
+                    <option value='false'>
+                        {category === 'Launches' ? 'Failure' : 'No active'}
+                    </option>
                 </select>
             </div> 
             <div className="items">
-                {category
+                {getCategory(category)
                     .filter((iteme) => filterLaunchesSuccess(iteme))
                     .filter((iteme) => filterList(iteme))
-                    .map(({id, name, links, details, success}, idx) => <ListItem
+                    .map(({id, name, links, details, success, description, flickr_images}, idx) => <ListItem
                     key={id}
                     title={name}
-                    urlImg={links.patch.small}
-                    description={{details, success}}
+                    urlImg={category == 'Launches' ? links.patch.small : flickr_images[0]}
+                    description={category == 'Launches' ? {details, success} : description}
                     // like={like}
                     // onToggleLike={() => toggleLike(idx)}
                 />)}
