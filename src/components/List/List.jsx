@@ -12,7 +12,7 @@ function useForceUpdate() {
 }
 
 
-export default function List({category}) {
+export default function List({category, onChangeItem}) {
     const forceUpdate = useForceUpdate()
     const [keyword, setKeyword] = useState('')
     const [text, setText] = useState('')
@@ -33,7 +33,7 @@ export default function List({category}) {
     }
     function filterLaunchesSuccess(iteme) {
         if(!success) return true;
-        if(category == 'Launches') {
+        if(category === 'Launches') {
             return String(iteme.success) == success
         }else if(category == 'Rockets') {
             return String(iteme.active) == success
@@ -80,10 +80,9 @@ export default function List({category}) {
                     .map(({id, name, links, details, success, description, flickr_images}, idx) => <ListItem
                     key={id}
                     title={name}
-                    urlImg={category == 'Launches' ? links.patch.small : flickr_images[0]}
-                    description={category == 'Launches' ? {details, success} : description}
-                    // like={like}
-                    // onToggleLike={() => toggleLike(idx)}
+                    urlImg={category === 'Launches' ? links.patch.small : flickr_images[0]}
+                    description={category === 'Launches' ? {details, success} : description}
+                    onChangeItem={() => onChangeItem(idx)}
                 />)}
             </div>
         </div>

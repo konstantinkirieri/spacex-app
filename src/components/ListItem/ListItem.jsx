@@ -1,9 +1,11 @@
 import S from './style.module.css';
 
-export default function ListItem({urlImg, title, description, like, onToggleLike}) {
+export default function ListItem({urlImg, title, description, like, onChangeItem, onToggleLike}) {
     console.log(typeof(description))
     return (
-        <div className={S.item}>
+        <div className={S.item}
+        onClick={onChangeItem}
+        >
             <img className={S.img} src={urlImg} alt="img" />
             <div className={S.body}>
                 <h3 className={S.title}>
