@@ -1,6 +1,6 @@
 import S from './style.module.css';
 
-export default function ListItem({urlImg, title, description, like, onChangeItem, onToggleLike}) {
+export default function ListItem({urlImg, title, description, like, onChangeItem}) {
     console.log(typeof(description))
     return (
         <div className={S.item}
@@ -19,7 +19,6 @@ export default function ListItem({urlImg, title, description, like, onChangeItem
             </div>
             <button 
                 className={like ? S.likeActive : null}
-                // onClick={onToggleLike}
             >
                 {like ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i>}
             </button>

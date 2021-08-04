@@ -4,25 +4,11 @@ import S from './style.module.css';
 import { launchesData } from '../../mocks/launches.js';
 import { rocketsData } from '../../mocks/rockets'
 
-console.log(launchesData)
-
-function useForceUpdate() {
-    const [i, setI] = useState(0);
-    return () => setI(i+1)
-}
-
-
 export default function List({category, onChangeItem}) {
-    const forceUpdate = useForceUpdate()
     const [keyword, setKeyword] = useState('')
     const [text, setText] = useState('')
     const [success, setSuccess] = useState('')
 
-
-    // function toggleLike(idx) {
-    //     Data[idx].like = !Data[idx].like;
-    //     forceUpdate();
-    // }
     function heandleClickSearch() {
         setKeyword(text)
     }
