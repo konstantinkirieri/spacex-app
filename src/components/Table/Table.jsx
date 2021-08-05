@@ -10,6 +10,7 @@ export default function Table() {
 
   const handlerChangeCategory = (name) => {
     setCategory(name)
+    setItemId(0)
   }
 
   const handlerChangeItem = (id) => {

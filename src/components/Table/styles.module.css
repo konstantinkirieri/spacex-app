@@ -1,10 +1,4 @@
 .main {
     display: flex;
-}
-
-.categories {
-    width: 15%;
-    background-color: #ccc;
-    height: 100%;
-    display: block;
+    flex: 1;
 }

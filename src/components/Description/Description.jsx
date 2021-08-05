@@ -3,8 +3,6 @@ import S from './styles.module.css'
 import {launchesData} from '../../mocks/launches.js'
 import {rocketsData} from '../../mocks/rockets'
 
-import like from '../../images/shape.png'
-
 const Description = ({itemId, category}) => {
   const getName = (category) => {
     switch (category) {
@@ -54,11 +52,9 @@ const Description = ({itemId, category}) => {
           {getDescription(category)}
         </p>
       </div>
-      <img
-        className={S.description__like}
-        src={like}
-        alt="Лого"
-      />
+      <button className={S.likeButton}>
+          <i className="far fa-heart"></i>
+      </button>
     </div>
   )
 }
