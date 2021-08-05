@@ -4,15 +4,18 @@
     padding: 5px;
     padding-right: 15px;
     align-items: center;
-    cursor: pointer
-}
-
-.item:not(:last-child) {
-    border-bottom: 1px solid rgb(98, 98, 98);
+    cursor: pointer;
+    background-color: rgb(214, 214, 214);
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 .item:hover {
-    background: rgb(124, 124, 124);
+    background: rgb(184, 184, 184);
+ }
+ 
+.item:active {
+    background: rgb(131, 130, 130);
 }
 
 img {
@@ -21,7 +24,7 @@ img {
 }
 
 .body {
-    width: 170px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

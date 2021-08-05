@@ -1,6 +1,5 @@
 import React from 'react'
 import S from './styles.module.css'
-import fav from '../../img/heart.svg'
 import { CategoryItem } from './CategoryItem';
 import { categories } from '../../mocks/categories';
 
@@ -20,22 +19,14 @@ export function Categories({onChangeCategory}) {
    })
 
    return (
-      <div className={S.category_wrapper}>
-         <div className={S.favourites}>
-            <img
-                className={S.fav_img}
-                src={fav}
-                alt="избранное"
-            />
-            <p
-                className={S.favTitle}
-                onClick={() => onChangeCategory(null)}
-            >Избранное</p>
+      <nav className={S.category_wrapper}>
+         <div
+               className={S.item}
+               onClick={() => onChangeCategory(null)}
+         >
+            Favorites <div className={S.like}><i className="fas fa-heart"></i></div>
          </div>
-         <hr className={S.horLine} />
-         <div className={S.fav}>
-            {allCategories}
-         </div>
-      </div>
+         {allCategories}
+      </nav>
    )
 }
