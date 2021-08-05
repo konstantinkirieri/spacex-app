@@ -10,7 +10,8 @@ export default function List({category, onChangeItem}) {
     const [success, setSuccess] = useState('')
 
     useEffect(() => {
-        setSuccess('')
+        setSuccess('');
+        setKeyword('');
     }, [category])
 
     function heandleClickSearch() {
