@@ -52,7 +52,7 @@ export default function List({category, onChangeItem}) {
                     placeholder={`Поиск...`}
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}/>
-                <select id='select' className={S.search_select} value={success} onChange={(e) => setSuccess(e.target.value)}>
+                {category !== null && <select id='select' className={S.search_select} value={success} onChange={(e) => setSuccess(e.target.value)}>
                     <option value=''>
                         {category === 'Launches' ? 'Result' : 'Activity'}
                     </option>
@@ -62,7 +62,7 @@ export default function List({category, onChangeItem}) {
                     <option value='false'>
                         {category === 'Launches' ? 'Failure' : 'No active'}
                     </option>
-                </select>
+                </select>}
             </div> 
             <div className="items">
                 {getCategory(category)

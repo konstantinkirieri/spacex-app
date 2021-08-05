@@ -1,25 +1,27 @@
 .list {
-    width: 250px;
-    background: rgb(216, 215, 215);
+    width: 300px;
+    background: rgb(248, 248, 248);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: start;
 }
 
 .search_wrapper {
     display: flex;
-    width: 250px;
+    width: 280px;
     height: 30px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 .search_button {
     flex: 0 0 30px;
     height: inherit;
-    background: rgb(197, 197, 197);
+    background-color: rgb(214, 214, 214);
 }
 
-.search_button:hover {
-    background: rgb(126, 125, 125);
-}
 
 .search_input {
     flex: 1;
@@ -32,10 +34,15 @@
     flex: 0 0 75px;
     outline: none;
     border: none;
-    background: rgb(197, 197, 197);
+    background-color: rgb(214, 214, 214);
     height: inherit;
+    cursor: pointer;
 }
 
-.search_select:hover {
-    cursor: pointer;
+.search_button:hover, .search_select:hover {
+    background: rgb(184, 184, 184);
+}
+
+.search_button:active, .search_select:active {
+    background: rgb(131, 130, 130);
 }
