@@ -1,6 +1,6 @@
 .category_wrapper{
+   width: 250px;
    padding: 20px 13px 0 15px;
-   min-height: 91vh;
 }
 .favourites{
    display: flex;

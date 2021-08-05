@@ -1,6 +1,6 @@
-import {React, useState} from 'react';
+import { React, useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
-import S from './style.module.css';
+import S from './styles.module.css';
 import { launchesData } from '../../mocks/launches.js';
 import { rocketsData } from '../../mocks/rockets'
 
@@ -8,6 +8,10 @@ export default function List({category, onChangeItem}) {
     const [keyword, setKeyword] = useState('')
     const [text, setText] = useState('')
     const [success, setSuccess] = useState('')
+
+    useEffect(() => {
+        setSuccess('')
+    }, [category])
 
     function heandleClickSearch() {
         setKeyword(text)

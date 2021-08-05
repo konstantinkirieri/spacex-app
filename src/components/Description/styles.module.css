@@ -1,26 +1,24 @@
 .description {
-  max-width: 821px;
-  min-height: 638px;
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+  padding: 20px;
 }
 
 .description__image {
   width: 200px;
   height: 200px;
-  margin: 0 auto;
-  margin-left: 41px;
-  margin-top: 40px;
+  display: flex;
 }
 
 .description__text {
-  margin-left: 29px;
   margin-top: 40px;
 }
 
 .description__title {
-  margin: 0;
-  max-width: 419px;
+  text-align: center;
   font-size: 36px;
   line-height: 42px;
 }
@@ -31,10 +29,13 @@
   line-height: 21px;
 }
 
-.description__like {
-  width: 74px;
-  height: 64px;
+.likeButton {
   position: absolute;
-  top: 271px;
-  left: 41px;
+  font-size: 40px;
+  right: 20px;
+  top: 20px;
+}
+
+.likeButton:hover {
+  color: red;
 }

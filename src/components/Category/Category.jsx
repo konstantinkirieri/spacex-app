@@ -1,5 +1,5 @@
 import React from 'react'
-import S from './categories.module.css'
+import S from './styles.module.css'
 import fav from '../../img/heart.svg'
 import { CategoryItem } from './CategoryItem';
 import { categories } from '../../mocks/categories';

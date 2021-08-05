@@ -17,10 +17,8 @@ export default function ListItem({urlImg, title, description, like, onChangeItem
                     {typeof(description) === 'string' && <>{description}</>}
                 </div>
             </div>
-            <button 
-                className={like ? S.likeActive : null}
-            >
-                {like ? <i className="fas fa-heart"></i> : <i className="far fa-heart"></i>}
+            <button className={S.like}>
+                <i className="far fa-heart"></i>
             </button>
         </div>
     )
