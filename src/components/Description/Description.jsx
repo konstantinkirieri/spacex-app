@@ -1,15 +1,12 @@
 import S from './styles.module.css'
 
-import {launchesData} from '../../mocks/launches.js'
-import {rocketsData} from '../../mocks/rockets'
-
-const Description = ({itemId, category}) => {
+const Description = ({itemId, category, launches, rockets, addToFavorite}) => {
   const getName = (category) => {
     switch (category) {
       case 'Launches':
-        return launchesData[itemId].name
+        return launches[itemId].name
       case 'Rockets':
-        return rocketsData[itemId].name
+        return rockets[itemId].name
       default:
         return ''
     }
@@ -18,9 +15,9 @@ const Description = ({itemId, category}) => {
   const getDescription = (category) => {
     switch (category) {
       case 'Launches':
-        return launchesData[itemId].details
+        return launches[itemId].details
       case 'Rockets':
-        return rocketsData[itemId].description
+        return rockets[itemId].description
       default:
         return ''
     }
@@ -29,13 +26,24 @@ const Description = ({itemId, category}) => {
   const getImg = (category) => {
     switch (category) {
       case 'Launches':
-        return launchesData[itemId].links.patch.small
+        return launches[itemId].links.patch.small
       case 'Rockets':
-        return rocketsData[itemId].flickr_images
+        return rockets[itemId].flickr_images
       default:
         return ''
     }
   }
+
+  const getFavorite = (category) => {
+    switch (category) {
+      case 'Launches':
+        return launches[itemId].isFavorite
+      case 'Rockets':
+        return rockets[itemId].isFavorite
+      default:
+        return ''
+    }
+  };
 
   return (
     <div className={S.description}>
@@ -52,8 +60,8 @@ const Description = ({itemId, category}) => {
           {getDescription(category)}
         </p>
       </div>
-      <button className={S.likeButton}>
-          <i className="far fa-heart"></i>
+      <button className={S.likeButton} onClick={() => addToFavorite(itemId)}>
+          <i className={getFavorite(category) ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
       </button>
     </div>
   )

@@ -13,7 +13,7 @@
 .item:hover {
     background: rgb(184, 184, 184);
  }
- 
+
 .item:active {
     background: rgb(131, 130, 130);
 }
@@ -44,7 +44,7 @@ img {
     text-overflow: ellipsis;
 }
 
-.like:hover {
+.like {
     color: red;
 }
 

@@ -1,7 +1,7 @@
 import S from './style.module.css';
 
-export default function ListItem({urlImg, title, description, like, onChangeItem}) {
-    console.log(typeof(description))
+export default function ListItem({urlImg, title, description, favorite, onChangeItem}) {
+    const isFavorite = favorite ? <i className={`${S.like} fas fa-heart`} /> : null;
     return (
         <div className={S.item}
         onClick={onChangeItem}
@@ -17,9 +17,7 @@ export default function ListItem({urlImg, title, description, like, onChangeItem
                     {typeof(description) === 'string' && <>{description}</>}
                 </div>
             </div>
-            <button className={S.like}>
-                <i className="far fa-heart"></i>
-            </button>
+            {isFavorite}
         </div>
     )
 }

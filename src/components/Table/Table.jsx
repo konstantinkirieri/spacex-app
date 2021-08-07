@@ -1,12 +1,29 @@
-import S from './styles.module.css'
+import {useState} from 'react'
+
 import {Categories} from '../Category/Category'
 import List from '../List/List'
 import {Description} from '../Description/Description'
-import {useState} from 'react'
+
+import {launchesData} from '../../mocks/launches'
+import {rocketsData} from '../../mocks/rockets'
+
+import S from './styles.module.css'
 
 export default function Table() {
-  const [category, setCategory] = useState(null)
+  const [rockets, setRockets] = useState(rocketsData);
+  const [launches, setLaunches] = useState(launchesData);
+  const [category, setCategory] = useState('Launches')
   const [itemId, setItemId] = useState(0)
+
+  const addToFavorite = (id) => {
+    const currentData = category === 'Launches' ? launches : rockets;
+    let copyData = [...currentData];
+    copyData[id] = {
+      ...copyData[id],
+      isFavorite: true,
+    };
+    category === 'Launches' ? setLaunches(copyData) : setRockets(copyData);
+  };
 
   const handlerChangeCategory = (name) => {
     setCategory(name)
@@ -25,8 +42,16 @@ export default function Table() {
       <List
         category={category}
         onChangeItem={handlerChangeItem}
+        rockets={rockets}
+        launches={launches}
       />
-      <Description category={category} itemId={itemId} />
+      <Description
+        category={category}
+        itemId={itemId}
+        rockets={rockets}
+        launches={launches}
+        addToFavorite={addToFavorite}
+      />
     </main>
   )
 }
