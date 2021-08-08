@@ -464,6 +464,7 @@ const copiedData = [...originalData];
 export const rocketsData = copiedData.map(item => {
   return {
     ...item,
-    isFavorite: false
+    isFavorite: false,
+    dataType: 'Rockets',
   }
 });

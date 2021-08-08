@@ -703,6 +703,7 @@ const copiedData = [...originalData];
 export const launchesData = copiedData.map(item => {
   return {
     ...item,
-    isFavorite: false
+    isFavorite: false,
+    dataType: 'Launches',
   }
 });

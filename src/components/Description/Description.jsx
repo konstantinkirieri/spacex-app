@@ -1,12 +1,19 @@
 import S from './styles.module.css'
 
-const Description = ({itemId, category, launches, rockets, addToFavorite}) => {
+const Description = ({itemId, category, launches, rockets, addToFavorite, favorites}) => {
+
+  if (category === 'Favorites' && favorites.length === 0) {
+      return <h1>Favorites is empty</h1>;
+  }
+
   const getName = (category) => {
     switch (category) {
       case 'Launches':
         return launches[itemId].name
       case 'Rockets':
         return rockets[itemId].name
+      case 'Favorites':
+        return favorites[itemId].name
       default:
         return ''
     }
@@ -18,6 +25,8 @@ const Description = ({itemId, category, launches, rockets, addToFavorite}) => {
         return launches[itemId].details
       case 'Rockets':
         return rockets[itemId].description
+      case 'Favorites':
+        return favorites[itemId].dataType === 'Launches' ? favorites[itemId].details : favorites[itemId].description
       default:
         return ''
     }
@@ -29,6 +38,8 @@ const Description = ({itemId, category, launches, rockets, addToFavorite}) => {
         return launches[itemId].links.patch.small
       case 'Rockets':
         return rockets[itemId].flickr_images
+      case 'Favorites':
+        return favorites[itemId].dataType === 'Launches' ? favorites[itemId].links.patch.small : favorites[itemId].flickr_images
       default:
         return ''
     }
@@ -40,6 +51,8 @@ const Description = ({itemId, category, launches, rockets, addToFavorite}) => {
         return launches[itemId].isFavorite
       case 'Rockets':
         return rockets[itemId].isFavorite
+      case 'Favorites':
+        return favorites[itemId].isFavorite
       default:
         return ''
     }

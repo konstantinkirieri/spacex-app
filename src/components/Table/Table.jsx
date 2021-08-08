@@ -12,17 +12,31 @@ import S from './styles.module.css'
 export default function Table() {
   const [rockets, setRockets] = useState(rocketsData);
   const [launches, setLaunches] = useState(launchesData);
-  const [category, setCategory] = useState('Launches')
-  const [itemId, setItemId] = useState(0)
+  const [category, setCategory] = useState('Launches');
+  const [itemId, setItemId] = useState(0);
+
+  const [favorites, setFavorites] = useState([]);
 
   const addToFavorite = (id) => {
     const currentData = category === 'Launches' ? launches : rockets;
+    const setFavoriteDate = Date.now();
+
     let copyData = [...currentData];
     copyData[id] = {
       ...copyData[id],
+      favoriteDate: setFavoriteDate,
       isFavorite: true,
     };
-    category === 'Launches' ? setLaunches(copyData) : setRockets(copyData);
+
+    if(category === 'Launches') setLaunches(copyData);
+    if(category === 'Rockets') setRockets(copyData);
+
+    setFavorites(prev => {
+      return [
+        ...prev,
+        copyData[id]
+      ]
+    });
   };
 
   const handlerChangeCategory = (name) => {
@@ -44,12 +58,14 @@ export default function Table() {
         onChangeItem={handlerChangeItem}
         rockets={rockets}
         launches={launches}
+        favorites={favorites}
       />
       <Description
         category={category}
         itemId={itemId}
         rockets={rockets}
         launches={launches}
+        favorites={favorites}
         addToFavorite={addToFavorite}
       />
     </main>

@@ -1,18 +1,27 @@
 import S from "./search.module.css"
+import {categories} from '../../mocks/categories'
 
 export default function Search () {
-    const getPath = window.location.pathname;
     return (
-        getPath === '/spacex-app/' ?
-            <div className={S.search_wrapper}>
-            <i className="fas fa-search" />
-            <input
-                className={S.search_input}
-                type="search"
-                placeholder={`Поиск...`}/>
-            <button className={S.search_filter}>
-                <i className="fas fa-filter" />
-            </button>
-            </div> : null
+      <div className={S.search_wrapper}>
+        <input
+          className={S.search_input}
+          type="search"
+          placeholder={`Поиск...`}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}/>
+        <select
+          id='select'
+          className={S.search_select}
+          value={success}
+          onChange={(e) => setSuccess(e.target.value)}
+        >
+          {categories.map(item => {
+            return (
+              <option value={item.name}>{item.name}</option>
+            )
+          })}
+        </select>
+      </div>
     )
 }
