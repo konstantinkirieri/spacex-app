@@ -9,9 +9,9 @@ export default function List({category, onChangeItem, launches, rockets, favorit
     const switchComponents = (category) => {
             switch (category) {
                 case 'Launches':
-                    return <ListItemLaunches launches={launches} onChangeItem={onChangeItem} />
+                    return <ListItemLaunches launches={launches} onChangeItem={onChangeItem} favorites={favorites}/>
                 case 'Rockets':
-                    return <ListItemRockets rockets={rockets} onChangeItem={onChangeItem} />
+                    return <ListItemRockets rockets={rockets} onChangeItem={onChangeItem} favorites={favorites}/>
                 case 'Favorites':
                     return <ListItemFavorites favorites={favorites} onChangeItem={onChangeItem} />
                 default:

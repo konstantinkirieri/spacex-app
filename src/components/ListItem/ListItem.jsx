@@ -1,7 +1,7 @@
 import S from './style.module.css';
 
-export default function ListItem({urlImg, id, title, description, success, favorite, onChangeItem}) {
-    const isFavorite = favorite ? <i className={`${S.like} fas fa-heart`} /> : null;
+export default function ListItem({urlImg, id, title, description, success, favorites, onChangeItem}) {
+    const isFavorite = favorites.some((f) => f.id === id) ? <i className={`${S.like} fas fa-heart`} /> : null;
     return (
       <div className={S.item}
            onClick={() => onChangeItem(id)}
