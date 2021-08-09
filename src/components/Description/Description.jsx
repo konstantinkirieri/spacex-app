@@ -1,62 +1,39 @@
-import S from './styles.module.css'
+import DescriptionLaunches from "../DescriptionLaunches/DescriptionLaunches";
+import DescriptionRockets from "../DescriptionRockets/DescriptionRockets";
+import DescriptionFavorites from "../DescriptionFavorites/DescriptionFavorites";
 
-import {launchesData} from '../../mocks/launches.js'
-import {rocketsData} from '../../mocks/rockets'
+export default function Description ({itemId, category, launches, rockets, addToFavorite, deleteFromFavorites, favorites}) {
 
-const Description = ({itemId, category}) => {
-  const getName = (category) => {
+  const switchDescription = () => {
     switch (category) {
       case 'Launches':
-        return launchesData[itemId].name
+        return <DescriptionLaunches
+                data={launches}
+                itemId={itemId}
+                addToFavorite={addToFavorite}
+                deleteFromFavorites={deleteFromFavorites}
+               />
       case 'Rockets':
-        return rocketsData[itemId].name
+        return <DescriptionRockets
+                data={rockets}
+                itemId={itemId}
+                addToFavorite={addToFavorite}
+                deleteFromFavorites={deleteFromFavorites}
+               />
+      case 'Favorites':
+        return <DescriptionFavorites
+                  data={favorites}
+                  itemId={itemId}
+                  addToFavorite={addToFavorite}
+                  deleteFromFavorites={deleteFromFavorites}
+               />
       default:
-        return ''
+        return <></>
     }
-  }
-
-  const getDescription = (category) => {
-    switch (category) {
-      case 'Launches':
-        return launchesData[itemId].details
-      case 'Rockets':
-        return rocketsData[itemId].description
-      default:
-        return ''
-    }
-  }
-
-  const getImg = (category) => {
-    switch (category) {
-      case 'Launches':
-        return launchesData[itemId].links.patch.small
-      case 'Rockets':
-        return rocketsData[itemId].flickr_images
-      default:
-        return ''
-    }
-  }
+  };
 
   return (
-    <div className={S.description}>
-      <img
-        className={S.description__image}
-        src={getImg(category)}
-        alt=""
-      />
-      <div className={S.description__text}>
-        <h2 className={S.description__title}>
-          {getName(category)}
-        </h2>
-        <p className={S.description__about}>
-          {getDescription(category)}
-        </p>
-      </div>
-      <button className={S.likeButton}>
-          <i className="far fa-heart"></i>
-      </button>
-    </div>
+      switchDescription(category)
   )
 }
 
-export {Description}

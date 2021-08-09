@@ -1,4 +1,4 @@
-export const launchesData = JSON.parse(`[
+const originalData = JSON.parse(`[
     {
         "fairings": {
             "reused": false,
@@ -697,3 +697,13 @@ export const launchesData = JSON.parse(`[
         "id": "5eb87ce1ffd86e000604b333"
     }
 ]`);
+
+const copiedData = [...originalData];
+
+export const launchesData = copiedData.map(item => {
+  return {
+    ...item,
+    isFavorite: false,
+    dataType: 'Launches',
+  }
+});

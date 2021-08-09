@@ -39,3 +39,7 @@
 .likeButton:hover {
   color: red;
 }
+
+.likeButtonHovered {
+  color: red;
+}
