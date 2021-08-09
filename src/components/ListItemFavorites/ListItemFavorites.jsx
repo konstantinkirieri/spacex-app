@@ -3,7 +3,7 @@ import ListItem from '../ListItem/ListItem'
 import S from '../Search/search.module.css'
 import {categories} from '../../mocks/categories'
 
-export default function Favorites({onChangeItem, favorites}) {
+export default function ListItemFavorites({onChangeItem, favorites}) {
   const [keyword, setKeyword] = useState('');
   const [searchCategory, setSearchCategory] = useState('Reset')
 
@@ -45,10 +45,20 @@ export default function Favorites({onChangeItem, favorites}) {
           value={searchCategory}
           onChange={(e) => setSearchCategory(e.target.value)}
         >
-          <option value='Reset' selected>Reset filter</option>
+          <option
+              value='Reset'
+              defaultValue={'Reset'}
+          >
+            Reset filter
+          </option>;
           {categories.map(item => {
             return (
-              <option value={item.name}>{item.name}</option>
+              <option
+                  key={item.id}
+                  value={item.name}
+              >
+                {item.name}
+              </option>
             )
           })}
         </select>
@@ -56,16 +66,17 @@ export default function Favorites({onChangeItem, favorites}) {
       {
         searchData
           .filter((item) => filterList(item))
-          .sort((a, b) => b.favoriteDate - a.favoriteDate)
-          .map((item, index) => {
-          return (<ListItem
-            key={item.id}
-            title={item.name}
-            urlImg={item.dataType === 'Launches' ? item.links['patch'].small : item.flickr_images[0]}
-            description={item.dataType === 'Launches' ? item.details : item.description}
-            success={item.dataType === 'Launches' ? item.success : null}
-            onChangeItem={() => onChangeItem(index)}
-          />)
+          .map((item) => {
+            return (
+                <ListItem
+                  key={item.id}
+                  title={item.name}
+                  urlImg={item.dataType === 'Launches' ? item.links['patch'].small : item.flickr_images[0]}
+                  description={item.dataType === 'Launches' ? item.details : item.description}
+                  success={item.dataType === 'Launches' ? item.success : null}
+                  onChangeItem={() => onChangeItem(item.id)}
+                />
+            )
         })
       }
     </>

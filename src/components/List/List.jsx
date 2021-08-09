@@ -1,19 +1,19 @@
 import React from 'react';
-import Favorites from '../Favorites/Favorites'
 import S from './List.module.css';
-import Rockets from '../Rockets/Rockets'
-import Launches from '../Launches/Launches'
+import ListItemLaunches from "../ListItemLaunches/ListItemLaunches";
+import ListItemRockets from "../ListItemRockets/ListItemRockets";
+import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
 
 export default function List({category, onChangeItem, launches, rockets, favorites}) {
 
     const switchComponents = (category) => {
             switch (category) {
                 case 'Launches':
-                    return <Launches launches={launches} onChangeItem={onChangeItem} />
+                    return <ListItemLaunches launches={launches} onChangeItem={onChangeItem} />
                 case 'Rockets':
-                    return <Rockets rockets={rockets} onChangeItem={onChangeItem} />
+                    return <ListItemRockets rockets={rockets} onChangeItem={onChangeItem} />
                 case 'Favorites':
-                    return <Favorites favorites={favorites} onChangeItem={onChangeItem} />
+                    return <ListItemFavorites favorites={favorites} onChangeItem={onChangeItem} />
                 default:
                     return null
             }

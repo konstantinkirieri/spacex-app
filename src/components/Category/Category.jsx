@@ -4,7 +4,7 @@ import { CategoryItem } from './CategoryItem';
 import { categories } from '../../mocks/categories';
 
 
-export function Categories({onChangeCategory}) {
+export default function Categories({onChangeCategory}) {
 
   const handlerChangeCategory = (name) => {
         onChangeCategory(name);
@@ -16,7 +16,7 @@ export function Categories({onChangeCategory}) {
                 data={item}
                 index={i + 1}
                 onChangeCategory={handlerChangeCategory}
-      />
+             />
   })
 
   return (
