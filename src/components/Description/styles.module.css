@@ -107,4 +107,7 @@
   .description {
     height: 60vh;
   }
+  .description__text {
+    width: 100%;
+  }
 }
