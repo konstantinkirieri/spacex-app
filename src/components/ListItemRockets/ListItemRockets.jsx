@@ -1,9 +1,10 @@
 import ListItem from '../ListItem/ListItem'
 
-export default function ListItemRockets ({onChangeItem, rockets}) {
+export default function ListItemRockets ({onChangeItem, rockets, favorites}) {
   return (
     rockets.map((item) => {
       return (<ListItem
+        favorites={favorites}
         key={item.id}
         id={item.id}
         title={item.name}

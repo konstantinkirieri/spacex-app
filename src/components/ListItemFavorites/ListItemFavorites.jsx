@@ -70,6 +70,7 @@ export default function ListItemFavorites({onChangeItem, favorites}) {
             return (
                 <ListItem
                   key={item.id}
+                  favorites={favorites}
                   title={item.name}
                   urlImg={item.dataType === 'Launches' ? item.links['patch'].small : item.flickr_images[0]}
                   description={item.dataType === 'Launches' ? item.details : item.description}

@@ -9,12 +9,31 @@ import {rocketsData} from '../../mocks/rockets'
 
 import S from './styles.module.css'
 
+function useLocalStorage(key, obj) {
+  const [local, setLocal] = useState(() => {
+    const ls = localStorage.getItem(key)
+    if(!ls) return obj;
+    try {
+      return JSON.parse(ls)
+    } catch {
+      return obj
+    }
+  })
+  return [
+    local,
+    (newValue) => {
+      localStorage.setItem(key, JSON.stringify(newValue))
+      setLocal(newValue)
+    },
+  ]
+}
+
 export default function Table() {
   const [rockets, setRockets] = useState(rocketsData);
   const [launches, setLaunches] = useState(launchesData);
   const [category, setCategory] = useState('Launches');
   const [itemId, setItemId] = useState(0);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useLocalStorage('favorites', []); //local
 
   const addToFavorite = (id, dataType) => {
       const currentData = dataType === 'Launches' ? launches : rockets;
@@ -29,12 +48,10 @@ export default function Table() {
           isFavorite: true,
       };
       // Add changed item to favorites state
-      setFavorites(prev => {
-          return [
-            ...prev,
+      setFavorites([
+            ...favorites,
             copyData[index]
-          ]
-      });
+      ]);
 
       if(dataType === 'Launches') setLaunches(copyData);
       if(dataType === 'Rockets') setRockets(copyData);

@@ -3,7 +3,7 @@ import React from "react";
 import {useState} from "react";
 import RocketInfo from "../RocketInfo/RocketInfo";
 
-export default function DescriptionLaunches({data, rockets, itemId, addToFavorite, deleteFromFavorites}) {
+export default function DescriptionLaunches({data, rockets, itemId, addToFavorite, deleteFromFavorites, favorites}) {
     const getDescription = itemId !== 0 ? data.filter(item => item.id === itemId) : [data[0]];
     const [showRocketInfo, setShowRocketInfo] = useState(false);
 
@@ -46,9 +46,9 @@ export default function DescriptionLaunches({data, rockets, itemId, addToFavorit
                 </div>
                 <button
                     className={S.likeButton}
-                    onClick={() => item.isFavorite ? deleteFromFavorites(item.id, item.dataType) : addToFavorite(item.id, item.dataType)}
+                    onClick={() => favorites.some((f) => f.id === item.id) ? deleteFromFavorites(item.id, item.dataType) : addToFavorite(item.id, item.dataType)}
                 >
-                    <i className={item.isFavorite ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
+                    <i className={favorites.some((f) => f.id === item.id) ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
                 </button>
 
             </div>)

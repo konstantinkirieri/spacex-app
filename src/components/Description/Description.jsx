@@ -10,6 +10,7 @@ export default function Description ({itemId, category, launches, rockets, addTo
         return <DescriptionLaunches
                 data={launches}
                 rockets={rockets}
+                favorites={favorites}
                 itemId={itemId}
                 addToFavorite={addToFavorite}
                 deleteFromFavorites={deleteFromFavorites}
@@ -17,6 +18,7 @@ export default function Description ({itemId, category, launches, rockets, addTo
       case 'Rockets':
         return <DescriptionRockets
                 data={rockets}
+                favorites={favorites}
                 itemId={itemId}
                 addToFavorite={addToFavorite}
                 deleteFromFavorites={deleteFromFavorites}
