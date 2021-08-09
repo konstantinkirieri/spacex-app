@@ -1,10 +1,13 @@
 .list {
+    padding: 10px 0;
     width: 300px;
     background: rgb(248, 248, 248);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    height: 85vh;
+    overflow-y: scroll;
 }
 
 .search_wrapper {
@@ -46,3 +49,10 @@
 .search_button:active, .search_select:active {
     background: rgb(131, 130, 130);
 }
+
+@media screen and (max-width: 750px) {
+    .list {
+        height: 20vh;
+        width: inherit;
+    }
+} 

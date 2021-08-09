@@ -21,7 +21,7 @@ export default function List({category, onChangeItem, launches, rockets, favorit
 
     return (
         <div className={S.list}>
-            <div className="items">
+            <div className={S.items}>
                 {switchComponents(category)}
             </div>
         </div>

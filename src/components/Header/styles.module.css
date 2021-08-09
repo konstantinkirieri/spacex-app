@@ -1,7 +1,7 @@
 .header {
   padding: 15px 15px;
   background-color: black;
-  flex: 0 0 75px;
+  flex: 0 0 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,4 +16,11 @@
 
 .headerTitle i {
   margin-right: 15px;
+}
+
+@media screen and (max-width: 750px) {
+  .header {
+    flex: 0 0 10vh;
+    padding: 0;
+  }
 }
