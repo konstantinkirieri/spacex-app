@@ -5,6 +5,8 @@
   align-items: center;
   position: relative;
   padding: 20px;
+  height: 85vh;
+  overflow-y: scroll;
 }
 
 .description__image {
@@ -42,4 +44,10 @@
 
 .likeButtonHovered {
   color: red;
+}
+
+@media screen and (max-width: 750px) {
+  .description {
+    height: 60vh;
+  }
 }
