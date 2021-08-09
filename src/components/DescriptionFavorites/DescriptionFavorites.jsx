@@ -9,7 +9,7 @@ export default function DescriptionFavorites({data, itemId, addToFavorite, delet
                     <img
                         className={S.description__image}
                         src={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images}
-                        alt=""
+                        alt={item.name}
                     />
                     <div className={S.description__text}>
                         <h2 className={S.description__title}>
