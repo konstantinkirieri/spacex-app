@@ -52,7 +52,7 @@ export default function ListItemFavorites({onChangeItem, favorites}) {
             Reset filter
           </option>;
           {categories.map(item => {
-            return (
+            if(item.name !== 'Favorites') return (
               <option
                   key={item.id}
                   value={item.name}

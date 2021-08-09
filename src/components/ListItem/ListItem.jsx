@@ -1,6 +1,6 @@
 import S from './style.module.css';
 
-export default function ListItem({urlImg, id, title, description, success, favorite, onChangeItem}) {
+export default function ListItem({urlImg, id, title, description, favorite, onChangeItem}) {
     const isFavorite = favorite ? <i className={`${S.like} fas fa-heart`} /> : null;
     return (
       <div className={S.item}
@@ -12,7 +12,6 @@ export default function ListItem({urlImg, id, title, description, success, favor
                   {title}
               </h3>
               <div className={S.description}>
-                  {success ? 'Success. ' : 'Failure. '}
                   {description}
               </div>
           </div>
