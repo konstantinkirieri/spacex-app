@@ -1,6 +1,10 @@
 .header {
   padding: 15px 15px;
+  background-image: url(https://inventure.com.ua/img/thumb.990.660/upload/pic2021-1q/SpaceX-Tesmanian_1600x.jpg);
+  background-repeat: no-repeat;
   background-color: black;
+  background-position-x: 100%;
+  background-position-y: -19px;
   flex: 0 0 15vh;
   display: flex;
   justify-content: center;

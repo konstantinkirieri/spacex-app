@@ -8,7 +8,7 @@ export default function DescriptionRockets({data, itemId, addToFavorite, deleteF
                 <img
                     className={S.description__image}
                     src={item.flickr_images}
-                    alt=""
+                    alt={item.name}
                 />
                 <div className={S.description__text}>
                     <h2 className={S.description__title}>

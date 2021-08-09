@@ -13,7 +13,7 @@ export default function ListItem({urlImg, id, title, description, success, favor
               </h3>
               <div className={S.description}>
                   {success !== undefined
-                    ? (success ? 'Success. ' : 'Failure. ')
+                    ? (success ? <span className={S.success}>Success. </span> : <span className={S.failure}>Failure. </span>)
                     : null
                   }
                   {description}

@@ -16,6 +16,8 @@
 }
 
 .description__text {
+  width: 60%;
+  margin: auto;
   margin-top: 40px;
 }
 
@@ -26,8 +28,9 @@
 }
 
 .description__about {
-  max-width: 489px;
-  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 22px;
   line-height: 21px;
 }
 
@@ -47,8 +50,64 @@
   color: red;
 }
 
+.rocketList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  border-top: 1px solid #f1f1f1;
+}
+
+.rocketList__item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.rocketList__info {
+  display: flex;
+  margin-top: 20px;
+  margin-left: -50px;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 13px -2px rgb(159 159 159);
+}
+
+.rocketList__button {
+  width: 100px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  border-bottom: 1px dashed #ccc;
+  font-size: 18px;
+}
+.rocketList__button:hover {
+  cursor: pointer;
+  color:red;
+}
+
+.rocketList__image {
+  width: 100px;
+  height: 100px;
+}
+
+.rocketList__details {
+  margin-left: 20px;
+}
+
+.success {
+  font-weight: 900;
+  color: green;
+}
+
+.failure {
+  font-weight: 900;
+  color: red;
+}
+
 @media screen and (max-width: 750px) {
   .description {
     height: 60vh;
+  }
+  .description__text {
+    width: 100%;
   }
 }
