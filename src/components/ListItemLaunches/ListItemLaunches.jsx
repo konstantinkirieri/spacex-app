@@ -9,7 +9,6 @@ export default function ListItemLaunches ({onChangeItem, launches}) {
         title={item.name}
         urlImg={item.links.patch.small}
         description={item.details}
-        success={item.success}
         favorite={item.isFavorite}
         onChangeItem={() => onChangeItem(item.id)}
       />)
