@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/spacex-app/static/css/main.c531d651.chunk.css",
-    "main.js": "/spacex-app/static/js/main.43f0d0c7.chunk.js",
-    "main.js.map": "/spacex-app/static/js/main.43f0d0c7.chunk.js.map",
+    "main.js": "/spacex-app/static/js/main.036a92b5.chunk.js",
+    "main.js.map": "/spacex-app/static/js/main.036a92b5.chunk.js.map",
     "runtime-main.js": "/spacex-app/static/js/runtime-main.e3073827.js",
     "runtime-main.js.map": "/spacex-app/static/js/runtime-main.e3073827.js.map",
     "static/js/2.46dc6f33.chunk.js": "/spacex-app/static/js/2.46dc6f33.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.e3073827.js",
     "static/js/2.46dc6f33.chunk.js",
     "static/css/main.c531d651.chunk.css",
-    "static/js/main.43f0d0c7.chunk.js"
+    "static/js/main.036a92b5.chunk.js"
   ]
 }
