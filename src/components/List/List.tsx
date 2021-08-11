@@ -24,7 +24,7 @@ const List: React.FC<ListProps> = ({
                 case 'Launches':
                     return <>{
                         launches.map((item) => <ListItem 
-                            selCategory={rockets} 
+                            key={item.id}
                             onChangeItem={onChangeItem}
                             favorites={favorites}
                             {...item} 
@@ -35,7 +35,7 @@ const List: React.FC<ListProps> = ({
                 case 'Rockets':
                     return <>{
                         rockets.map((item) => <ListItem 
-                            selCategory={rockets} 
+                            key={item.id}
                             onChangeItem={onChangeItem} 
                             favorites={favorites}
                             {...item}

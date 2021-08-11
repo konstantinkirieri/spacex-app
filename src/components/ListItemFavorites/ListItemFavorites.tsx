@@ -16,12 +16,12 @@ interface PassedProps {
   flickr_images: string[], 
   details: string, 
   description: string, 
-  success: boolean | undefined
+  success: boolean | undefined,
 }
 
 const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favorites}) => {
   const [keyword, setKeyword] = useState('');
-  const [searchCategory, setSearchCategory] = useState('Reset')
+  const [searchCategory, setSearchCategory] = useState('')
 
   useEffect(() => {
     setKeyword('');
@@ -32,19 +32,6 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favo
     const regexp = new RegExp(keyword, 'i');
     return item.name.match(regexp);
   }
-
-  const changeSearchCategory = (searchCategory: string) => {
-    switch(searchCategory) {
-      case 'Launches':
-        return favorites.filter((item: {dataType: string}) => item.dataType === 'Launches');
-      case 'Rockets':
-        return favorites.filter((item: {dataType: string}) => item.dataType === 'Rockets');
-      default:
-        return favorites;
-    }
-  };
-
-  let searchData = changeSearchCategory(searchCategory);
 
   return (
     <>
@@ -62,8 +49,8 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favo
           onChange={(e) => setSearchCategory(e.target.value)}
         >
           <option
-              value='Reset'
-              defaultValue={'Reset'}
+              value=''
+              defaultValue={''}
           >
             Reset filter
           </option>;
@@ -80,18 +67,17 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favo
         </select>
       </div>
       {
-        searchData
+        favorites
+          .filter((item: {dataType: string}) => searchCategory ? item.dataType === searchCategory : true)
           .filter((item) => filterList(item))
           .map((item: PassedProps): JSX.Element => {
             return (
                 <ListItem
                   key={item.id}
-                  id={item.id}
                   favorites={favorites}
-                  title={item.name}
+                  {...item}
                   urlImg={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images[0]}
                   description={item.dataType === 'Launches' ? item.details : item.description}
-                  success={item.dataType === 'Launches' ? item.success : undefined}
                   onChangeItem={() => onChangeItem(item.id)}
                 />
             )
