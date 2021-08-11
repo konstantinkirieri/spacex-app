@@ -4,9 +4,23 @@ import ListItemLaunches from "../ListItemLaunches/ListItemLaunches";
 import ListItemRockets from "../ListItemRockets/ListItemRockets";
 import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
 
-export default function List({category, onChangeItem, launches, rockets, favorites}) {
+interface ListProps {
+    category: string,
+    onChangeItem: Function,
+    launches: any[],
+    rockets: any[],
+    favorites: []
+}
 
-    const switchComponents = (category) => {
+const List: React.FC<ListProps> = ({
+    category,
+    onChangeItem,
+    launches,
+    rockets,
+    favorites
+}) => {
+
+    const switchComponents: ((category: string) => JSX.Element | null) = category => {
             switch (category) {
                 case 'Launches':
                     return <ListItemLaunches launches={launches} onChangeItem={onChangeItem} favorites={favorites}/>
@@ -27,3 +41,5 @@ export default function List({category, onChangeItem, launches, rockets, favorit
         </div>
     )
 }
+
+export default List
