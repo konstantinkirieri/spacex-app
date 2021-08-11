@@ -1,8 +1,7 @@
 import React from 'react';
 import S from './List.module.css';
-import ListItemLaunches from "../ListItemLaunches/ListItemLaunches";
-import ListItemRockets from "../ListItemRockets/ListItemRockets";
 import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
+import ListItem from '../ListItem/ListItem'
 
 interface ListProps {
     category: string,
@@ -23,9 +22,26 @@ const List: React.FC<ListProps> = ({
     const switchComponents: ((category: string) => JSX.Element | null) = category => {
             switch (category) {
                 case 'Launches':
-                    return <ListItemLaunches launches={launches} onChangeItem={onChangeItem} favorites={favorites}/>
+                    return <>{
+                        launches.map((item) => <ListItem 
+                            selCategory={rockets} 
+                            onChangeItem={onChangeItem}
+                            favorites={favorites}
+                            {...item} 
+                            urlImg={item.links.patch.small} 
+                            description={item.details}/>
+                        )
+                    }</>
                 case 'Rockets':
-                    return <ListItemRockets rockets={rockets} onChangeItem={onChangeItem} favorites={favorites}/>
+                    return <>{
+                        rockets.map((item) => <ListItem 
+                            selCategory={rockets} 
+                            onChangeItem={onChangeItem} 
+                            favorites={favorites}
+                            {...item}
+                            urlImg={item.flickr_images[0]}/>
+                        )
+                    }</>
                 case 'Favorites':
                     return <ListItemFavorites favorites={favorites} onChangeItem={onChangeItem} />
                 default:
