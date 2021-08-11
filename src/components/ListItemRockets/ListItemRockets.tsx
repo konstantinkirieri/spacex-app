@@ -19,7 +19,7 @@ const ListItemRockets: React.FC<ListItemRocketsProps> = ({
    favorites
 }) => {
   return <>
-    {rockets.map(({id, name, flickr_images, description}: PassedProps) => {
+    {rockets.map(({id, name, flickr_images, description}: PassedProps): JSX.Element => {
       return (<ListItem
         favorites={favorites}
         key={id}

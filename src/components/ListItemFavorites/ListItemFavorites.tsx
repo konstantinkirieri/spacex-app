@@ -82,7 +82,7 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favo
       {
         searchData
           .filter((item) => filterList(item))
-          .map((item: PassedProps) => {
+          .map((item: PassedProps): JSX.Element => {
             return (
                 <ListItem
                   key={item.id}

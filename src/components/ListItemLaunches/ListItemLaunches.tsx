@@ -17,7 +17,7 @@ interface PassedProps {
 
 const ListItemLaunches: React.FC<ListItemLaunchesProps> = ({onChangeItem, launches, favorites}) => {
   return <>
-    {launches.map(({id, name, links, details, success}: PassedProps) => {
+    {launches.map(({id, name, links, details, success}: PassedProps): JSX.Element => {
       return (<ListItem
         favorites={favorites}
         key={id}
