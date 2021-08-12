@@ -3,11 +3,12 @@ import React from "react";
 import {DescriptionLaunches} from '../DescriptionLaunches/DescriptionLaunches'
 import {DescriptionRockets} from '../DescriptionRockets/DescriptionRockets'
 import {DescriptionFavorites} from '../DescriptionFavorites/DescriptionFavorites'
+import {LaunchesData} from "../../interfaces";
 
 interface DescriptionProps {
   itemId: string | number,
   category: string,
-  launches: any[],
+  launches: LaunchesData,
   rockets: any[],
   addToFavorite: (id: string, dataType: string) => void,
   deleteFromFavorites: (id: string, dataType: string) => void,

@@ -1,8 +1,10 @@
 import React from "react";
+import {IRocketsData} from "../../interfaces";
+
 import S from "../Description/styles.module.css";
 
 interface DescriptionRocketsProps {
-    data: any[],
+    data: IRocketsData[],
     itemId: string | number,
     addToFavorite: (id: string, dataType: string) => void,
     deleteFromFavorites: (id: string, dataType: string) => void,

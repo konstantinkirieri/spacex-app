@@ -1,11 +1,13 @@
 import React from "react";
 import {useState} from "react";
+import {ILaunchesData} from "../../interfaces";
+
 import {RocketInfo} from "../RocketInfo/RocketInfo";
 
 import S from "../Description/styles.module.css";
 
 interface DescriptionLaunchesProps {
-    data: any[],
+    data: ILaunchesData[],
     rockets: any[],
     itemId: string | number,
     addToFavorite: (id: string, dataType: string) => void,
@@ -23,6 +25,7 @@ export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
 }) => {
     const getDescription = itemId !== 0 ? data.filter(item => item.id === itemId) : [data[0]];
     const [showRocketInfo, setShowRocketInfo] = useState(false);
+
     const showDescription = getDescription.map(item => {
         const rocket = rockets.filter(rocketItem => rocketItem.id === item.rocket);
         return (
