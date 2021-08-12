@@ -11,33 +11,30 @@ import {rocketsData} from '../../mocks/rockets'
 import S from './styles.module.css'
 
 export const Table: React.FC = () => {
-  const [rockets, setRockets] = useState(rocketsData)
-  const [launches, setLaunches] = useState(launchesData)
-  const [category, setCategory] = useState('Launches')
-  const [itemId, setItemId] = useState(0)
+  const [rockets, setRockets] = useState<any[]>(rocketsData)
+  const [launches, setLaunches] = useState<any[]>(launchesData)
+  const [category, setCategory] = useState<string>('Launches')
+  const [itemId, setItemId] = useState<number | string>(0)
   const [favorites, setFavorites] = useLocalStorage(
     'favorites',
     [],
   ) //local
 
-  const addToFavorite = (
-    id: string,
-    dataType: string,
-  ): void => {
-    const currentData =
-      dataType === 'Launches' ? launches : rockets
-    const setFavoriteDate = Date.now()
+  const addToFavorite = (id: string, dataType: string): void => {
+
+    const currentData = dataType === 'Launches' ? launches : rockets;
+    const setFavoriteDate = Date.now();
 
     // Copy data and modify item
-    const copyData = [...currentData]
-    const index = copyData.findIndex(
-      (item) => item.id === id,
-    )
+    const copyData = [...currentData];
+    const index = copyData.findIndex((item) => item.id === id);
+
     copyData[index] = {
       ...copyData[index],
       favoriteDate: setFavoriteDate,
       isFavorite: true,
     }
+
     // Add changed item to favorites state
     setFavorites([...favorites, copyData[index]])
 
