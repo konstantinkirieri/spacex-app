@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {useLocalStorage} from "../../hooks";
 
-import Categories from '../Category/Category'
+import {Categories} from '../Category/Category'
 import List from '../List/List'
 import {Description} from '../Description/Description'
 
@@ -42,10 +42,7 @@ export const Table: React.FC = () => {
     if (dataType === 'Rockets') setRockets(copyData)
   }
 
-  const deleteFromFavorites = (
-    id: string,
-    dataType: string,
-  ): void => {
+  const deleteFromFavorites = (id: string, dataType: string): void => {
     // Delete from data
     const currentData =
       dataType === 'Launches' ? launches : rockets

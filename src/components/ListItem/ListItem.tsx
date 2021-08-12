@@ -1,3 +1,4 @@
+import React from "react";
 import S from './style.module.css';
 
 interface ListItemProps {
@@ -10,7 +11,15 @@ interface ListItemProps {
     onChangeItem: Function
 }
 
-const ListItem: React.FC<ListItemProps> = ({urlImg, id, name, description, success, favorites, onChangeItem}) => {
+const ListItem: React.FC<ListItemProps> = ({
+    urlImg,
+    id,
+    name,
+     description,
+    success,
+    favorites,
+    onChangeItem
+}) => {
     return (
       <div className={S.item}
            onClick={() => onChangeItem(id)}

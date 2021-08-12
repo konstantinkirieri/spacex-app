@@ -1,7 +1,9 @@
 import React from 'react';
-import S from './List.module.css';
+
 import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
 import ListItem from '../ListItem/ListItem'
+
+import S from './List.module.css';
 
 interface ListProps {
     category: string,

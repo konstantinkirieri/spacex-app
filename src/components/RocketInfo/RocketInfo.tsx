@@ -1,6 +1,21 @@
+import React from "react";
 import S from "../Description/styles.module.css";
 
-export default function RocketInfo({data}) {
+interface RocketInfoProps {
+    name: string,
+    height: {
+        meters: number
+    },
+    diameter: {
+        meters: string
+    },
+    mass: {
+        kg: string
+    },
+    flickr_images: string,
+}
+
+export const RocketInfo: React.FC<{data: RocketInfoProps}> = ({data}) => {
   const {name, height, diameter, mass, flickr_images} = data;
   return (
     <div className={S.rocketList__info}>

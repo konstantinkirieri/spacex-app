@@ -14,6 +14,7 @@ export const DescriptionFavorites: React.FC<DescriptionFavoritesProps> = ({
     addToFavorite,
     deleteFromFavorites
 }) => {
+
     const getDescription = itemId === 0 ? [data[0]] : data.filter(item => item.id === itemId);
     const showDescription = data.length !== 0 ?
         getDescription.map(item => {

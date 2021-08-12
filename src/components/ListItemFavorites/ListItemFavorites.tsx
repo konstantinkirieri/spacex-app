@@ -20,8 +20,8 @@ interface PassedProps {
 }
 
 const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favorites}) => {
-  const [keyword, setKeyword] = useState('');
-  const [searchCategory, setSearchCategory] = useState('')
+  const [keyword, setKeyword] = useState<string>('');
+  const [searchCategory, setSearchCategory] = useState<string>('')
 
   useEffect(() => {
     setKeyword('');

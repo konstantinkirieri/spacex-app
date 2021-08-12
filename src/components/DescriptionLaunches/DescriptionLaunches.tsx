@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import RocketInfo from "../RocketInfo/RocketInfo";
+import {RocketInfo} from "../RocketInfo/RocketInfo";
 
 import S from "../Description/styles.module.css";
 
