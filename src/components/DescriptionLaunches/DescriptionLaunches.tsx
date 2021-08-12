@@ -1,17 +1,32 @@
-import S from "../Description/styles.module.css";
 import React from "react";
 import {useState} from "react";
 import RocketInfo from "../RocketInfo/RocketInfo";
 
-export default function DescriptionLaunches({data, rockets, itemId, addToFavorite, deleteFromFavorites, favorites}) {
+import S from "../Description/styles.module.css";
+
+interface DescriptionLaunchesProps {
+    data: any[],
+    rockets: any[],
+    itemId: string | number,
+    addToFavorite: (id: string, dataType: string) => void,
+    deleteFromFavorites: (id: string, dataType: string) => void,
+    favorites: any[]
+}
+
+export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
+    data,
+    rockets,
+    itemId,
+    addToFavorite,
+    deleteFromFavorites,
+    favorites
+}) => {
     const getDescription = itemId !== 0 ? data.filter(item => item.id === itemId) : [data[0]];
     const [showRocketInfo, setShowRocketInfo] = useState(false);
-
-    return (
-        getDescription.map(item => {
-            const rocket = rockets.filter(rocketItem => rocketItem.id === item.rocket);
-            return (
-              <div key={item.id} className={S.description}>
+    const showDescription = getDescription.map(item => {
+        const rocket = rockets.filter(rocketItem => rocketItem.id === item.rocket);
+        return (
+            <div key={item.id} className={S.description}>
                 <img
                     className={S.description__image}
                     src={item.links.patch.small}
@@ -28,14 +43,14 @@ export default function DescriptionLaunches({data, rockets, itemId, addToFavorit
                         <div className={S.rocketList__item}>
                             <div><strong>Rocket:</strong> </div>
                             {rocket.map(rocket =>
-                                {
-                                    return (
-                                      <div key={rocket.id}>
-                                          <button className={S.rocketList__button} onClick={() => setShowRocketInfo(!showRocketInfo)}>{rocket.name} {showRocketInfo ? '[↑]': '[↓]'}</button>
-                                          {showRocketInfo && <RocketInfo data={rocket}/>}
-                                      </div>
-                                    )
-                                })
+                            {
+                                return (
+                                    <div key={rocket.id}>
+                                        <button className={S.rocketList__button} onClick={() => setShowRocketInfo(!showRocketInfo)}>{rocket.name} {showRocketInfo ? '[↑]': '[↓]'}</button>
+                                        {showRocketInfo && <RocketInfo data={rocket}/>}
+                                    </div>
+                                )
+                            })
                             }
                         </div>
                         <div className={S.rocketList__item}><strong>Success:</strong> {item['success'] ? <span className={S.success}>Success</span> : <span className={S.failure}>Failure</span>}</div>
@@ -52,6 +67,7 @@ export default function DescriptionLaunches({data, rockets, itemId, addToFavorit
                 </button>
 
             </div>)
-        })
-    )
+    });
+
+    return <>{showDescription}</>
 }

@@ -1,37 +1,16 @@
-import {useState} from 'react'
+import React,{useState} from 'react'
+import {useLocalStorage} from "../../hooks";
 
 import Categories from '../Category/Category'
 import List from '../List/List'
-import Description from '../Description/Description'
+import {Description} from '../Description/Description'
 
 import {launchesData} from '../../mocks/launches'
 import {rocketsData} from '../../mocks/rockets'
 
 import S from './styles.module.css'
 
-function useLocalStorage(
-  key: string,
-  obj: any,
-): [any, (value: any) => void] {
-  const [local, setLocal] = useState(() => {
-    const ls = localStorage.getItem(key)
-    if (!ls) return obj
-    try {
-      return JSON.parse(ls)
-    } catch {
-      return obj
-    }
-  })
-  return [
-    local,
-    (newValue) => {
-      localStorage.setItem(key, JSON.stringify(newValue))
-      setLocal(newValue)
-    },
-  ]
-}
-
-export default function Table() {
+export const Table: React.FC = () => {
   const [rockets, setRockets] = useState(rocketsData)
   const [launches, setLaunches] = useState(launchesData)
   const [category, setCategory] = useState('Launches')

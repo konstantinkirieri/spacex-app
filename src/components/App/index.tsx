@@ -1,9 +1,11 @@
-import Header from "../Header/Header";
-import Table from "../Table/Table";
+import React from "react";
+
+import {Header} from "../Header/Header";
+import {Table} from "../Table/Table";
 
 import S from './styles.module.css'
 
-export default function App() {
+export const App: React.FC = () => {
   return (
     <div className={S.app}>
         <Header />
