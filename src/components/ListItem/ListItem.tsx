@@ -2,12 +2,14 @@ import React from "react";
 import S from './style.module.css';
 
 interface ListItemProps {
-    urlImg: string, 
-    id: string | number, 
-    name: string, 
-    description: string, 
-    success?: boolean | undefined, 
-    favorites: [], 
+    //todo правильней будет назвать imgUrl
+    urlImg: string,
+    id: string | number,
+    name: string,
+    description: string,
+    success?: boolean | undefined,
+    favorites: [],
+    //TODO лучше назвать просто onClick, да и тип сделать более точный (id: string) => void
     onChangeItem: Function
 }
 

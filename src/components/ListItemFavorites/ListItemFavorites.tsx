@@ -3,19 +3,20 @@ import ListItem from '../ListItem/ListItem'
 import S from '../Search/search.module.css'
 import {categories} from '../../mocks/categories'
 
+//TODO уточнить типы бы надо
 interface ListItemFavoritesProps {
   onChangeItem: Function,
   favorites: []
 }
 
 interface PassedProps {
-  id: number | string, 
-  name: string, 
-  dataType: string, 
-  links: {patch: {small: string}}, 
-  flickr_images: string[], 
-  details: string, 
-  description: string, 
+  id: number | string,
+  name: string,
+  dataType: string,
+  links: {patch: {small: string}},
+  flickr_images: string[],
+  details: string,
+  description: string,
   success: boolean | undefined,
 }
 

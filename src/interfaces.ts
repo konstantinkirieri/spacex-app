@@ -9,6 +9,7 @@ export interface ILaunchesData {
     },
     name: string,
     details: string,
+    //todo лучше использовать литерал, 'Launches', раз он всегда один
     dataType: string,
     success: boolean,
     flight_number: string,
@@ -20,5 +21,6 @@ export interface IRocketsData {
     flickr_images: string,
     name: string,
     description: string,
+    //todo здесь тоже, 'Rockets'
     dataType: string
 }

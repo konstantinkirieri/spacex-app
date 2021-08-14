@@ -1,3 +1,5 @@
+//TODO здесь не нужно использовать JSON parse - json можно вставлять напрямую в любой js код.
+//ts даже выведет для них типы
 const originalData = JSON.parse(`[
     {
         "fairings": {
@@ -698,6 +700,7 @@ const originalData = JSON.parse(`[
     }
 ]`);
 
+//todo не обязательно сохранять в отдельную переменную, map не изменяет исходный массив
 const copiedData = [...originalData];
 
 export const launchesData = copiedData.map(item => {

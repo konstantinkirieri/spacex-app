@@ -8,10 +8,12 @@ import S from "../Description/styles.module.css";
 
 interface DescriptionLaunchesProps {
     data: ILaunchesData[],
+    //TODO: протипизировать нормально, можно использовать напрямую RocketInfoProps
     rockets: any[],
     itemId: string | number,
     addToFavorite: (id: string, dataType: string) => void,
     deleteFromFavorites: (id: string, dataType: string) => void,
+    //TODO: протипизировать нормально
     favorites: any[]
 }
 
