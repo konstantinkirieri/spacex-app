@@ -1,9 +1,10 @@
 import React from "react";
 import S from "../Description/styles.module.css";
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
-interface DescriptionFavoritesProps {
-    data: any[],
-    itemId: string | number,
+export interface DescriptionFavoritesProps {
+    data: [IRocketsData | ILaunchesData],
+    itemId: null | string,
     addToFavorite: (id: string, dataType: string) => void,
     deleteFromFavorites: (id: string, dataType: string) => void,
 }
@@ -15,9 +16,9 @@ export const DescriptionFavorites: React.FC<DescriptionFavoritesProps> = ({
     deleteFromFavorites
 }) => {
 
-    const getDescription = itemId === 0 ? [data[0]] : data.filter(item => item.id === itemId);
-    const showDescription = data.length !== 0 ?
-        getDescription.map(item => {
+    const getDescription = itemId === null ? [data[0]] : data.filter(item => item.id === itemId);
+    const showDescription = data.length ?
+        getDescription.map((item) => {
             return (<div key={item.id} className={S.description}>
                 <img
                     className={S.description__image}

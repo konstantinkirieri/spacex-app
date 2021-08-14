@@ -1,20 +1,17 @@
-import React from "react";
-import {useState} from "react";
-import {ILaunchesData} from "../../interfaces";
+import React, {useState} from "react";
 
-import {RocketInfo} from "../RocketInfo/RocketInfo";
+import {ILaunchesData, IRocketsData} from '../../interfaces'
+import {RocketInfo} from '../RocketInfo/RocketInfo'
 
 import S from "../Description/styles.module.css";
 
 interface DescriptionLaunchesProps {
     data: ILaunchesData[],
-    //TODO: протипизировать нормально, можно использовать напрямую RocketInfoProps
-    rockets: any[],
-    itemId: string | number,
+    rockets: IRocketsData[],
+    itemId: null | string,
     addToFavorite: (id: string, dataType: string) => void,
     deleteFromFavorites: (id: string, dataType: string) => void,
-    //TODO: протипизировать нормально
-    favorites: any[]
+    favorites: [IRocketsData | ILaunchesData],
 }
 
 export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
@@ -25,11 +22,11 @@ export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
     deleteFromFavorites,
     favorites
 }) => {
-    const getDescription = itemId !== 0 ? data.filter(item => item.id === itemId) : [data[0]];
+    const getDescription = itemId !== null ? data.filter(item => item.id === itemId) : [data[0]];
     const [showRocketInfo, setShowRocketInfo] = useState(false);
 
     const showDescription = getDescription.map(item => {
-        const rocket = rockets.filter(rocketItem => rocketItem.id === item.rocket);
+        const rocket = rockets.filter((rocketItem: { id: string; }) => rocketItem.id === item.rocket);
         return (
             <div key={item.id} className={S.description}>
                 <img
@@ -47,15 +44,11 @@ export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
                     <div className={S.rocketList}>
                         <div className={S.rocketList__item}>
                             <div><strong>Rocket:</strong> </div>
-                            {rocket.map(rocket =>
-                            {
-                                return (
-                                    <div key={rocket.id}>
-                                        <button className={S.rocketList__button} onClick={() => setShowRocketInfo(!showRocketInfo)}>{rocket.name} {showRocketInfo ? '[↑]': '[↓]'}</button>
-                                        {showRocketInfo && <RocketInfo data={rocket}/>}
-                                    </div>
-                                )
-                            })
+                            {rocket.map(rocket => (
+                              <div key={rocket.id}>
+                                  <button className={S.rocketList__button} onClick={() => setShowRocketInfo(!showRocketInfo)}>{rocket.name} {showRocketInfo ? '[↑]': '[↓]'}</button>
+                                  {showRocketInfo && <RocketInfo data={rocket}/>}
+                              </div>))
                             }
                         </div>
                         <div className={S.rocketList__item}><strong>Success:</strong> {item['success'] ? <span className={S.success}>Success</span> : <span className={S.failure}>Failure</span>}</div>
@@ -66,9 +59,9 @@ export const DescriptionLaunches: React.FC<DescriptionLaunchesProps> = ({
                 </div>
                 <button
                     className={S.likeButton}
-                    onClick={() => favorites.some((f) => f.id === item.id) ? deleteFromFavorites(item.id, item.dataType) : addToFavorite(item.id, item.dataType)}
+                    onClick={() => favorites.some(f => f.id === item.id) ? deleteFromFavorites(item.id, item.dataType) : addToFavorite(item.id, item.dataType)}
                 >
-                    <i className={favorites.some((f) => f.id === item.id) ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
+                    <i className={favorites.some(f => f.id === item.id) ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
                 </button>
 
             </div>)

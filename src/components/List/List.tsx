@@ -4,18 +4,19 @@ import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
 import ListItem from '../ListItem/ListItem'
 
 import S from './List.module.css';
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 interface ListProps {
     category: string,
-    onChangeItem: Function,
-    launches: any[],
-    rockets: any[],
-    favorites: []
+    onClickItem: (id: string | null) => void,
+    launches: ILaunchesData[],
+    rockets: IRocketsData[],
+    favorites: [IRocketsData | ILaunchesData]
 }
 
 const List: React.FC<ListProps> = ({
     category,
-    onChangeItem,
+    onClickItem,
     launches,
     rockets,
     favorites
@@ -25,27 +26,27 @@ const List: React.FC<ListProps> = ({
             switch (category) {
                 case 'Launches':
                     return <>{
-                        launches.map((item) => <ListItem 
+                        launches.map((item) => <ListItem
                             key={item.id}
-                            onChangeItem={onChangeItem}
+                            onClickItem={onClickItem}
                             favorites={favorites}
-                            {...item} 
-                            urlImg={item.links.patch.small} 
+                            {...item}
+                            imgUrl={item.links.patch.small}
                             description={item.details}/>
                         )
                     }</>
                 case 'Rockets':
                     return <>{
-                        rockets.map((item) => <ListItem 
+                        rockets.map((item) => <ListItem
                             key={item.id}
-                            onChangeItem={onChangeItem} 
+                            onClickItem={onClickItem}
                             favorites={favorites}
                             {...item}
-                            urlImg={item.flickr_images[0]}/>
+                            imgUrl={item.flickr_images[0]}/>
                         )
                     }</>
                 case 'Favorites':
-                    return <ListItemFavorites favorites={favorites} onChangeItem={onChangeItem} />
+                    return <ListItemFavorites favorites={favorites} onClickItem={onClickItem} />
                 default:
                     return null
             }

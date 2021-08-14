@@ -1,14 +1,14 @@
 import React from "react";
-import {IRocketsData} from "../../interfaces";
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 import S from "../Description/styles.module.css";
 
 interface DescriptionRocketsProps {
     data: IRocketsData[],
-    itemId: string | number,
+    itemId: string | null,
     addToFavorite: (id: string, dataType: string) => void,
     deleteFromFavorites: (id: string, dataType: string) => void,
-    favorites: any[]
+    favorites: [IRocketsData | ILaunchesData]
 }
 
 export const DescriptionRockets: React.FC<DescriptionRocketsProps> = ({
@@ -18,7 +18,7 @@ export const DescriptionRockets: React.FC<DescriptionRocketsProps> = ({
     deleteFromFavorites,
     favorites
 }) => {
-    const getDescription = itemId !== 0 ? data.filter(item => item.id === itemId) : [data[0]];
+    const getDescription = itemId !== null ? data.filter(item => item.id === itemId) : [data[0]];
     const showDescription = getDescription.map(item => {
         return (<div key={item.id} className={S.description}>
             <img

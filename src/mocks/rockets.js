@@ -1,5 +1,4 @@
-//todo то же, что и launches
-const originalData = JSON.parse(`[
+const originalData = [
     {
         "height": {
             "meters": 22.25,
@@ -458,12 +457,9 @@ const originalData = JSON.parse(`[
         "description": "Starship and Super Heavy Rocket represent a fully reusable transportation system designed to service all Earth orbit needs as well as the Moon and Mars. This two-stage vehicle — composed of the Super Heavy rocket (booster) and Starship (ship) — will eventually replace Falcon 9, Falcon Heavy and Dragon.",
         "id": "5e9d0d96eda699382d09d1ee"
     }
-]`);
+];
 
-//todo то же, что и launches
-const copiedData = [...originalData];
-
-export const rocketsData = copiedData.map(item => {
+export const rocketsData = originalData.map(item => {
   return {
     ...item,
     isFavorite: false,

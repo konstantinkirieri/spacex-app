@@ -3,16 +3,16 @@ import React from "react";
 import {DescriptionLaunches} from '../DescriptionLaunches/DescriptionLaunches'
 import {DescriptionRockets} from '../DescriptionRockets/DescriptionRockets'
 import {DescriptionFavorites} from '../DescriptionFavorites/DescriptionFavorites'
-import {IRocketsData, ILaunchesData} from "../../interfaces";
+import {IRocketsData, ILaunchesData} from '../../interfaces'
 
 interface DescriptionProps {
-  itemId: string | number,
+  itemId: null | string,
   category: string,
   launches: ILaunchesData[],
   rockets: IRocketsData[],
   addToFavorite: (id: string, dataType: string) => void,
   deleteFromFavorites: (id: string, dataType: string) => void,
-  favorites: []
+  favorites: [IRocketsData | ILaunchesData],
 }
 
 export const Description: React.FC<DescriptionProps> = ({

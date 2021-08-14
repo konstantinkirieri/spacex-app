@@ -1,32 +1,31 @@
 import React from "react";
 import S from './style.module.css';
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 interface ListItemProps {
-    //todo правильней будет назвать imgUrl
-    urlImg: string,
-    id: string | number,
+    imgUrl: string,
+    id: string | null,
     name: string,
     description: string,
     success?: boolean | undefined,
-    favorites: [],
-    //TODO лучше назвать просто onClick, да и тип сделать более точный (id: string) => void
-    onChangeItem: Function
+    favorites: [IRocketsData | ILaunchesData],
+    onClickItem: (id: string | null) => void
 }
 
 const ListItem: React.FC<ListItemProps> = ({
-    urlImg,
+    imgUrl,
     id,
     name,
      description,
     success,
     favorites,
-    onChangeItem
+    onClickItem
 }) => {
     return (
       <div className={S.item}
-           onClick={() => onChangeItem(id)}
+           onClick={() => onClickItem(id)}
       >
-          <img className={S.img} src={urlImg} alt={name} />
+          <img className={S.img} src={imgUrl} alt={name} />
           <div className={S.body}>
               <h3 className={S.title}>
                   {name}
@@ -40,7 +39,7 @@ const ListItem: React.FC<ListItemProps> = ({
               </div>
           </div>
           {
-            favorites.some((f: {id: string | number}) => f.id === id)
+            favorites.some((f: {id: string}) => f.id === id)
             && <i className={`${S.like} fas fa-heart`} />
           }
       </div>

@@ -5,7 +5,7 @@ import { categories } from '../../mocks/categories';
 
 
 export const Categories: React.FC<{onChangeCategory: (name: string) => void}> = ({onChangeCategory}) => {
-  const allCategories = categories.map((item) => {
+  const allCategories = categories.map((item: {name: string, id: number}) => {
       return <CategoryItem
                 key={item.id}
                 data={item}

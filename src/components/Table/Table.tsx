@@ -15,9 +15,8 @@ export const Table: React.FC = () => {
   const [rockets, setRockets] = useState<any[]>(rocketsData)
   const [launches, setLaunches] = useState<any[]>(launchesData)
   //TODO лучше использовать union литералов как тип: 'Launches' | 'Rockets'
-  const [category, setCategory] = useState<string>('Launches')
-  //TODO для обозначения не выбранного итема лучше использовать null, а не цифру 0: null | string
-  const [itemId, setItemId] = useState<number | string>(0)
+  const [category, setCategory] = useState('Launches')
+  const [itemId, setItemId] = useState<null | string>(null)
   const [favorites, setFavorites] = useLocalStorage(
     'favorites',
     [],
@@ -72,10 +71,10 @@ export const Table: React.FC = () => {
 
   const handlerChangeCategory = (name: string): void => {
     setCategory(name)
-    setItemId(0)
+    setItemId(null)
   }
 
-  const handlerChangeItem = (id: number): void => {
+  const handlerClickItem = (id: null | string): void => {
     setItemId(id)
   }
 
@@ -86,7 +85,7 @@ export const Table: React.FC = () => {
       />
       <List
         category={category}
-        onChangeItem={handlerChangeItem}
+        onClickItem={handlerClickItem}
         rockets={rockets}
         launches={launches}
         favorites={favorites}
