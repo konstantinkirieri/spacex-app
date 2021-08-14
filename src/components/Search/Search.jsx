@@ -1,6 +1,7 @@
 import S from "./search.module.css"
 import {categories} from '../../mocks/categories'
 
+//TODO вообще удалить раз не используется
 export default function Search () {
     return (
       <div className={S.search_wrapper}>

@@ -1,3 +1,4 @@
+//todo то же, что и launches
 const originalData = JSON.parse(`[
     {
         "height": {
@@ -459,6 +460,7 @@ const originalData = JSON.parse(`[
     }
 ]`);
 
+//todo то же, что и launches
 const copiedData = [...originalData];
 
 export const rocketsData = copiedData.map(item => {

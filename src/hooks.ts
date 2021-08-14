@@ -1,5 +1,6 @@
 import {useState} from "react";
 
+//todo надо бы использовать дженерик, что бы протипизировать возвращаемое значение
 export const useLocalStorage = (
     key: string,
     obj: any,

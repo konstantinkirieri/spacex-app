@@ -11,9 +11,12 @@ import {rocketsData} from '../../mocks/rockets'
 import S from './styles.module.css'
 
 export const Table: React.FC = () => {
+  //TODO нормально протипизировать
   const [rockets, setRockets] = useState<any[]>(rocketsData)
   const [launches, setLaunches] = useState<any[]>(launchesData)
+  //TODO лучше использовать union литералов как тип: 'Launches' | 'Rockets'
   const [category, setCategory] = useState<string>('Launches')
+  //TODO для обозначения не выбранного итема лучше использовать null, а не цифру 0: null | string
   const [itemId, setItemId] = useState<number | string>(0)
   const [favorites, setFavorites] = useLocalStorage(
     'favorites',
