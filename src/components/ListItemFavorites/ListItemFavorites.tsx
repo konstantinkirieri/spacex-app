@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import ListItem from '../ListItem/ListItem'
 import {categories} from '../../mocks/categories'
 import {ILaunchesData, IRocketsData} from '../../interfaces'
 
@@ -10,7 +9,7 @@ interface ListItemFavoritesProps {
   favorites: [ILaunchesData | IRocketsData]
 }
 
-const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onClickItem, favorites}) => {
+const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({favorites}) => {
   const [keyword, setKeyword] = useState<string>('');
   const [searchCategory, setSearchCategory] = useState<string>('')
 
@@ -61,16 +60,9 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onClickItem, favor
         favorites
           .filter((item: {dataType: string}) => searchCategory ? item.dataType === searchCategory : true)
           .filter((item: {name: string}) => filterList(item))
-          .map((item: IRocketsData | ILaunchesData): JSX.Element => {
+          .map(() => {
             return (
-                <ListItem
-                  key={item.id}
-                  favorites={favorites}
-                  {...item}
-                  imgUrl={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images}
-                  description={item.dataType === 'Launches' ? item.details : item.description}
-                  onClickItem={() => onClickItem(item.id)}
-                />
+                <>List component</>
             )
         })
       }
