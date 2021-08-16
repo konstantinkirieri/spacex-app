@@ -1,66 +1,63 @@
-import React from "react";
+import React from 'react'
 
+import S from './styles.module.css'
 import {DescriptionLaunches} from '../DescriptionLaunches/DescriptionLaunches'
-import {DescriptionRockets} from '../DescriptionRockets/DescriptionRockets'
-import {DescriptionFavorites} from '../DescriptionFavorites/DescriptionFavorites'
-import {IRocketsData, ILaunchesData} from '../../interfaces'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 interface DescriptionProps {
-  itemId: null | string,
-  category: string,
-  launches: ILaunchesData[],
-  rockets: IRocketsData[],
-  addToFavorite: (id: string, dataType: string) => void,
-  deleteFromFavorites: (id: string, dataType: string) => void,
-  favorites: [IRocketsData | ILaunchesData],
+  id: null | string,
+  name: string,
+  description: string,
+  isFavorite: boolean,
+  thumbnail: string,
+  dataType: 'Rockets' | 'Launches',
+  addToFavorite: (id: string | null, dataType: 'Rockets' | 'Launches') => void,
+  deleteFromFavorites: (id: string | null, dataType: 'Rockets' | 'Launches') => void,
+  moreDetails: ILaunchesData | IRocketsData,
 }
 
 export const Description: React.FC<DescriptionProps> = ({
-  itemId,
-  category,
-  launches,
-  rockets,
+  id,
+  name,
+  description,
+  isFavorite,
+  thumbnail,
+  dataType,
   addToFavorite,
   deleteFromFavorites,
-  favorites,
+  moreDetails
 }) => {
 
-  const switchDescription = (category: string) => {
-    switch (category) {
-      case 'Launches':
-        return (
-          <DescriptionLaunches
-            data={launches}
-            rockets={rockets}
-            favorites={favorites}
-            itemId={itemId}
-            addToFavorite={addToFavorite}
-            deleteFromFavorites={deleteFromFavorites}
-          />
-        )
-      case 'Rockets':
-        return (
-          <DescriptionRockets
-            data={rockets}
-            favorites={favorites}
-            itemId={itemId}
-            addToFavorite={addToFavorite}
-            deleteFromFavorites={deleteFromFavorites}
-          />
-        )
-      case 'Favorites':
-        return (
-          <DescriptionFavorites
-            data={favorites}
-            itemId={itemId}
-            addToFavorite={addToFavorite}
-            deleteFromFavorites={deleteFromFavorites}
-          />
-        )
-      default:
-        return <></>
+  const getDetails: () => JSX.Element | null = () => {
+    if(moreDetails.dataType === 'Launches') {
+      return <DescriptionLaunches moreDetails={moreDetails}/>
     }
-  }
+    return null
+  };
 
-  return switchDescription(category)
+  return (
+    <div key={id} className={S.description}>
+      <img
+        className={S.description__image}
+        src={thumbnail}
+        alt={name}
+      />
+      <div className={S.description__text}>
+        <h2 className={S.description__title}>
+          {name}
+        </h2>
+        <div className={S.description__about}>
+          {description}
+        </div>
+      </div>
+      {getDetails()}
+      <button
+        className={S.likeButton}
+        onClick = {() => isFavorite ? deleteFromFavorites(id, dataType) : addToFavorite(id, dataType)}
+      >
+        <i className={isFavorite ? `${S.likeButtonHovered} fas fa-heart` : 'far fa-heart'} />
+      </button>
+
+    </div>
+  )
 }

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 import {useLocalStorage} from "../../hooks";
 
 import {Categories} from '../Category/Category'
@@ -9,21 +9,34 @@ import {launchesData} from '../../mocks/launches'
 import {rocketsData} from '../../mocks/rockets'
 
 import S from './styles.module.css'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 export const Table: React.FC = () => {
   //TODO нормально протипизировать
   const [rockets, setRockets] = useState<any[]>(rocketsData)
   const [launches, setLaunches] = useState<any[]>(launchesData)
-  //TODO лучше использовать union литералов как тип: 'Launches' | 'Rockets'
-  const [category, setCategory] = useState('Launches')
-  const [itemId, setItemId] = useState<null | string>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('Launches')
+  const [selectedItemId, setSelectedItemId] = useState<null | string>(null)
   const [favorites, setFavorites] = useLocalStorage(
     'favorites',
     [],
   ) //local
 
-  const addToFavorite = (id: string, dataType: string): void => {
+  const getCurrentData: () => [ILaunchesData | IRocketsData] = () => {
+    switch (selectedCategory) {
+      case 'Launches':
+        return selectedItemId ? launches.filter((item: ILaunchesData) => item.id === selectedItemId) : [launches[0]];
+      case 'Rockets':
+        return selectedItemId ? rockets.filter((item: IRocketsData) => item.id === selectedItemId) : [rockets[0]];
+      case 'Favorites':
+        return selectedItemId ? favorites.filter((item: IRocketsData | ILaunchesData) => item.id === selectedItemId) : favorites.length !== 0 ? [favorites[0]] : null;
+      default:
+        return null
+    }
+  };
 
+  const addToFavorite = (id: string | null, dataType: 'Rockets' | 'Launches'): void => {
+    console.log(id, dataType)
     const currentData = dataType === 'Launches' ? launches : rockets;
     const setFavoriteDate = Date.now();
 
@@ -40,14 +53,13 @@ export const Table: React.FC = () => {
     // Add changed item to favorites state
     setFavorites([...favorites, copyData[index]])
 
-    if (dataType === 'Launches') setLaunches(copyData)
-    if (dataType === 'Rockets') setRockets(copyData)
+    if (selectedCategory === 'Launches') setLaunches(copyData)
+    if (selectedCategory === 'Rockets') setRockets(copyData)
   }
 
-  const deleteFromFavorites = (id: string, dataType: string): void => {
+  const deleteFromFavorites = (id: string | null, dataType: 'Rockets' | 'Launches'): void => {
     // Delete from data
-    const currentData =
-      dataType === 'Launches' ? launches : rockets
+    const currentData = dataType === 'Launches' ? launches : rockets;
     const copyData = [...currentData]
     const index = copyData.findIndex(
       (item) => item.id === id,
@@ -57,8 +69,8 @@ export const Table: React.FC = () => {
       favoriteDate: null,
       isFavorite: false,
     }
-    if (dataType === 'Launches') setLaunches(copyData)
-    if (dataType === 'Rockets') setRockets(copyData)
+    if (selectedCategory === 'Launches') setLaunches(copyData)
+    if (selectedCategory === 'Rockets') setRockets(copyData)
 
     // Delete from favorites state
     const copyFavorite = [...favorites]
@@ -70,12 +82,12 @@ export const Table: React.FC = () => {
   }
 
   const handlerChangeCategory = (name: string): void => {
-    setCategory(name)
-    setItemId(null)
+    setSelectedCategory(name)
+    setSelectedItemId(null)
   }
 
   const handlerClickItem = (id: null | string): void => {
-    setItemId(id)
+    setSelectedItemId(id)
   }
 
   return (
@@ -84,21 +96,28 @@ export const Table: React.FC = () => {
         onChangeCategory={handlerChangeCategory}
       />
       <List
-        category={category}
+        category={selectedCategory}
         onClickItem={handlerClickItem}
         rockets={rockets}
         launches={launches}
         favorites={favorites}
       />
-      <Description
-        category={category}
-        itemId={itemId}
-        rockets={rockets}
-        launches={launches}
-        favorites={favorites}
-        addToFavorite={addToFavorite}
-        deleteFromFavorites={deleteFromFavorites}
-      />
+      {
+        getCurrentData() ? getCurrentData().map((item) => {
+          return (<Description
+            key={item.id}
+            moreDetails={item}
+            id={item.id}
+            name={item.name}
+            description={item.dataType === 'Launches' ? item.details : item.description}
+            isFavorite={item.isFavorite}
+            thumbnail={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images}
+            dataType={item.dataType}
+            addToFavorite={addToFavorite}
+            deleteFromFavorites={deleteFromFavorites}
+          />)
+        }) : <div style={{width: '100%'}}><h1 style={{textAlign: 'center', marginTop: '100px'}}>No items</h1></div>
+      }
     </main>
   )
 }

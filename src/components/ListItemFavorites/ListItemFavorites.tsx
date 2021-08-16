@@ -67,7 +67,7 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onClickItem, favor
                   key={item.id}
                   favorites={favorites}
                   {...item}
-                  imgUrl={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images[0]}
+                  imgUrl={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images}
                   description={item.dataType === 'Launches' ? item.details : item.description}
                   onClickItem={() => onClickItem(item.id)}
                 />

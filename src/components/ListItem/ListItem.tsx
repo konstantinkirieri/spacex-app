@@ -16,7 +16,7 @@ const ListItem: React.FC<ListItemProps> = ({
     imgUrl,
     id,
     name,
-     description,
+    description,
     success,
     favorites,
     onClickItem
