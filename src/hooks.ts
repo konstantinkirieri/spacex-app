@@ -1,10 +1,10 @@
 import {useState} from "react";
+import {ILaunchesData, IRocketsData} from './interfaces'
 
-//todo надо бы использовать дженерик, что бы протипизировать возвращаемое значение
 export const useLocalStorage = (
     key: string,
-    obj: any,
-): [any, (value: any) => void] => {
+    obj: Array<ILaunchesData | IRocketsData>,
+): [Array<ILaunchesData | IRocketsData>, (newValue: Array<ILaunchesData | IRocketsData>) => void] => {
     const [local, setLocal] = useState(() => {
         const ls = localStorage.getItem(key)
         if (!ls) return obj

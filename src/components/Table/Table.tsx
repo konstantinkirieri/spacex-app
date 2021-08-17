@@ -14,21 +14,15 @@ import {ILaunchesData, IRocketsData} from '../../interfaces'
 export const Table: React.FC = () => {
   //TODO нормально протипизировать
   const [rockets, setRockets] = useState<any[]>(rocketsData)
-  const [launches, setLaunches] =
-    useState<any[]>(launchesData)
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>('Launches')
-  const [selectedItemId, setSelectedItemId] = useState<
-    null | string
-  >(null)
+  const [launches, setLaunches] = useState<any[]>(launchesData)
+  const [selectedCategory, setSelectedCategory] = useState<string>('Launches')
+  const [selectedItemId, setSelectedItemId] = useState<null | string>(null)
   const [favorites, setFavorites] = useLocalStorage(
     'favorites',
     [],
-  ) //local
+  )
 
-  const getItemsByCategory: () => [
-        ILaunchesData | IRocketsData,
-  ] = () => {
+  const getItemsByCategory: (() => Array <ILaunchesData | IRocketsData> | null) = () => {
     switch (selectedCategory) {
       case 'Launches':
         return launches
@@ -41,9 +35,8 @@ export const Table: React.FC = () => {
     }
   };
 
-  const getCurrentData: () => [
-    ILaunchesData | IRocketsData,
-  ] = () => {
+
+  const getCurrentData: (() => Array<ILaunchesData | IRocketsData> | null) = () => {
     switch (selectedCategory) {
       case 'Launches':
         return selectedItemId
@@ -89,8 +82,7 @@ export const Table: React.FC = () => {
 
     copyData[index] = {
       ...copyData[index],
-      favoriteDate: setFavoriteDate,
-      isFavorite: true,
+      favoriteDate: setFavoriteDate
     }
 
     // Add changed item to favorites state
@@ -114,15 +106,14 @@ export const Table: React.FC = () => {
     )
     copyData[index] = {
       ...copyData[index],
-      favoriteDate: null,
-      isFavorite: false,
+      favoriteDate: null
     }
     if (selectedCategory === 'Launches')
       setLaunches(copyData)
     if (selectedCategory === 'Rockets') setRockets(copyData)
 
     // Delete from favorites state
-    const copyFavorite: ILaunchesData[] | IRocketsData[] = [
+    const copyFavorite: Array<ILaunchesData | IRocketsData> = [
       ...favorites,
     ]
     const indexFavoriteItem = favorites.findIndex(
@@ -151,13 +142,15 @@ export const Table: React.FC = () => {
         <div className={S.items}>
           <List
             data={getItemsByCategory()}
+            selectedCategory={selectedCategory}
             onClickItem={handlerClickItem}
+            favorites={favorites}
           />
         </div>
       </div>
 
       {getCurrentData() ? (
-        getCurrentData().map((item) => {
+        getCurrentData()?.map((item) => {
           return (
             <Description
               key={item.id}
@@ -168,7 +161,6 @@ export const Table: React.FC = () => {
                   ? item.details
                   : item.description
               }
-              isFavorite={item.isFavorite}
               thumbnail={
                 item.dataType === 'Launches'
                   ? item.links.patch.small
@@ -178,6 +170,7 @@ export const Table: React.FC = () => {
               addToFavorite={addToFavorite}
               deleteFromFavorites={deleteFromFavorites}
               moreDetails={item}
+              favorites={favorites}
             />
           )
         })

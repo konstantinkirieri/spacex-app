@@ -8,7 +8,6 @@ interface DescriptionProps {
   id: null | string,
   name: string,
   description: string,
-  isFavorite: boolean,
   thumbnail: string,
   dataType: 'Rockets' | 'Launches',
   addToFavorite: (
@@ -20,18 +19,19 @@ interface DescriptionProps {
     dataType: 'Rockets' | 'Launches',
   ) => void,
   moreDetails: ILaunchesData | IRocketsData,
+  favorites: Array<ILaunchesData | IRocketsData>
 }
 
 export const Description: React.FC<DescriptionProps> = ({
   id,
   name,
   description,
-  isFavorite,
   thumbnail,
   dataType,
   addToFavorite,
   deleteFromFavorites,
   moreDetails,
+  favorites
 }) => {
   const getDetails: () => boolean | JSX.Element = () => {
     return (
@@ -58,13 +58,13 @@ export const Description: React.FC<DescriptionProps> = ({
       <button
         className={S.likeButton}
         onClick={() =>
-          isFavorite
+          favorites?.some((f) => f.id === id)
             ? deleteFromFavorites(id, dataType)
             : addToFavorite(id, dataType)
         }>
         <i
           className={
-            isFavorite
+            favorites?.some((f) => f.id === id)
               ? `${S.likeButtonHovered} fas fa-heart`
               : 'far fa-heart'
           }
