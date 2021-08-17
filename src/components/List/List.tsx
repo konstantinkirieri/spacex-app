@@ -1,16 +1,66 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import {categories} from '../../mocks/categories'
 import S from './List.module.css'
 import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 export const List: React.FC<{
-  data: [ILaunchesData | IRocketsData],
-  onClickItem: (id: string | null) => void
-}> = ({data, onClickItem}) => {
+  data: Array<ILaunchesData | IRocketsData> | null,
+  selectedCategory: string,
+  onClickItem: (id: string | null) => void,
+  favorites: Array<ILaunchesData | IRocketsData> | null,
+}> = ({data, selectedCategory, onClickItem, favorites}) => {
+  const [keyword, setKeyword] = useState<string>('');
+  const [searchCategory, setSearchCategory] = useState<string>('')
+
+  useEffect(() => {
+    setKeyword('');
+  }, [])
+
+  function filterList(item: {name: string}) {
+    if(!keyword) return true;
+    const regexp = new RegExp(keyword, 'i');
+    return item.name.match(regexp);
+  }
   return (
     <>
+      {selectedCategory === 'Favorites' && 
+        <>
+        <input
+        className={S.search_input}
+        type="search"
+        placeholder={`Поиск...`}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}/>
+        <select
+          id='select'
+          className={S.search_select}
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+        >
+          <option
+              value=''
+              defaultValue={''}
+          >
+            Reset filter
+          </option>;
+          {categories.map(item => {
+            if(item.name !== 'Favorites') return (
+              <option
+                  key={item.id}
+                  value={item.name}
+              >
+                {item.name}
+              </option>
+            )
+          })}
+        </select>
+      </>
+      }
       {data ? (
-        data.map((item) => {
+        data
+        .filter((item: {dataType: string}) => searchCategory ? item.dataType === searchCategory : true)
+        .filter((item: {name: string}) => filterList(item))
+        .map((item) => {
           return (
             <div
               key={item.id}
@@ -44,7 +94,7 @@ export const List: React.FC<{
                     : item.description}
                 </div>
               </div>
-              {item.isFavorite && (
+              {favorites?.some((f) => f.id === item.id) && (
                 <i className={`${S.like} fas fa-heart`} />
               )}
             </div>
