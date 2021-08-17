@@ -1,6 +1,7 @@
+import React from "react";
 import S from './styles.module.css';
 
-export default function Header() {
+export const Header: React.FC = () => {
     return (
         <header className={S.header}>
             <h1 className={S.headerTitle}>

@@ -4,18 +4,12 @@ import { CategoryItem } from './CategoryItem';
 import { categories } from '../../mocks/categories';
 
 
-export default function Categories({onChangeCategory}) {
-
-  const handlerChangeCategory = (name) => {
-        onChangeCategory(name);
-  }
-
-  const allCategories = categories.map((item, i) => {
+export const Categories: React.FC<{onChangeCategory: (name: string) => void}> = ({onChangeCategory}) => {
+  const allCategories = categories.map((item: {name: string, id: number}) => {
       return <CategoryItem
                 key={item.id}
                 data={item}
-                index={i + 1}
-                onChangeCategory={handlerChangeCategory}
+                onChangeCategory={onChangeCategory}
              />
   })
 

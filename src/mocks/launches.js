@@ -1,4 +1,4 @@
-const originalData = JSON.parse(`[
+const originalData = [
     {
         "fairings": {
             "reused": false,
@@ -696,11 +696,9 @@ const originalData = JSON.parse(`[
         ],
         "id": "5eb87ce1ffd86e000604b333"
     }
-]`);
+];
 
-const copiedData = [...originalData];
-
-export const launchesData = copiedData.map(item => {
+export const launchesData = originalData.map(item => {
   return {
     ...item,
     isFavorite: false,

@@ -1,27 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import ListItem from '../ListItem/ListItem'
-import S from '../Search/search.module.css'
 import {categories} from '../../mocks/categories'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
+
+import S from '../ListItemFavorites/Favorites.module.css'
 
 interface ListItemFavoritesProps {
-  onChangeItem: Function,
-  favorites: []
+  onClickItem: (id: string | null) => void,
+  favorites: [ILaunchesData | IRocketsData]
 }
 
-interface PassedProps {
-  id: number | string, 
-  name: string, 
-  dataType: string, 
-  links: {patch: {small: string}}, 
-  flickr_images: string[], 
-  details: string, 
-  description: string, 
-  success: boolean | undefined,
-}
-
-const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favorites}) => {
-  const [keyword, setKeyword] = useState('');
-  const [searchCategory, setSearchCategory] = useState('')
+const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({favorites}) => {
+  const [keyword, setKeyword] = useState<string>('');
+  const [searchCategory, setSearchCategory] = useState<string>('')
 
   useEffect(() => {
     setKeyword('');
@@ -69,17 +59,10 @@ const ListItemFavorites: React.FC<ListItemFavoritesProps> = ({onChangeItem, favo
       {
         favorites
           .filter((item: {dataType: string}) => searchCategory ? item.dataType === searchCategory : true)
-          .filter((item) => filterList(item))
-          .map((item: PassedProps): JSX.Element => {
+          .filter((item: {name: string}) => filterList(item))
+          .map(() => {
             return (
-                <ListItem
-                  key={item.id}
-                  favorites={favorites}
-                  {...item}
-                  urlImg={item.dataType === 'Launches' ? item.links.patch.small : item.flickr_images[0]}
-                  description={item.dataType === 'Launches' ? item.details : item.description}
-                  onChangeItem={() => onChangeItem(item.id)}
-                />
+                <>List component</>
             )
         })
       }

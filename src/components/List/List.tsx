@@ -1,61 +1,58 @@
-import React from 'react';
-import S from './List.module.css';
-import ListItemFavorites from "../ListItemFavorites/ListItemFavorites";
-import ListItem from '../ListItem/ListItem'
+import React from 'react'
 
-interface ListProps {
-    category: string,
-    onChangeItem: Function,
-    launches: any[],
-    rockets: any[],
-    favorites: []
-}
+import S from './List.module.css'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
-const List: React.FC<ListProps> = ({
-    category,
-    onChangeItem,
-    launches,
-    rockets,
-    favorites
-}) => {
-
-    const switchComponents: ((category: string) => JSX.Element | null) = category => {
-            switch (category) {
-                case 'Launches':
-                    return <>{
-                        launches.map((item) => <ListItem 
-                            key={item.id}
-                            onChangeItem={onChangeItem}
-                            favorites={favorites}
-                            {...item} 
-                            urlImg={item.links.patch.small} 
-                            description={item.details}/>
-                        )
-                    }</>
-                case 'Rockets':
-                    return <>{
-                        rockets.map((item) => <ListItem 
-                            key={item.id}
-                            onChangeItem={onChangeItem} 
-                            favorites={favorites}
-                            {...item}
-                            urlImg={item.flickr_images[0]}/>
-                        )
-                    }</>
-                case 'Favorites':
-                    return <ListItemFavorites favorites={favorites} onChangeItem={onChangeItem} />
-                default:
-                    return null
-            }
-    };
-
-    return (
-        <div className={S.list}>
-            <div className={S.items}>
-                {switchComponents(category)}
+export const List: React.FC<{
+  data: [ILaunchesData | IRocketsData],
+  onClickItem: (id: string | null) => void
+}> = ({data, onClickItem}) => {
+  return (
+    <>
+      {data ? (
+        data.map((item) => {
+          return (
+            <div
+              key={item.id}
+              className={S.item}
+              onClick={() => onClickItem(item.id)}>
+              <img
+                className={S.img}
+                src={
+                  item.dataType === 'Launches'
+                    ? item.links.patch.small
+                    : item.flickr_images
+                }
+                alt={item.name}
+              />
+              <div className={S.body}>
+                <h3 className={S.title}>{item.name}</h3>
+                <div className={S.description}>
+                  {item.dataType === 'Launches' ? (
+                    item.success ? (
+                      <span className={S.success}>
+                        Success.{' '}
+                      </span>
+                    ) : (
+                      <span className={S.failure}>
+                        Failure.{' '}
+                      </span>
+                    )
+                  ) : undefined}
+                  {item.dataType === 'Launches'
+                    ? item.details
+                    : item.description}
+                </div>
+              </div>
+              {item.isFavorite && (
+                <i className={`${S.like} fas fa-heart`} />
+              )}
             </div>
-        </div>
-    )
+          )
+        })
+      ) : (
+        <p>Not found items</p>
+      )}
+    </>
+  )
 }
-
-export default List
