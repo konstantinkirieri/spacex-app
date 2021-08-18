@@ -5,14 +5,14 @@ import {Categories} from '../Category/Category'
 import {List} from '../List/List'
 import {Description} from '../Description/Description'
 
-import {launchesData} from '../../mocks/launches'
 import {rocketsData} from '../../mocks/rockets'
 
-import S from './styles.module.css'
 import {ILaunchesData, IRocketsData} from '../../interfaces'
 
+import S from './styles.module.css'
+import {launchesData} from '../../mocks/launches'
+
 export const Table: React.FC = () => {
-  //TODO нормально протипизировать
   const [rockets, setRockets] = useState<any[]>(rocketsData)
   const [launches, setLaunches] = useState<any[]>(launchesData)
   const [selectedCategory, setSelectedCategory] = useState<string>('Launches')
@@ -22,6 +22,7 @@ export const Table: React.FC = () => {
     [],
   )
 
+  console.log(launches)
   const getItemsByCategory: (() => Array <ILaunchesData | IRocketsData> | null) = () => {
     switch (selectedCategory) {
       case 'Launches':
