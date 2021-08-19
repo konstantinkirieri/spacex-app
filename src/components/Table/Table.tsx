@@ -8,6 +8,7 @@ import {Description} from '../Description/Description'
 
 import {ILaunchesData, IRocketsData} from '../../interfaces'
 
+import { CircularProgress, ListItem } from '@material-ui/core';
 import S from './styles.module.css'
 
 export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favoritesStore}) => {
@@ -84,26 +85,40 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
     setSelectedItemId(id)
   }
 
-  return launchesStore.isLoading || rocketsStore.isLoading ? <h1>...Loading</h1> : (
-    <main className={S.main}>
+  function scrollDiv(e: any) {
+    if (e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight) {
+      launchesStore.loadLaunches()
+      
+    }
+  }
+
+  return <main className={S.main}>
       <Categories
         onChangeCategory={handlerChangeCategory}
       />
+      <div className={S.list} onScroll={scrollDiv}>
+        {
+      // launchesStore.isLoading || rocketsStore.isLoading ?
+        launchesStore.launchesDataStore.length === 0 ?
 
-      <div className={S.list}>
-        <div className={S.items}>
-          <List
-            data={getItemsByCategory()}
-            selectedCategory={selectedCategory}
-            onClickItem={handlerClickItem}
-            favorites={favoritesDataStore}
-          />
-        </div>
+        <CircularProgress/> :
+
+        <List
+          data={getItemsByCategory()}
+          selectedCategory={selectedCategory}
+          onClickItem={handlerClickItem}
+          favorites={favoritesDataStore}
+        />}
+        {launchesStore.isLoading && <CircularProgress/>}
       </div>
 
       {getCurrentData() ? (
         getCurrentData()?.map((item) => {
           return (
+            launchesStore.launchesDataStore.length === 0 || rocketsStore.rocketsDataStore.length === 0  ?
+            
+            <CircularProgress/> :
+
             <Description
               key={item.id}
               id={item.id}
@@ -143,5 +158,4 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
         </div>
       )}
     </main>
-  )
 })
