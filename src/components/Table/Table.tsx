@@ -11,6 +11,10 @@ import {ILaunchesData, IRocketsData} from '../../interfaces'
 import { CircularProgress, ListItem } from '@material-ui/core';
 import S from './styles.module.css'
 
+function getWidth(): number {
+  return window.innerWidth;
+}
+
 export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favoritesStore}) => {
 
   useEffect(() => {
@@ -27,7 +31,8 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
   const [selectedItemId, setSelectedItemId] = useState<
     null | string
   >(null)
-
+  const [listStyle, setListStyle] = useState({})
+  const [visibleDescription, setVisibleDescription] = useState(false)
 
   const getItemsByCategory: () => Array<
     ILaunchesData | IRocketsData
@@ -79,16 +84,25 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
   const handlerChangeCategory = (name: string): void => {
     setSelectedCategory(name)
     setSelectedItemId(null)
+    handleGoBack()
   }
 
   const handlerClickItem = (id: null | string): void => {
     setSelectedItemId(id)
+    if(getWidth() < 750) {
+      setListStyle({display: 'none'})
+    }
+    setVisibleDescription(true)
+  }
+
+  const handleGoBack = (): void => {
+    setListStyle({display: 'flex'})
+    setVisibleDescription(false)
   }
 
   function scrollDiv(e: any) {
     if (e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight) {
-      launchesStore.loadLaunches()
-      
+      launchesStore.loadLaunches() 
     }
   }
 
@@ -96,7 +110,7 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
       <Categories
         onChangeCategory={handlerChangeCategory}
       />
-      <div className={S.list} onScroll={scrollDiv}>
+      <div className={S.list} onScroll={scrollDiv} style={listStyle}>
         {
       // launchesStore.isLoading || rocketsStore.isLoading ?
         launchesStore.launchesDataStore.length === 0 ?
@@ -111,7 +125,7 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
         />}
         {launchesStore.isLoading && <CircularProgress/>}
       </div>
-
+      {(getWidth() > 750 || visibleDescription)&& <div className={S.description}>
       {getCurrentData() ? (
         getCurrentData()?.map((item) => {
           return (
@@ -143,6 +157,7 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
               moreDetails={item}
               favorites={favoritesDataStore}
               rocketsDataStore={rocketsDataStore}
+              onGoBack={handleGoBack}
             />
           )
         })
@@ -157,5 +172,6 @@ export const Table: React.FC<any> = observer(({launchesStore, rocketsStore, favo
           </h1>
         </div>
       )}
+      </div>}
     </main>
 })
