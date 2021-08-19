@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const BASE_URL ="https://api.spacexdata.com/v5/";
+export const BASE_URL ="https://api.spacexdata.com/v4/";
 
 export class Api extends React.Component<any, any> {
 
@@ -25,7 +25,7 @@ export class Api extends React.Component<any, any> {
     }
   }
 
-  async getRockets(): Promise<any[]> {
+  async fetchRockets(): Promise<any[]> {
     const result = await this._getData({path: 'rockets/query', data:{
       options: {
         limit: 4,
@@ -34,7 +34,7 @@ export class Api extends React.Component<any, any> {
     return this._transformRocketsData(result.docs);
   }
 
-  async getLaunches(page: number): Promise<any[]> {
+  async fetchLaunches(page: number): Promise<any[]> {
     const result = await this._getData({path: 'launches/query', data:{
         options: {
           limit: 10,
