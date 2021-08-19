@@ -8,6 +8,7 @@
     background-color: rgb(214, 214, 214);
     margin-top: 5px;
     border-radius: 5px;
+    width: 281px;
 }
 
 .item:hover {
@@ -61,4 +62,13 @@ button {
 .failure {
     font-weight: 900;
     color: red;
+}
+
+.search {
+    display: flex;
+}
+
+.formControl {
+    width: 100px;
+    padding-left: 10px;
 }

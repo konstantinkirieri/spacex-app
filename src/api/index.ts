@@ -37,7 +37,7 @@ export class Api extends React.Component<any, any> {
   async fetchLaunches(page: number): Promise<any[]> {
     const result = await this._getData({path: 'launches/query', data:{
         options: {
-          limit: 10,
+          limit: 15,
           page,
           pagination: true,
         }

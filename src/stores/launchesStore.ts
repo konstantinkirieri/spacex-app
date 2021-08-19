@@ -5,7 +5,9 @@ const api = new Api;
 
 export class LaunchesStore {
   isLoading: boolean = true
+  // isLoadingMore: boolean = true
   launchesDataStore: any[] = []
+  nextPage = 0
 
   favoritesStore;
 
@@ -13,6 +15,7 @@ export class LaunchesStore {
     makeObservable(this, {
       launchesDataStore: observable,
       isLoading: observable,
+      // isLoadingMore: observable,
       loadLaunches: flow.bound,
       updateLaunches: action.bound,
       setIsLoading: action.bound,
@@ -22,7 +25,7 @@ export class LaunchesStore {
   }
 
   updateLaunches(item: any[]) {
-    this.launchesDataStore = item
+    this.launchesDataStore = this.launchesDataStore.concat(item)
   }
 
   setIsLoading(status: boolean) {
@@ -31,7 +34,9 @@ export class LaunchesStore {
 
   *loadLaunches() {
     this.setIsLoading(true);
-    yield api.fetchLaunches(1).then((item: any[]) => {
+    console.log(this.nextPage)
+    this.nextPage++
+    yield api.fetchLaunches(this.nextPage).then((item: any[]) => {
       this.updateLaunches(item);
       this.setIsLoading(false);
     })
