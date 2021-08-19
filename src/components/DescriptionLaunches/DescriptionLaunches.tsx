@@ -1,15 +1,13 @@
 import React, {useState} from 'react'
 
-import {ILaunchesData} from '../../interfaces'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 import {RocketInfo} from '../RocketInfo/RocketInfo'
 
 import S from "../Description/styles.module.css";
 
-import {rocketsData} from '../../mocks/rockets';
-
-export const DescriptionLaunches: React.FC<{moreDetails: ILaunchesData}> = ({moreDetails}) => {
+export const DescriptionLaunches: React.FC<{moreDetails: ILaunchesData; rocketsDataStore: IRocketsData[]}> = ({moreDetails, rocketsDataStore}) => {
   const [showRocketInfo, setShowRocketInfo] = useState(false);
-  const rocket = rocketsData.filter((rocketItem: { id: string; }) => rocketItem.id === moreDetails.rocket);
+  const rocket = rocketsDataStore.filter((rocketItem: { id: string; }) => rocketItem.id === moreDetails.rocket);
 
   return (
     <div className={S.rocketList}>

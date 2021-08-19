@@ -12,14 +12,13 @@ interface DescriptionProps {
   dataType: 'Rockets' | 'Launches',
   addToFavorite: (
     id: string | null,
-    dataType: 'Rockets' | 'Launches',
   ) => void,
   deleteFromFavorites: (
     id: string | null,
-    dataType: 'Rockets' | 'Launches',
   ) => void,
   moreDetails: ILaunchesData | IRocketsData,
-  favorites: Array<ILaunchesData | IRocketsData>
+  favorites: Array<ILaunchesData | IRocketsData>,
+  rocketsDataStore: IRocketsData[]
 }
 
 export const Description: React.FC<DescriptionProps> = ({
@@ -27,16 +26,17 @@ export const Description: React.FC<DescriptionProps> = ({
   name,
   description,
   thumbnail,
-  dataType,
   addToFavorite,
   deleteFromFavorites,
   moreDetails,
-  favorites
+  favorites,
+  rocketsDataStore
 }) => {
+
   const getDetails: () => boolean | JSX.Element = () => {
     return (
       moreDetails.dataType === 'Launches' && (
-        <DescriptionLaunches moreDetails={moreDetails} />
+        <DescriptionLaunches moreDetails={moreDetails} rocketsDataStore={rocketsDataStore} />
       )
     )
   }
@@ -59,8 +59,8 @@ export const Description: React.FC<DescriptionProps> = ({
         className={S.likeButton}
         onClick={() =>
           favorites?.some((f) => f.id === id)
-            ? deleteFromFavorites(id, dataType)
-            : addToFavorite(id, dataType)
+            ? deleteFromFavorites(id)
+            : addToFavorite(id)
         }>
         <i
           className={
