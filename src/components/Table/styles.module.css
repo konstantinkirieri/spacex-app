@@ -7,8 +7,21 @@
     .main {
         flex-direction: column;
     }
+    .list {
+        height: 80vh;
+    }
 }
-
+.description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    height: 85vh;
+    overflow-y: scroll;
+  }
+  
 .list {
     padding: 10px 0;
     width: 300px;
@@ -63,7 +76,6 @@
 
 @media screen and (max-width: 750px) {
     .list {
-        height: 20vh;
         width: inherit;
     }
 }

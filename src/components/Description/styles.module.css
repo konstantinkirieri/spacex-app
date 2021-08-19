@@ -102,11 +102,30 @@
   color: red;
 }
 
+.goBackButton {
+  display: none;
+}
+
 @media screen and (max-width: 750px) {
-  .description {
-    height: 60vh;
+  .goBackButton {
+    display: block;
+    position: absolute;
+    font-size: 40px;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+    color: rgb(131, 130, 130);
   }
   .description__text {
     width: 100%;
+  }
+  .rocketList {
+    width: 90vw;
+    padding: 5vw;
+  }
+  .rocketList__item a {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 }

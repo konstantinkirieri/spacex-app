@@ -31,66 +31,33 @@ export const List: React.FC<{
     <>
       {selectedCategory === 'Favorites' && 
         <div className={S.search}>
-        {/* <input
-        className={S.search_input}
-        type="search"
-        placeholder={`Поиск...`}
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}/> */}
-        <TextField id="standard-basic" 
-        label="Search" 
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}/>
-        <FormControl className={S.formControl}>
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
-          <Select
-            labelId="select"
-            id="demo-simple-select"
-            value={searchCategory}
-            onChange={handleChange}
-          >
-            <MenuItem
-                key={'000'}
-                value=''
+          <TextField id="standard-basic" 
+          autoComplete='off'
+          label="Search" 
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}/>
+          <FormControl className={S.formControl}>
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <Select
+              labelId="select"
+              id="demo-simple-select"
+              value={searchCategory}
+              onChange={handleChange}
             >
-              All
-            </MenuItem>
-            {categories.map(item => {
-            if(item.name !== 'Favorites') return (
-              <MenuItem
-                  key={item.id}
-                  value={item.name}
-              >
-                {item.name}
-              </MenuItem>
-            )
-          })}
-          </Select>
-        </FormControl>
-        {/* <select
-          id='select'
-          className={S.search_select}
-          value={searchCategory}
-          onChange={(e) => setSearchCategory(e.target.value)}
-        >
-          <option
-              value=''
-              defaultValue={''}
-          >
-            Reset filter
-          </option>;
-          {categories.map(item => {
-            if(item.name !== 'Favorites') return (
-              <option
-                  key={item.id}
-                  value={item.name}
-              >
-                {item.name}
-              </option>
-            )
-          })}
-        </select> */}
-      </div>
+              <MenuItem key={'000'} value=''>All</MenuItem>
+              {categories.map(item => {
+              if(item.name !== 'Favorites') return (
+                <MenuItem
+                    key={item.id}
+                    value={item.name}
+                >
+                  {item.name}
+                </MenuItem>
+              )
+              })}
+            </Select>
+          </FormControl>
+        </div>
       }
       {data ? (
         data

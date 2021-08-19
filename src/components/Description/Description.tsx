@@ -13,6 +13,7 @@ interface DescriptionProps {
   addToFavorite: (
     id: string | null,
   ) => void,
+  onGoBack: () => void,
   deleteFromFavorites: (
     id: string | null,
   ) => void,
@@ -27,6 +28,7 @@ export const Description: React.FC<DescriptionProps> = ({
   description,
   thumbnail,
   addToFavorite,
+  onGoBack,
   deleteFromFavorites,
   moreDetails,
   favorites,
@@ -55,6 +57,9 @@ export const Description: React.FC<DescriptionProps> = ({
         </div>
       </div>
       {getDetails()}
+      <button className={S.goBackButton} onClick={onGoBack}>
+        <i className="fas fa-arrow-alt-circle-left"></i>
+      </button>
       <button
         className={S.likeButton}
         onClick={() =>
