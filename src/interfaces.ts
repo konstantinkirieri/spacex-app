@@ -1,37 +1,38 @@
 export interface ILaunchesData {
-  id: string,
+  id: string
   links: {
     patch: {
       small: string
     }
     webcast: string
     wikipedia: string
-  },
-  name: string,
-  details: string,
-  dataType: 'Launches',
-  success: boolean,
-  flight_number: string,
-  rocket: string,
-  isFavorite: boolean,
-  favoriteDate: number | null,
+  }
+  name: string
+  details: string
+  dataType: 'Launches'
+  success: boolean
+  flight_number: string
+  rocket: string
+  isFavorite: boolean
+  favoriteDate: number | null
 }
 
 export interface IRocketsData {
-  id: string,
-  flickr_images: string,
-  name: string,
-  description: string,
-  dataType: 'Rockets',
+  id: string
+  flickr_images: string
+  name: string
+  description: string
+  dataType: 'Rockets'
   height: {
     meters: number
-  },
+  }
   diameter: {
     meters: string
-  },
+  }
   mass: {
     kg: string
-  },
-  isFavorite: boolean,
-  favoriteDate: number | null,
+  }
+  isFavorite: boolean
+  favoriteDate: number | null
+  rocket: string
 }

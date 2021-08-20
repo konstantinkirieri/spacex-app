@@ -1,5 +1,5 @@
 {
-  "printWidth": 60,
+  "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
   "semi": false,
@@ -7,5 +7,6 @@
   "trailingComma": "none",
   "bracketSpacing": false,
   "jsxBracketSameLine": true,
-  "fluid": false
+  "fluid": false,
+  "parser": "typescript"
 }

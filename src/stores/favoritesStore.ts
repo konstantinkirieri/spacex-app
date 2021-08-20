@@ -1,21 +1,16 @@
-import {
-  makeObservable,
-  observable,
-  action,
-} from 'mobx'
+import {makeObservable, observable, action} from 'mobx'
 
 export class FavoritesStore {
   favoritesDataStore: any = this.loadFromLocalStorage()
 
   constructor() {
     makeObservable(this, {
-        favoritesDataStore: observable,
-        addToStore: action.bound,
-        deleteFromStore: action.bound,
-        loadFromLocalStorage: action.bound,
-        updateLocalStorage: action.bound,
-      }
-    )
+      favoritesDataStore: observable,
+      addToStore: action.bound,
+      deleteFromStore: action.bound,
+      loadFromLocalStorage: action.bound,
+      updateLocalStorage: action.bound
+    })
   }
 
   addToStore(item: any) {
@@ -38,11 +33,12 @@ export class FavoritesStore {
 
   loadFromLocalStorage() {
     const getItem = localStorage.getItem('favorites')
-    return !getItem ? [] : JSON.parse(getItem);
+    return !getItem ? [] : JSON.parse(getItem)
   }
 
   updateLocalStorage() {
-    localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore));
+    localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore))
   }
-
 }
+
+export const favoritesStore = new FavoritesStore()
