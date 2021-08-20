@@ -36,7 +36,6 @@ export class RocketsStore {
     this.setIsLoading(true)
     yield api.fetchRockets()
       .then((item) => {
-        console.log(item)
         this.updateRockets(arrRocketsSchema.parse(item))
         this.setIsLoading(false)
     })

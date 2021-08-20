@@ -1,21 +1,19 @@
 import React, {useState} from 'react'
 
-import {launchesStore, rocketsStore} from '../../../stores'
+import {rocketsStore} from '../../../stores'
+import {ILaunchesData} from '../../../interfaces'
 
 import S from '../styles.module.css'
 import {DescriptionRockets} from '../Rockets'
 
 export const DescriptionLaunches: React.FC<{
-  itemIndex: number
-}> = ({itemIndex}) => {
+  launchesItem: ILaunchesData
+}> = ({launchesItem}) => {
   const [showRocketInfo, setShowRocketInfo] = useState(false)
 
-  const launchesItem = launchesStore.launchesDataStore[itemIndex]
-  const rocketItem = rocketsStore.rocketsDataStore.filter(
-    (item: {id: string}) => item.id === launchesItem.rocket
-  )[0]
+  const rocketItem = rocketsStore.rocketsDataStore.find(item => item.id = launchesItem.rocket)
 
-  return (
+  if (typeof launchesItem !== 'undefined' && typeof rocketItem !== 'undefined') return (
     <div className={S.rocketList}>
       <div className={S.rocketList__item}>
         <div>
@@ -28,7 +26,7 @@ export const DescriptionLaunches: React.FC<{
             onClick={() => setShowRocketInfo(!showRocketInfo)}>
             {rocketItem.name} {showRocketInfo ? '[↑]' : '[↓]'}
           </button>
-          {showRocketInfo && <DescriptionRockets dataRocket={rocketItem} />}
+          {showRocketInfo && <DescriptionRockets rocketsItem={rocketItem} />}
         </div>
       </div>
       <div className={S.rocketList__item}>
@@ -57,4 +55,5 @@ export const DescriptionLaunches: React.FC<{
       </div>
     </div>
   )
+  return <div>Full description not found</div>
 }
