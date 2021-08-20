@@ -104,7 +104,8 @@ export const Table: React.FC<any> = observer(() => {
     <main className={S.main}>
       <Categories onChangeCategory={handlerChangeCategory} />
       <div className={S.list} onScroll={scrollDiv} style={listStyle}>
-        {launchesStore.launchesDataStore.length === 0 ? (
+        {launchesStore.launchesDataStore.length === 0 ||
+        rocketsStore.rocketsDataStore.length === 0 ? (
           <CircularProgress />
         ) : (
           <List
@@ -113,7 +114,6 @@ export const Table: React.FC<any> = observer(() => {
             onClickItem={handlerClickItem}
           />
         )}
-        {launchesStore.isLoading && <CircularProgress />}
       </div>
       {(getWidth() > 750 || visibleDescription) && (
         <div className={S.description}>
