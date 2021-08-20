@@ -39,6 +39,7 @@ export class LaunchesStore {
     this.nextPage++
     yield api.fetchLaunches(this.nextPage)
       .then((item) => {
+        console.log(item)
         this.updateLaunches(arrLaunchesSchema.parse(item))
         this.setIsLoading(false)
     })

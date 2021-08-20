@@ -1,18 +1,18 @@
 import React from 'react'
-import {favoritesStore, rocketsStore} from '../../stores'
+import {favoritesStore} from '../../stores'
 
 import {DescriptionLaunches} from './Launches'
 import {DescriptionRockets} from './Rockets'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 import S from './styles.module.css'
 
 interface DescriptionProps {
-  id: null | string
-  itemIndex: number
+  id: string
+  currentData: ILaunchesData | IRocketsData
   name: string
   description: string | null
   thumbnail: string 
-  dataType: 'Launches' | 'Rockets'
   addToFavorite: (id: string | null) => void
   onGoBack: () => void
   deleteFromFavorites: (id: string | null) => void
@@ -20,11 +20,10 @@ interface DescriptionProps {
 
 export const Description: React.FC<DescriptionProps> = ({
   id,
-  itemIndex,
+  currentData,
   name,
   description,
   thumbnail,
-  dataType,
   addToFavorite,
   onGoBack,
   deleteFromFavorites
@@ -38,12 +37,10 @@ export const Description: React.FC<DescriptionProps> = ({
         <div className={S.description__about}>{description}</div>
       </div>
 
-      {dataType === 'Launches' ? (
-        <DescriptionLaunches itemIndex={itemIndex} />
+      {currentData.dataType === 'Launches' ? (
+        <DescriptionLaunches launchesItem={currentData}/>
       ) : (
-        <DescriptionRockets
-          dataRocket={rocketsStore.rocketsDataStore[itemIndex]}
-        />
+        <DescriptionRockets rocketsItem={currentData}/>
       )}
 
       <button className={S.goBackButton} onClick={onGoBack}>

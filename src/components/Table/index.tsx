@@ -28,6 +28,7 @@ export const Table: React.FC<any> = observer(() => {
   const [selectedItemId, setSelectedItemId] = useState<null | string>(null)
   const [listStyle, setListStyle] = useState({})
   const [visibleDescription, setVisibleDescription] = useState(false)
+  const [currentData, setCurrentData]: [any, any] = useState(null)
 
   const getItemsByCategory: () => Array<ILaunchesData | IRocketsData> | null =
     () => {
@@ -43,30 +44,30 @@ export const Table: React.FC<any> = observer(() => {
       }
     }
 
-  const getCurrentData: () => Array<ILaunchesData | IRocketsData>  = () => {
-    if (selectedCategory === 'Launches')
-      return selectedItemId
-        ? launchesDataStore.filter(
+  const getCurrentData: () => void  = () => {
+    if (selectedCategory === 'Launches') {
+       selectedItemId
+        ? setCurrentData(launchesDataStore.find(
             (item: {id: string}) => item.id === selectedItemId
-          )
-        : [launchesDataStore[0]]
+          ))
+        : setCurrentData(launchesDataStore[0])
 
-    if (selectedCategory === 'Rockets')
+    } else if (selectedCategory === 'Rockets') {
       return selectedItemId
-        ? rocketsDataStore.filter(
+        ? setCurrentData(rocketsDataStore.find(
             (item: {id: string}) => item.id === selectedItemId
-          )
-        : [rocketsDataStore[0]]
+          ))
+        : setCurrentData(rocketsDataStore[0])
 
-    if (selectedCategory === 'Favorites')
+    } else if (selectedCategory === 'Favorites') {
       return selectedItemId
-        ? favoritesDataStore.filter(
+        ? setCurrentData(favoritesDataStore.find(
             (item: {id: string}) => item.id === selectedItemId
-          )
+          ))
         : favoritesDataStore.length !== 0
-        ? [favoritesDataStore[0]]
+        ? setCurrentData(favoritesDataStore[0])
         : null
-    return
+    }
   }
 
   const handlerChangeCategory = (name: string): void => {
@@ -77,6 +78,7 @@ export const Table: React.FC<any> = observer(() => {
 
   const handlerClickItem = (id: null | string): void => {
     setSelectedItemId(id)
+    getCurrentData()
     if (getWidth() < 750) {
       setListStyle({display: 'none'})
     }
@@ -92,12 +94,6 @@ export const Table: React.FC<any> = observer(() => {
     if (e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight) {
       launchesStore.loadLaunches()
     }
-  }
-
-  const getIndex = (item: ILaunchesData | IRocketsData): number => {
-    return getCurrentData()
-      ? getCurrentData()?.findIndex((data) => data.id === item.id)
-      : 0
   }
 
   return (
@@ -117,28 +113,26 @@ export const Table: React.FC<any> = observer(() => {
       </div>
       {(getWidth() > 750 || visibleDescription) && (
         <div className={S.description}>
-          {getCurrentData() ? (
-            getCurrentData()?.map((item) => {
-              return launchesStore.launchesDataStore.length === 0 ||
+          {currentData ? (
+              launchesStore.launchesDataStore.length === 0 ||
                 rocketsStore.rocketsDataStore.length === 0 ? (
                 <CircularProgress key={0} />
               ) : (
                 <Description
-                  key={item.id}
-                  id={item.id}
-                  itemIndex={getIndex(item)}
-                  name={item.name}
+                  key={currentData.id}
+                  id={currentData.id}
+                  currentData={currentData}
+                  name={currentData.name}
                   description={
-                    'details' in item ? item.details : item.description
+                    'details' in currentData ? currentData.details : currentData.description
                   }
                   thumbnail={
-                    'links' in item
-                      ? item.links.patch.small
-                      : item.flickr_images[0]
+                    'links' in currentData
+                      ? currentData.links.patch.small
+                      : currentData.flickr_images[0]
                   }
-                  dataType={item.dataType}
                   addToFavorite={
-                    item.dataType === 'Launches'
+                    currentData.dataType === 'Launches'
                       ? launchesStore.addToFavorites
                       : rocketsStore.addToFavorites
                   }
@@ -146,7 +140,6 @@ export const Table: React.FC<any> = observer(() => {
                   onGoBack={handleGoBack}
                 />
               )
-            })
           ) : (
             <div style={{width: '100%'}}>
               <h1

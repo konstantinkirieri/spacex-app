@@ -3,10 +3,10 @@ import {IRocketsData} from '../../../interfaces'
 
 import S from '../styles.module.css'
 
-export const DescriptionRockets: React.FC<{dataRocket: IRocketsData}> = ({
-  dataRocket
+export const DescriptionRockets: React.FC<{rocketsItem: IRocketsData}> = ({
+  rocketsItem
 }) => {
-  const {name, height, diameter, mass, flickr_images} = dataRocket
+  const {name, height, diameter, mass, flickr_images} = rocketsItem
   return (
     <div className={S.rocketList__info}>
       <div>

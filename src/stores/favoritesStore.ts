@@ -1,8 +1,8 @@
 import {makeObservable, observable, action} from 'mobx'
-// import { ILaunchesData, ILaunchesData } from '../interfaces'
+import { ILaunchesData, IRocketsData } from '../interfaces'
 
 export class FavoritesStore {
-  favoritesDataStore: any = this.loadFromLocalStorage()
+  favoritesDataStore: Array<ILaunchesData | IRocketsData> = this.loadFromLocalStorage()
 
   constructor() {
     makeObservable(this, {
@@ -14,7 +14,7 @@ export class FavoritesStore {
     })
   }
 
-  addToStore(item: any) {
+  addToStore(item: ILaunchesData | IRocketsData) {
     const setFavoriteDate = Date.now()
     item = {
       ...item,
