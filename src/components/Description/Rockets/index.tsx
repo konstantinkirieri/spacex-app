@@ -10,7 +10,7 @@ export const DescriptionRockets: React.FC<{dataRocket: IRocketsData}> = ({
   return (
     <div className={S.rocketList__info}>
       <div>
-        <img className={S.rocketList__image} src={flickr_images} alt={name} />
+        <img className={S.rocketList__image} src={flickr_images[0]} alt={name} />
       </div>
       <div className={S.rocketList__details}>
         <h3>{name}</h3>

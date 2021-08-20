@@ -88,7 +88,7 @@ export const List: React.FC<{
                   src={
                     item.dataType === 'Launches'
                       ? item.links.patch.small
-                      : item.flickr_images
+                      : item.flickr_images[0]
                   }
                   alt={item.name}
                 />

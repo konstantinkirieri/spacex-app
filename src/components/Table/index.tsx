@@ -43,7 +43,7 @@ export const Table: React.FC<any> = observer(() => {
       }
     }
 
-  const getCurrentData: () => Array<ILaunchesData | IRocketsData> = () => {
+  const getCurrentData: () => Array<ILaunchesData | IRocketsData>  = () => {
     if (selectedCategory === 'Launches')
       return selectedItemId
         ? launchesDataStore.filter(
@@ -134,7 +134,7 @@ export const Table: React.FC<any> = observer(() => {
                   thumbnail={
                     'links' in item
                       ? item.links.patch.small
-                      : item.flickr_images
+                      : item.flickr_images[0]
                   }
                   dataType={item.dataType}
                   addToFavorite={

@@ -1,13 +1,14 @@
 import {makeObservable, observable, action, flow} from 'mobx'
 import {favoritesStore} from './favoritesStore'
 
+import { arrRocketsSchema, IRocketsData } from '../interfaces'
 import {Api} from '../api'
 
 const api = new Api()
 
 export class RocketsStore {
   isLoading: boolean = true
-  rocketsDataStore: any[] = []
+  rocketsDataStore: Array<IRocketsData> = []
   favoritesStore
 
   constructor() {
@@ -23,7 +24,7 @@ export class RocketsStore {
     this.loadRockets()
   }
 
-  updateRockets(item: any[]) {
+  updateRockets(item: Array<IRocketsData>) {
     this.rocketsDataStore = item
   }
 
@@ -33,9 +34,11 @@ export class RocketsStore {
 
   *loadRockets() {
     this.setIsLoading(true)
-    yield api.fetchRockets().then((item: any[]) => {
-      this.updateRockets(item)
-      this.setIsLoading(false)
+    yield api.fetchRockets()
+      .then((item) => {
+        console.log(item)
+        this.updateRockets(arrRocketsSchema.parse(item))
+        this.setIsLoading(false)
     })
   }
 

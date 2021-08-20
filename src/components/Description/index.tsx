@@ -10,8 +10,8 @@ interface DescriptionProps {
   id: null | string
   itemIndex: number
   name: string
-  description: string
-  thumbnail: string
+  description: string | null
+  thumbnail: string 
   dataType: 'Launches' | 'Rockets'
   addToFavorite: (id: string | null) => void
   onGoBack: () => void
