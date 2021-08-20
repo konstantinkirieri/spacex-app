@@ -1,27 +1,28 @@
 import {makeObservable, observable, action, flow} from 'mobx'
+import {favoritesStore} from './favoritesStore'
+
 import {Api} from '../api'
 
-const api = new Api;
+const api = new Api()
 
 export class LaunchesStore {
-  isLoading: boolean = true
-  // isLoadingMore: boolean = true
+  isLoading = true
   launchesDataStore: any[] = []
   nextPage = 0
+  favoritesStore
 
-  favoritesStore;
-
-  constructor(favoritesStore: any) {
+  constructor() {
     makeObservable(this, {
       launchesDataStore: observable,
       isLoading: observable,
-      // isLoadingMore: observable,
+      nextPage: observable,
       loadLaunches: flow.bound,
       updateLaunches: action.bound,
       setIsLoading: action.bound,
       addToFavorites: action.bound
     })
-    this.favoritesStore = favoritesStore;
+    this.favoritesStore = favoritesStore
+    this.loadLaunches()
   }
 
   updateLaunches(item: any[]) {
@@ -29,16 +30,15 @@ export class LaunchesStore {
   }
 
   setIsLoading(status: boolean) {
-    this.isLoading = status;
+    this.isLoading = status
   }
 
   *loadLaunches() {
-    this.setIsLoading(true);
-    console.log(this.nextPage)
+    this.setIsLoading(true)
     this.nextPage++
     yield api.fetchLaunches(this.nextPage).then((item: any[]) => {
-      this.updateLaunches(item);
-      this.setIsLoading(false);
+      this.updateLaunches(item)
+      this.setIsLoading(false)
     })
   }
 
@@ -49,3 +49,5 @@ export class LaunchesStore {
     this.favoritesStore.addToStore(this.launchesDataStore[index])
   }
 }
+
+export const launchesStore = new LaunchesStore()
