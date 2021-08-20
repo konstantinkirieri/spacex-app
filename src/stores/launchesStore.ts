@@ -1,13 +1,14 @@
 import {makeObservable, observable, action, flow} from 'mobx'
 import {favoritesStore} from './favoritesStore'
 
+import { arrLaunchesSchema, ILaunchesData } from '../interfaces'
 import {Api} from '../api'
 
 const api = new Api()
 
 export class LaunchesStore {
   isLoading = true
-  launchesDataStore: any[] = []
+  launchesDataStore: Array<ILaunchesData> = []
   nextPage = 0
   favoritesStore
 
@@ -25,7 +26,7 @@ export class LaunchesStore {
     this.loadLaunches()
   }
 
-  updateLaunches(item: any[]) {
+  updateLaunches(item: Array<ILaunchesData>) {
     this.launchesDataStore = this.launchesDataStore.concat(item)
   }
 
@@ -36,9 +37,10 @@ export class LaunchesStore {
   *loadLaunches() {
     this.setIsLoading(true)
     this.nextPage++
-    yield api.fetchLaunches(this.nextPage).then((item: any[]) => {
-      this.updateLaunches(item)
-      this.setIsLoading(false)
+    yield api.fetchLaunches(this.nextPage)
+      .then((item) => {
+        this.updateLaunches(arrLaunchesSchema.parse(item))
+        this.setIsLoading(false)
     })
   }
 
