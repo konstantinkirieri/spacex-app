@@ -9,16 +9,19 @@ const api = new Api()
 export class RocketsStore {
   isLoading: boolean = true
   rocketsDataStore: Array<IRocketsData> = []
+  rocketItem: any
   favoritesStore
 
   constructor() {
     makeObservable(this, {
       rocketsDataStore: observable,
       isLoading: observable,
+      rocketItem: observable,
       loadRockets: flow.bound,
       updateRockets: action.bound,
       setIsLoading: action.bound,
-      addToFavorites: action.bound
+      addToFavorites: action.bound,
+      getItem: action.bound
     })
     this.favoritesStore = favoritesStore
     this.loadRockets()
@@ -39,6 +42,10 @@ export class RocketsStore {
         this.updateRockets(arrRocketsSchema.parse(item))
         this.setIsLoading(false)
     })
+  }
+
+  getItem(id: string) {
+    this.rocketItem = this.rocketsDataStore.find((item: any) => item.id === id)
   }
 
   addToFavorites(id: string | null) {

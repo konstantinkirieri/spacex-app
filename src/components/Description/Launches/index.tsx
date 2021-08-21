@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {rocketsStore} from '../../../stores'
 import {ILaunchesData} from '../../../interfaces'
@@ -11,7 +11,11 @@ export const DescriptionLaunches: React.FC<{
 }> = ({launchesItem}) => {
   const [showRocketInfo, setShowRocketInfo] = useState(false)
 
-  const rocketItem = rocketsStore.rocketsDataStore.find(item => item.id = launchesItem.rocket)
+  useEffect(() => {
+    rocketsStore.getItem(launchesItem.rocket)
+  }, [launchesItem.rocket]);
+
+  const rocketItem = rocketsStore.rocketItem;
 
   if (typeof launchesItem !== 'undefined' && typeof rocketItem !== 'undefined') return (
     <div className={S.rocketList}>
