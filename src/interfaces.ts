@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const launcheSchema = z.object({
+export const launchSchema = z.object({
   name: z.string(),
   id: z.string(),
   dataType: z.literal('Launches'),
@@ -19,9 +19,9 @@ export const launcheSchema = z.object({
   favoriteDate: z.number().optional().nullable()
 })
 
-export const arrLaunchesSchema = z.array(launcheSchema)
+export const arrLaunchesSchema = z.array(launchSchema)
 
-export type ILaunchesData = z.infer<typeof launcheSchema>;
+export type ILaunchesData = z.infer<typeof launchSchema>;
 
 export const rocketSchema = z.object({
   name: z.string(),
