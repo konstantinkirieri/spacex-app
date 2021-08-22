@@ -19,7 +19,6 @@ export class LaunchesStore {
       loadLaunches: flow.bound,
       updateLaunches: action.bound,
       setIsLoading: action.bound,
-      addToFavorites: action.bound
     })
     this.favoritesStore = favoritesStore
     this.loadLaunches()
@@ -42,13 +41,6 @@ export class LaunchesStore {
         this.updateLaunches(arrLaunchesSchema.parse(item))
         this.setIsLoading(false)
     })
-  }
-
-  addToFavorites(id: string | null) {
-    const index = this.launchesDataStore.findIndex(
-      (item: {id: string}) => item.id === id
-    )
-    this.favoritesStore.addToStore(this.launchesDataStore[index])
   }
 }
 

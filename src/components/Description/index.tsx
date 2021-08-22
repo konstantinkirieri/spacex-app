@@ -1,12 +1,13 @@
 import React from 'react'
-import {favoritesStore, launchesStore, mainStore, rocketsStore} from '../../stores'
+import {favoritesStore, mainStore} from '../../stores'
 
 import {DescriptionLaunches} from './Launches'
 import {DescriptionRockets} from './Rockets'
 
 import S from './styles.module.css'
+import {observer} from 'mobx-react'
 
-export const Description: React.FC<{onGoBack: () => void}> = ({onGoBack}) => {
+export const Description: React.FC<{onGoBack: () => void}> = observer(({onGoBack}) => {
   const currentItem = mainStore.getCurrentItem;
 
   return currentItem ? (
@@ -38,9 +39,7 @@ export const Description: React.FC<{onGoBack: () => void}> = ({onGoBack}) => {
             (f: {id: string}) => f.id === currentItem.id
           )
             ? favoritesStore.deleteFromStore(currentItem.id)
-            : currentItem.dataType === 'Launches'
-              ? launchesStore.addToFavorites(currentItem.id)
-              : rocketsStore.addToFavorites(currentItem.id)
+            : favoritesStore.addToStore(currentItem)
         }>
         <i
           className={
@@ -64,4 +63,4 @@ export const Description: React.FC<{onGoBack: () => void}> = ({onGoBack}) => {
       </h1>
     </div>
   )
-}
+})

@@ -17,12 +17,12 @@ export const List: React.FC = observer(() => {
   const [keyword, setKeyword] = useState<string>('')
   const [searchCategory, setSearchCategory] = useState<string>('')
 
+  const currentData = mainStore.getCurrentData;
+
   useEffect(() => {
     setKeyword('')
     setSearchCategory('')
-  }, [])
-
-  const currentData = mainStore.getCurrentData;
+  }, [currentData])
 
   function filterList(item: {name: string}) {
     if (!keyword) return true

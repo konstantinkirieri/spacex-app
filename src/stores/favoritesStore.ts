@@ -29,8 +29,8 @@ export class FavoritesStore {
   }
 
   loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
-    const getItem = localStorage.getItem('favorites')
-    return !getItem ? [] : JSON.parse(getItem)
+    const localStorageItem = localStorage.getItem('favorites')
+    return !localStorageItem ? [] : JSON.parse(localStorageItem)
   }
 
   updateLocalStorage(): void {

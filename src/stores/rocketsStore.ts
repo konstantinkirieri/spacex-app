@@ -20,7 +20,6 @@ export class RocketsStore {
       loadRockets: flow.bound,
       updateRockets: action.bound,
       setIsLoading: action.bound,
-      addToFavorites: action.bound,
       getItem: action.bound
     })
     this.favoritesStore = favoritesStore
@@ -46,13 +45,6 @@ export class RocketsStore {
 
   getItem(id: string) {
     this.rocketItem = this.rocketsDataStore.find((item: any) => item.id === id)
-  }
-
-  addToFavorites(id: string | null) {
-    const index = this.rocketsDataStore.findIndex(
-      (item: {id: string}) => item.id === id
-    )
-    this.favoritesStore.addToStore(this.rocketsDataStore[index])
   }
 }
 
