@@ -14,15 +14,15 @@ import {
 import {observer} from 'mobx-react'
 
 export const List: React.FC = observer(() => {
+  useEffect(() => {
+    setKeyword('')
+    setSearchCategory('')
+  }, [])
+
   const [keyword, setKeyword] = useState<string>('')
   const [searchCategory, setSearchCategory] = useState<string>('')
 
   const currentData = mainStore.getCurrentData;
-
-  useEffect(() => {
-    setKeyword('')
-    setSearchCategory('')
-  }, [currentData])
 
   function filterList(item: {name: string}) {
     if (!keyword) return true

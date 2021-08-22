@@ -1,22 +1,34 @@
-import {makeObservable, action, observable, computed} from 'mobx'
-import {launchesStore} from './launchesStore'
-import {rocketsStore} from './rocketsStore'
+import {makeObservable, action, observable, computed, flow} from 'mobx'
+import {Api} from '../api'
+
 import {favoritesStore} from './favoritesStore'
-import {ILaunchesData, IRocketsData} from '../interfaces'
+import {arrLaunchesSchema, arrRocketsSchema, ILaunchesData, IRocketsData} from '../interfaces'
+
 
 class Main {
+  isLoading = true
   selectedCategory: string = 'Launches'
   selectedItemId: string | null = null
+  launchesItems: Array<ILaunchesData> = []
+  rocketsItems: Array<IRocketsData> = []
+  rocketItem: Array<IRocketsData> = []
 
   constructor() {
     makeObservable(this, {
+      isLoading: observable,
+      launchesItems: observable,
+      rocketsItems: observable,
+      rocketItem: observable,
       selectedCategory: observable,
       selectedItemId: observable,
       setCategory: action.bound,
       setItemId: action.bound,
+      getRocketById: action,
       getCurrentData: computed,
-      getCurrentItem: computed
+      getCurrentItem: computed,
+      fetchData: flow.bound,
     })
+    console.log('Start constructor main store')
   }
 
   setCategory(category: string) {
@@ -30,7 +42,8 @@ class Main {
 
   get getCurrentData(): Array<ILaunchesData | IRocketsData> {
     if (this.selectedCategory === 'Rockets')
-      return rocketsStore.rocketsDataStore
+      return this.rocketsItems
+
     if (this.selectedCategory === 'Favorites')
       if (!favoritesStore.favoritesDataStore) {
         return []
@@ -38,16 +51,35 @@ class Main {
         return favoritesStore.favoritesDataStore.slice().sort((a, b) => b.favoriteDate - a.favoriteDate)
       }
 
-    return launchesStore.launchesDataStore
+    return this.launchesItems
   }
 
   get getCurrentItem(): ILaunchesData | IRocketsData {
-    const result = this.getCurrentData.find((item: {id: string}) => item.id === this.selectedItemId)
+    return this.getCurrentData.find((item: {id: string}) => item.id === this.selectedItemId) || this.getCurrentData[0]
+  }
 
-    if (result) {
-      return result
-    } else {
-      return this.getCurrentData[0]
+  getRocketById(itemId: string) {
+    return this.rocketsItems.find((item: {id: string}) => item.id === itemId);
+  }
+
+  *fetchData(type: string) {
+    const api = new Api()
+    this.isLoading = true
+
+    if(type === 'Launches') {
+      yield api.fetchLaunches(1)
+        .then((item) => {
+          this.launchesItems = arrLaunchesSchema.parse(item)
+          this.isLoading = false
+      })
+    }
+
+    if(type === 'Rockets') {
+      yield api.fetchRockets()
+        .then((item) => {
+          this.rocketsItems = arrRocketsSchema.parse(item)
+          this.isLoading = false
+        })
     }
   }
 }
