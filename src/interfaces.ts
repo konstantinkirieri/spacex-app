@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import {z} from 'zod'
 
 export const launchSchema = z.object({
   name: z.string(),
@@ -15,8 +15,7 @@ export const launchSchema = z.object({
   }),
   rocket: z.string(),
   details: z.string().nullable(),
-  isFavorite: z.boolean().optional(),
-  favoriteDate: z.number().optional().nullable()
+  favoriteDate: z.number(),
 })
 
 export const arrLaunchesSchema = z.array(launchSchema)
@@ -29,7 +28,6 @@ export const rocketSchema = z.object({
   flickr_images: z.array(z.string()),
   dataType: z.literal('Rockets'),
   description: z.string(),
-  isFavorite: z.boolean().optional(),
   height: z.object({
     meters: z.number()
   }),
@@ -39,7 +37,7 @@ export const rocketSchema = z.object({
   mass: z.object({
     kg: z.number()
   }),
-  favoriteDate: z.number().optional()
+  favoriteDate: z.number(),
 })
 
 export const arrRocketsSchema = z.array(rocketSchema)

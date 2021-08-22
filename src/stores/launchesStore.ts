@@ -9,14 +9,13 @@ const api = new Api()
 export class LaunchesStore {
   isLoading = true
   launchesDataStore: Array<ILaunchesData> = []
-  nextPage = 0
   favoritesStore
+  nextPage: number
 
   constructor() {
     makeObservable(this, {
       launchesDataStore: observable,
       isLoading: observable,
-      nextPage: observable,
       loadLaunches: flow.bound,
       updateLaunches: action.bound,
       setIsLoading: action.bound,
@@ -24,6 +23,7 @@ export class LaunchesStore {
     })
     this.favoritesStore = favoritesStore
     this.loadLaunches()
+    this.nextPage = 0
   }
 
   updateLaunches(item: Array<ILaunchesData>) {
@@ -39,7 +39,6 @@ export class LaunchesStore {
     this.nextPage++
     yield api.fetchLaunches(this.nextPage)
       .then((item) => {
-        console.log(item)
         this.updateLaunches(arrLaunchesSchema.parse(item))
         this.setIsLoading(false)
     })

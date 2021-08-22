@@ -1,6 +1,6 @@
 import React from 'react'
 import S from './styles.module.css'
-import {categories} from '../../mocks/categories'
+import {categories} from './categories'
 import {mainStore} from '../../stores'
 
 export const Categories: React.FC = () => {

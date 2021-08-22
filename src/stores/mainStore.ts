@@ -1,4 +1,4 @@
-import {makeObservable, action, observable} from 'mobx'
+import {makeObservable, action, observable, computed} from 'mobx'
 import {launchesStore} from './launchesStore'
 import {rocketsStore} from './rocketsStore'
 import {favoritesStore} from './favoritesStore'
@@ -7,7 +7,6 @@ import {ILaunchesData, IRocketsData} from '../interfaces'
 class Main {
   selectedCategory: string = 'Launches'
   selectedItemId: string | null = null
-  currentData: Array<ILaunchesData | IRocketsData> | null = []
 
   constructor() {
     makeObservable(this, {
@@ -15,31 +14,43 @@ class Main {
       selectedItemId: observable,
       setCategory: action.bound,
       setItemId: action.bound,
-      getCurrentData: action.bound,
-      currentData: observable
-      //getAllItems: action,
+      getCurrentData: computed,
+      getCurrentItem: computed
     })
   }
+
   setCategory(category: string) {
     this.selectedCategory = category
     this.selectedItemId = null
-
   }
+
   setItemId(id: string | null) {
     this.selectedItemId = id
   }
 
-  getCurrentData(): Array<ILaunchesData | IRocketsData> | null {
-    if (this.selectedCategory === 'Launches')
-        this.currentData = launchesStore.launchesDataStore
+  get getCurrentData(): Array<ILaunchesData | IRocketsData> {
     if (this.selectedCategory === 'Rockets')
-        this.currentData = rocketsStore.rocketsDataStore
+      return rocketsStore.rocketsDataStore
     if (this.selectedCategory === 'Favorites')
-        this.currentData = favoritesStore.favoritesDataStore
+      if (!favoritesStore.favoritesDataStore) {
+        return []
+      } else {
+        return favoritesStore.favoritesDataStore.slice().sort((a, b) => b.favoriteDate - a.favoriteDate)
+      }
 
-    return null
+    return launchesStore.launchesDataStore
+  }
+
+  get getCurrentItem(): ILaunchesData | IRocketsData {
+    const result = this.getCurrentData.find((item: {id: string}) => item.id === this.selectedItemId)
+
+    if (result) {
+      return result
+    } else {
+      return this.getCurrentData[0]
+    }
   }
 }
 
-export const mainStore = new Main();
+export const mainStore = new Main()
 

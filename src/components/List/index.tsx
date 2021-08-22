@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {favoritesStore, mainStore} from '../../stores'
 
-import {categories} from '../../mocks/categories'
+import {categories} from '../Category/categories'
 
 import S from './styles.module.css'
 import {
@@ -22,7 +22,7 @@ export const List: React.FC = observer(() => {
     setSearchCategory('')
   }, [])
 
-  mainStore.getCurrentData()
+  const currentData = mainStore.getCurrentData;
 
   function filterList(item: {name: string}) {
     if (!keyword) return true
@@ -67,8 +67,8 @@ export const List: React.FC = observer(() => {
           </FormControl>
         </div>
       )}
-      {mainStore.currentData ? (
-        mainStore.currentData
+      {currentData ? (
+        currentData
           .filter((item: {dataType: string}) =>
             searchCategory ? item.dataType === searchCategory : true
           )

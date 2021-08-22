@@ -15,16 +15,12 @@ export class FavoritesStore {
   }
 
   addToStore(item: ILaunchesData | IRocketsData) {
-    const setFavoriteDate = Date.now()
-    item = {
-      ...item,
-      favoriteDate: setFavoriteDate
-    }
+    item.favoriteDate = Date.now()
     this.favoritesDataStore.push(item)
     this.updateLocalStorage()
   }
 
-  deleteFromStore(id: string | null) {
+  deleteFromStore(id: string | null): void {
     const index = this.favoritesDataStore.findIndex(
       (item: {id: string}) => item.id === id
     )
@@ -32,12 +28,12 @@ export class FavoritesStore {
     this.updateLocalStorage()
   }
 
-  loadFromLocalStorage() {
+  loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
     const getItem = localStorage.getItem('favorites')
     return !getItem ? [] : JSON.parse(getItem)
   }
 
-  updateLocalStorage() {
+  updateLocalStorage(): void {
     localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore))
   }
 }
