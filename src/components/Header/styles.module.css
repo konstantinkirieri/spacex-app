@@ -4,21 +4,22 @@
   background-repeat: no-repeat;
   background-color: black;
   background-size: 100%;
+  background-position-y: -764px;
   flex: 0 0 15vh;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
 .headerTitle {
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 30px;
   font-size: 25px;
   color: #ffffff;
 }
 
 .headerTitle i {
   margin-right: 15px;
+  color: #ff0081;
 }
 
 .button_burger {
@@ -29,7 +30,12 @@
   .header {
     flex: 0 0 10vh;
     padding: 0;
-    justify-content: space-around;
+    justify-content: start;
+    background-position-y: -170px;
+  }
+
+  .headerTitle {
+    display: none;
   }
 
   .button_burger {
@@ -38,5 +44,6 @@
     background-color: transparent;
     color: #fff;
     font-size: 30px;
+    margin-left: 30px;
   }
 }

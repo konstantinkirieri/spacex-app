@@ -33,6 +33,7 @@
     justify-content: flex-start;
     height: 85vh;
     overflow-y: scroll;
+    margin-left: 10px;
 }
 
 .search_wrapper {
@@ -78,6 +79,7 @@
 @media screen and (max-width: 750px) {
     .list {
         width: inherit;
+        margin-left: 0;
     }
     .sidebar_open {
         position: absolute;
@@ -91,4 +93,5 @@
     .sidebar_close {
         display: none;
     }
+
 }
