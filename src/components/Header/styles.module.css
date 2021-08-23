@@ -21,9 +21,22 @@
   margin-right: 15px;
 }
 
+.button_burger {
+  display: none;
+}
+
 @media screen and (max-width: 750px) {
   .header {
     flex: 0 0 10vh;
     padding: 0;
+    justify-content: space-around;
+  }
+
+  .button_burger {
+    display: block;
+    background-image: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 30px;
   }
 }

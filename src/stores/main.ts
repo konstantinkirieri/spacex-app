@@ -15,6 +15,7 @@ class Main {
   _selectedCategory = 'Launches'
   _selectedItemId: string | null = null
   _rocket: IRocketsData | undefined
+  sidebarIsOpen = false
   launchesItems: Array<ILaunchesData> = []
   rocketsItems: Array<IRocketsData> = []
 
@@ -25,6 +26,7 @@ class Main {
       _selectedItemId: observable,
       _selectedCategory: observable,
       _rocket: observable,
+      sidebarIsOpen: observable,
       currentCategory: computed,
       launchesItems: observable,
       rocketsItems: observable,
@@ -38,8 +40,13 @@ class Main {
       setLaunchesItems: action.bound,
       setRocketsItems: action.bound,
       setRocketItem: action.bound,
-      setItemId: action.bound
+      setItemId: action.bound,
+      toggleSidebar: action.bound
     })
+  }
+
+  toggleSidebar() {
+    this.sidebarIsOpen = !this.sidebarIsOpen
   }
 
   get currentCategory() {

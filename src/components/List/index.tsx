@@ -78,7 +78,10 @@ export const List: React.FC = observer(() => {
               <div
                 key={item.id}
                 className={S.item}
-                onClick={() => (mainStore.changeItemId = item.id)}>
+                onClick={() => {
+                  mainStore.changeItemId = item.id
+                  mainStore.toggleSidebar()
+                }}>
                 <img
                   className={S.img}
                   src={
