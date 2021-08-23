@@ -1,20 +1,19 @@
 import React from 'react'
 import S from './styles.module.css'
-import {CategoryItem} from './CategoryItem'
-import {categories} from '../../mocks/categories'
+import {categories} from './categories'
+import {main} from '../../stores'
 
-export const Categories: React.FC<{
-  onChangeCategory: (name: string) => void
-}> = ({onChangeCategory}) => {
+export const Categories: React.FC = () => {
   return (
     <nav className={S.category_wrapper}>
       {categories.map((item: {name: string; id: number}) => {
         return (
-          <CategoryItem
+          <div
             key={item.id}
-            data={item}
-            onChangeCategory={onChangeCategory}
-          />
+            className={S.item}
+            onClick={() => main.changeCategory = item.name}>
+            {item.name}
+          </div>
         )
       })}
     </nav>

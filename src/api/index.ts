@@ -1,3 +1,5 @@
+import {ILaunchesData, IRocketsData} from '../interfaces'
+
 export const BASE_URL = 'https://api.spacexdata.com/v4/'
 
 export class Api {
@@ -50,22 +52,21 @@ export class Api {
   }
 
   _transformLaunchesData(data: any): any[] {
-    return [...data].map((item: any) => {
+    return data.map((item: ILaunchesData) => {
       return {
         ...item,
-        isFavorite: false,
-        dataType: 'Launches'
+        dataType: 'Launches',
+        favoriteDate: 0,
       }
     })
   }
 
   _transformRocketsData(data: any): any[] {
-    const originalData = [...data]
-    return originalData.map((item) => {
+    return data.map((item: IRocketsData) => {
       return {
         ...item,
-        isFavorite: false,
-        dataType: 'Rockets'
+        dataType: 'Rockets',
+        favoriteDate: 0,
       }
     })
   }

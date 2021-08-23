@@ -1,46 +1,32 @@
 import React from 'react'
-import {favoritesStore} from '../../stores'
+import {favoritesStore, main} from '../../stores'
 
 import {DescriptionLaunches} from './Launches'
 import {DescriptionRockets} from './Rockets'
-import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 import S from './styles.module.css'
+import {observer} from 'mobx-react'
 
-interface DescriptionProps {
-  id: string
-  currentData: ILaunchesData | IRocketsData
-  name: string
-  description: string | null
-  thumbnail: string 
-  addToFavorite: (id: string | null) => void
-  onGoBack: () => void
-  deleteFromFavorites: (id: string | null) => void
-}
+export const Description: React.FC<{onGoBack: () => void}> = observer(({onGoBack}) => {
+  const currentItem = main.currentItem;
 
-export const Description: React.FC<DescriptionProps> = ({
-  id,
-  currentData,
-  name,
-  description,
-  thumbnail,
-  addToFavorite,
-  onGoBack,
-  deleteFromFavorites
-}) => {
-  return (
-    <div key={id} className={S.description}>
-      <img className={S.description__image} src={thumbnail} alt={name} />
+  return currentItem ? (
+    <div key={currentItem.id} className={S.description}>
+      <img className={S.description__image} src={
+        'links' in currentItem
+        ? currentItem.links.patch.small
+        : currentItem.flickr_images[0]
+      } alt={currentItem.name} />
 
       <div className={S.description__text}>
-        <h2 className={S.description__title}>{name}</h2>
-        <div className={S.description__about}>{description}</div>
+        <h2 className={S.description__title}>{currentItem.name}</h2>
+        <div className={S.description__about}>{'details' in currentItem ? currentItem.details : currentItem.description}</div>
       </div>
 
-      {currentData.dataType === 'Launches' ? (
-        <DescriptionLaunches launchesItem={currentData}/>
+      {currentItem.dataType === 'Launches' ? (
+        <DescriptionLaunches launchesItem={currentItem}/>
       ) : (
-        <DescriptionRockets rocketsItem={currentData}/>
+        <DescriptionRockets rocketsItem={currentItem}/>
       )}
 
       <button className={S.goBackButton} onClick={onGoBack}>
@@ -50,15 +36,15 @@ export const Description: React.FC<DescriptionProps> = ({
         className={S.likeButton}
         onClick={() =>
           favoritesStore.favoritesDataStore?.some(
-            (f: {id: string}) => f.id === id
+            (f: {id: string}) => f.id === currentItem.id
           )
-            ? deleteFromFavorites(id)
-            : addToFavorite(id)
+            ? favoritesStore.deleteFromStore(currentItem.id)
+            : favoritesStore.addToStore(currentItem)
         }>
         <i
           className={
             favoritesStore.favoritesDataStore?.some(
-              (f: {id: string}) => f.id === id
+              (f: {id: string}) => f.id === currentItem.id
             )
               ? `${S.likeButtonHovered} fas fa-heart`
               : 'far fa-heart'
@@ -66,5 +52,15 @@ export const Description: React.FC<DescriptionProps> = ({
         />
       </button>
     </div>
+  ) : (
+    <div style={{width: '100%'}}>
+      <h1
+        style={{
+          textAlign: 'center',
+          marginTop: '100px'
+        }}>
+        No items
+      </h1>
+    </div>
   )
-}
+})

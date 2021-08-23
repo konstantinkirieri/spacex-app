@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {favoritesStore} from '../../stores'
+import {favoritesStore, main} from '../../stores'
 
-import {categories} from '../../mocks/categories'
-
-import {ILaunchesData, IRocketsData} from '../../interfaces'
+import {categories} from '../Category/categories'
 
 import S from './styles.module.css'
 import {
@@ -13,19 +11,18 @@ import {
   MenuItem,
   TextField
 } from '@material-ui/core'
+import {observer} from 'mobx-react'
 
-export const List: React.FC<{
-  data: Array<ILaunchesData | IRocketsData> | null
-  selectedCategory: string
-  onClickItem: (id: string | null) => void
-}> = ({data, selectedCategory, onClickItem}) => {
-  const [keyword, setKeyword] = useState<string>('')
-  const [searchCategory, setSearchCategory] = useState<string>('')
-
+export const List: React.FC = observer(() => {
   useEffect(() => {
     setKeyword('')
     setSearchCategory('')
-  }, [selectedCategory])
+  }, [])
+
+  const [keyword, setKeyword] = useState<string>('')
+  const [searchCategory, setSearchCategory] = useState<string>('')
+
+  const currentData = main.currentData;
 
   function filterList(item: {name: string}) {
     if (!keyword) return true
@@ -36,10 +33,9 @@ export const List: React.FC<{
   const handleChange = (event: React.ChangeEvent<{value: unknown}>) => {
     setSearchCategory(event.target.value as string)
   }
-
   return (
     <>
-      {selectedCategory === 'Favorites' && (
+      {main.currentCategory === 'Favorites' && (
         <div className={S.search}>
           <TextField
             id="standard-basic"
@@ -71,18 +67,18 @@ export const List: React.FC<{
           </FormControl>
         </div>
       )}
-      {data ? (
-        data
+      {currentData ? (
+        currentData
           .filter((item: {dataType: string}) =>
             searchCategory ? item.dataType === searchCategory : true
           )
           .filter((item: {name: string}) => filterList(item))
-          .map((item) => {
+          .map((item: any) => {
             return (
               <div
                 key={item.id}
                 className={S.item}
-                onClick={() => onClickItem(item.id)}>
+                onClick={() => main.changeItemId = item.id}>
                 <img
                   className={S.img}
                   src={
@@ -118,4 +114,4 @@ export const List: React.FC<{
       )}
     </>
   )
-}
+})

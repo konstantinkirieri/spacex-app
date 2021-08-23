@@ -1,3 +1,2 @@
-export  * from "./launchesStore"
-export  * from "./rocketsStore"
-export  * from "./favoritesStore"
+export  * from "./main"
+export  * from "./favorites"

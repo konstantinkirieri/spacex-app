@@ -1,7 +1,7 @@
 import {makeObservable, observable, action} from 'mobx'
 import { ILaunchesData, IRocketsData } from '../interfaces'
 
-export class FavoritesStore {
+export class Favorites {
   favoritesDataStore: Array<ILaunchesData | IRocketsData> = this.loadFromLocalStorage()
 
   constructor() {
@@ -15,16 +15,12 @@ export class FavoritesStore {
   }
 
   addToStore(item: ILaunchesData | IRocketsData) {
-    const setFavoriteDate = Date.now()
-    item = {
-      ...item,
-      favoriteDate: setFavoriteDate
-    }
+    item.favoriteDate = Date.now()
     this.favoritesDataStore.push(item)
     this.updateLocalStorage()
   }
 
-  deleteFromStore(id: string | null) {
+  deleteFromStore(id: string | null): void {
     const index = this.favoritesDataStore.findIndex(
       (item: {id: string}) => item.id === id
     )
@@ -32,14 +28,14 @@ export class FavoritesStore {
     this.updateLocalStorage()
   }
 
-  loadFromLocalStorage() {
-    const getItem = localStorage.getItem('favorites')
-    return !getItem ? [] : JSON.parse(getItem)
+  loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
+    const localStorageItem = localStorage.getItem('favorites')
+    return !localStorageItem ? [] : JSON.parse(localStorageItem)
   }
 
-  updateLocalStorage() {
+  updateLocalStorage(): void {
     localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore))
   }
 }
 
-export const favoritesStore = new FavoritesStore()
+export const favoritesStore = new Favorites()

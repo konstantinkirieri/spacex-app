@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
 
-import {rocketsStore} from '../../../stores'
 import {ILaunchesData} from '../../../interfaces'
 
 import S from '../styles.module.css'
 import {DescriptionRockets} from '../Rockets'
+import {main} from '../../../stores'
+import {observer} from 'mobx-react'
 
 export const DescriptionLaunches: React.FC<{
   launchesItem: ILaunchesData
-}> = ({launchesItem}) => {
+}> = observer(({launchesItem}) => {
   const [showRocketInfo, setShowRocketInfo] = useState(false)
 
-  const rocketItem = rocketsStore.rocketsDataStore.find(item => item.id = launchesItem.rocket)
+  main.findRocket = launchesItem.rocket;
+  const rocketItem = main.rocket;
 
   if (typeof launchesItem !== 'undefined' && typeof rocketItem !== 'undefined') return (
     <div className={S.rocketList}>
@@ -56,4 +58,4 @@ export const DescriptionLaunches: React.FC<{
     </div>
   )
   return <div>Full description not found</div>
-}
+})
