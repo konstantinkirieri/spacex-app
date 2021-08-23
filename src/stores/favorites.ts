@@ -15,7 +15,13 @@ export class Favorites {
 
   private static loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
     const localStorageItem = localStorage.getItem('favorites')
-    return !localStorageItem ? [] : JSON.parse(localStorageItem)
+
+    return !localStorageItem
+      ? []
+      : JSON.parse(localStorageItem).sort(
+          (a: {favoriteDate: number}, b: {favoriteDate: number}) =>
+            b.favoriteDate - a.favoriteDate
+        )
   }
 
   private updateLocalStorage() {

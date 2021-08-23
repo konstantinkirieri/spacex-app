@@ -4,8 +4,8 @@
   background-repeat: no-repeat;
   background-color: black;
   background-size: 100%;
-  background-position-y: -764px;
-  flex: 0 0 15vh;
+  background-position-y: inherit;
+  flex: 0 0 12vh;
   display: flex;
   align-items: center;
 }
@@ -31,11 +31,14 @@
     flex: 0 0 10vh;
     padding: 0;
     justify-content: start;
-    background-position-y: -170px;
+    background-position-y: 0;
   }
-
   .headerTitle {
-    display: none;
+    flex-basis: 200px;
+    text-align: center;
+  }
+  .headerTitle i {
+    display: none
   }
 
   .button_burger {

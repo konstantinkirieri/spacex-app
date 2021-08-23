@@ -8,6 +8,7 @@ import {
   ILaunchesData,
   IRocketsData
 } from '../interfaces'
+import {searchStore} from './search'
 
 class Main {
   _isLoading = true
@@ -61,8 +62,6 @@ class Main {
         return []
       } else {
         return favoritesStore.favoritesDataStore
-          .slice()
-          .sort((a, b) => b.favoriteDate - a.favoriteDate)
       }
 
     return this.launchesItems
@@ -83,6 +82,7 @@ class Main {
   set changeCategory(category: string) {
     this.setCategory(category)
     this.setItemId(null)
+    searchStore.changeFilterCategory('')
   }
 
   set changeItemId(id: string | null) {

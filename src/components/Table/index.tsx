@@ -10,9 +10,9 @@ import {Description} from '../Description'
 import S from './styles.module.css'
 
 export const Table: React.FC<any> = observer(() => {
-  function scrollDiv(e: any) {
+  const scrollDiv = (e: any) => {
     if (
-      Math.floor(e.target.offsetHeight + e.target.scrollTop) ===
+      Math.floor(e.target.offsetHeight + e.target.scrollTop + 1) ===
       e.target.scrollHeight
     ) {
       mainStore.loadMoreLaunches()
