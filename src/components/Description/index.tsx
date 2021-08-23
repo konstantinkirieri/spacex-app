@@ -43,8 +43,8 @@ export const Description: React.FC = observer(() => {
           favoritesStore.favoritesDataStore?.some(
             (f: {id: string}) => f.id === currentItem.id
           )
-            ? favoritesStore.deleteFromStore(currentItem.id)
-            : favoritesStore.addToStore(currentItem)
+            ? (favoritesStore.deleteFromFavorites = currentItem.id)
+            : (favoritesStore.addToFavorites = currentItem)
         }>
         <i
           className={
