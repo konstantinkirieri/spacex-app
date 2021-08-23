@@ -7,7 +7,8 @@ import {arrLaunchesSchema, arrRocketsSchema, ILaunchesData, IRocketsData} from '
 
 class Main {
   _isLoading = true
-  _selectedCategory: string = 'Launches'
+  _page = 1
+  _selectedCategory = 'Launches'
   _selectedItemId: string | null = null
   _rocket: IRocketsData | undefined
   launchesItems: Array<ILaunchesData> = []
@@ -16,6 +17,7 @@ class Main {
   constructor() {
     makeObservable(this, {
       _isLoading: observable,
+      _page: observable,
       _selectedItemId: observable,
       _selectedCategory: observable,
       _rocket: observable,
@@ -26,6 +28,7 @@ class Main {
       currentData: computed,
       currentItem: computed,
       fetchData: flow.bound,
+      loadMoreLaunches: action.bound,
       setIsLoading: action.bound,
       setCategory: action.bound,
       setLaunchesItems: action.bound,
@@ -87,7 +90,7 @@ class Main {
   }
 
   setLaunchesItems(item: any[]): void {
-    this.launchesItems = arrLaunchesSchema.parse(item)
+    this.launchesItems = this.launchesItems.concat(arrLaunchesSchema.parse(item))
   }
 
   setRocketsItems(item: any[]): void {
@@ -98,12 +101,12 @@ class Main {
     this._isLoading = type
   }
 
-  *fetchData(type: string) {
+  *fetchData(type: string, page: number = this._page) {
     const api = new Api()
     this.setIsLoading(true)
 
     if(type === 'Launches') {
-      yield api.fetchLaunches(1)
+      yield api.fetchLaunches(page)
         .then((item) => {
           this.setLaunchesItems(item)
           this.setIsLoading(false)
@@ -117,6 +120,11 @@ class Main {
           this.setIsLoading(false)
         })
     }
+  }
+
+  loadMoreLaunches() {
+    this._page++;
+    this.fetchData('Launches')
   }
 }
 

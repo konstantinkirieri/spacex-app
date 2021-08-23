@@ -31,9 +31,8 @@ export const Table: React.FC<any> = observer(() => {
   }
 
   function scrollDiv(e: any) {
-    if (e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight) {
-      console.log('End height');
-      main.fetchData('Launches');
+    if (Math.floor(e.target.offsetHeight + e.target.scrollTop) === e.target.scrollHeight) {
+      main.loadMoreLaunches()
     }
   }
 
