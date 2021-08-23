@@ -1,5 +1,5 @@
 import React from 'react'
-import {favoritesStore, mainStore} from '../../stores'
+import {favoritesStore, main} from '../../stores'
 
 import {DescriptionLaunches} from './Launches'
 import {DescriptionRockets} from './Rockets'
@@ -8,7 +8,7 @@ import S from './styles.module.css'
 import {observer} from 'mobx-react'
 
 export const Description: React.FC<{onGoBack: () => void}> = observer(({onGoBack}) => {
-  const currentItem = mainStore.getCurrentItem;
+  const currentItem = main.currentItem;
 
   return currentItem ? (
     <div key={currentItem.id} className={S.description}>

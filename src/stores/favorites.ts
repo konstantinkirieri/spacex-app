@@ -1,7 +1,7 @@
 import {makeObservable, observable, action} from 'mobx'
 import { ILaunchesData, IRocketsData } from '../interfaces'
 
-export class FavoritesStore {
+export class Favorites {
   favoritesDataStore: Array<ILaunchesData | IRocketsData> = this.loadFromLocalStorage()
 
   constructor() {
@@ -38,4 +38,4 @@ export class FavoritesStore {
   }
 }
 
-export const favoritesStore = new FavoritesStore()
+export const favoritesStore = new Favorites()

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {observer} from 'mobx-react'
 
-import {mainStore} from '../../stores'
+import {main} from '../../stores'
 
 import {Categories} from '../Category'
 import {List} from '../List'
@@ -33,7 +33,7 @@ export const Table: React.FC<any> = observer(() => {
   function scrollDiv(e: any) {
     if (e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight) {
       console.log('End height');
-      mainStore.fetchData('Launches');
+      main.fetchData('Launches');
     }
   }
 

@@ -1,2 +1,2 @@
-export  * from "./mainStore"
-export  * from "./favoritesStore"
+export  * from "./main"
+export  * from "./favorites"
