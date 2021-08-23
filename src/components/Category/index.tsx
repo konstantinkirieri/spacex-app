@@ -1,7 +1,7 @@
 import React from 'react'
 import S from './styles.module.css'
 import {categories} from './categories'
-import {main} from '../../stores'
+import {mainStore} from '../../stores'
 
 export const Categories: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ export const Categories: React.FC = () => {
           <div
             key={item.id}
             className={S.item}
-            onClick={() => main.changeCategory = item.name}>
+            onClick={() => (mainStore.changeCategory = item.name)}>
             {item.name}
           </div>
         )

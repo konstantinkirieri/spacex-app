@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {observer} from 'mobx-react'
 
-import {main} from '../../stores'
+import {mainStore} from '../../stores'
 
 import {Categories} from '../Category'
 import {List} from '../List'
@@ -14,7 +14,6 @@ const getWidth = (): number => {
 }
 
 export const Table: React.FC<any> = observer(() => {
-
   const [listStyle, setListStyle] = useState({})
   const [visibleDescription, setVisibleDescription] = useState(false)
 
@@ -31,8 +30,11 @@ export const Table: React.FC<any> = observer(() => {
   }
 
   function scrollDiv(e: any) {
-    if (Math.floor(e.target.offsetHeight + e.target.scrollTop) === e.target.scrollHeight) {
-      main.loadMoreLaunches()
+    if (
+      Math.floor(e.target.offsetHeight + e.target.scrollTop) ===
+      e.target.scrollHeight
+    ) {
+      mainStore.loadMoreLaunches()
     }
   }
 
@@ -40,7 +42,7 @@ export const Table: React.FC<any> = observer(() => {
     <main className={S.main}>
       <Categories />
       <div className={S.list} onScroll={scrollDiv} style={listStyle}>
-          <List />
+        <List />
       </div>
       {(getWidth() > 750 || visibleDescription) && (
         <div className={S.description}>

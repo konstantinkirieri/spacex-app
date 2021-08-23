@@ -2,8 +2,12 @@ import {makeObservable, observable, computed, action, flow} from 'mobx'
 import {Api} from '../api'
 
 import {favoritesStore} from './favorites'
-import {arrLaunchesSchema, arrRocketsSchema, ILaunchesData, IRocketsData} from '../interfaces'
-
+import {
+  arrLaunchesSchema,
+  arrRocketsSchema,
+  ILaunchesData,
+  IRocketsData
+} from '../interfaces'
 
 class Main {
   _isLoading = true
@@ -24,7 +28,7 @@ class Main {
       currentCategory: computed,
       launchesItems: observable,
       rocketsItems: observable,
-      rocket: computed,
+      rocketItem: computed,
       currentData: computed,
       currentItem: computed,
       fetchData: flow.bound,
@@ -34,34 +38,39 @@ class Main {
       setLaunchesItems: action.bound,
       setRocketsItems: action.bound,
       setRocketItem: action.bound,
-      setItemId: action.bound,
+      setItemId: action.bound
     })
   }
 
   get currentCategory() {
-    return this._selectedCategory;
+    return this._selectedCategory
   }
 
   get currentData(): Array<ILaunchesData | IRocketsData> {
-    if (this._selectedCategory === 'Rockets')
-      return this.rocketsItems
+    if (this._selectedCategory === 'Rockets') return this.rocketsItems
 
     if (this._selectedCategory === 'Favorites')
       if (!favoritesStore.favoritesDataStore) {
         return []
       } else {
-        return favoritesStore.favoritesDataStore.slice().sort((a, b) => b.favoriteDate - a.favoriteDate)
+        return favoritesStore.favoritesDataStore
+          .slice()
+          .sort((a, b) => b.favoriteDate - a.favoriteDate)
       }
 
     return this.launchesItems
   }
 
   get currentItem(): ILaunchesData | IRocketsData {
-    return this.currentData.find((item: {id: string}) => item.id === this._selectedItemId) || this.currentData[0]
+    return (
+      this.currentData.find(
+        (item: {id: string}) => item.id === this._selectedItemId
+      ) || this.currentData[0]
+    )
   }
 
-  get rocket() {
-    return this._rocket;
+  get rocketItem() {
+    return this._rocket
   }
 
   set changeCategory(category: string) {
@@ -73,10 +82,6 @@ class Main {
     this.setItemId(id)
   }
 
-  set findRocket(itemId: string) {
-    this.setRocketItem(itemId)
-  }
-
   setCategory(category: string) {
     this._selectedCategory = category
   }
@@ -86,11 +91,15 @@ class Main {
   }
 
   setRocketItem(id: string) {
-    this._rocket = this.rocketsItems.find((item: {id: string}) => item.id === id)
+    this._rocket = this.rocketsItems.find(
+      (item: {id: string}) => item.id === id
+    )
   }
 
   setLaunchesItems(item: any[]): void {
-    this.launchesItems = this.launchesItems.concat(arrLaunchesSchema.parse(item))
+    this.launchesItems = this.launchesItems.concat(
+      arrLaunchesSchema.parse(item)
+    )
   }
 
   setRocketsItems(item: any[]): void {
@@ -105,28 +114,25 @@ class Main {
     const api = new Api()
     this.setIsLoading(true)
 
-    if(type === 'Launches') {
-      yield api.fetchLaunches(page)
-        .then((item) => {
-          this.setLaunchesItems(item)
-          this.setIsLoading(false)
-        })
+    if (type === 'Launches') {
+      yield api.fetchLaunches(page).then((item) => {
+        this.setLaunchesItems(item)
+        this.setIsLoading(false)
+      })
     }
 
-    if(type === 'Rockets') {
-      yield api.fetchRockets()
-        .then((item) => {
-          this.setRocketsItems(item)
-          this.setIsLoading(false)
-        })
+    if (type === 'Rockets') {
+      yield api.fetchRockets().then((item) => {
+        this.setRocketsItems(item)
+        this.setIsLoading(false)
+      })
     }
   }
 
   loadMoreLaunches() {
-    this._page++;
+    this._page++
     this.fetchData('Launches')
   }
 }
 
-export const main = new Main()
-
+export const mainStore = new Main()

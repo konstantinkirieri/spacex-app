@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {favoritesStore, main} from '../../stores'
+import {favoritesStore, mainStore} from '../../stores'
 
 import {categories} from '../Category/categories'
 
@@ -22,7 +22,7 @@ export const List: React.FC = observer(() => {
   const [keyword, setKeyword] = useState<string>('')
   const [searchCategory, setSearchCategory] = useState<string>('')
 
-  const currentData = main.currentData;
+  const currentData = mainStore.currentData
 
   function filterList(item: {name: string}) {
     if (!keyword) return true
@@ -35,7 +35,7 @@ export const List: React.FC = observer(() => {
   }
   return (
     <>
-      {main.currentCategory === 'Favorites' && (
+      {mainStore.currentCategory === 'Favorites' && (
         <div className={S.search}>
           <TextField
             id="standard-basic"
@@ -78,7 +78,7 @@ export const List: React.FC = observer(() => {
               <div
                 key={item.id}
                 className={S.item}
-                onClick={() => main.changeItemId = item.id}>
+                onClick={() => (mainStore.changeItemId = item.id)}>
                 <img
                   className={S.img}
                   src={
