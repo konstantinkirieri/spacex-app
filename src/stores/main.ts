@@ -111,13 +111,15 @@ class Main {
     )
   }
 
-  setLaunchesItems(item: any[]): void {
+  setLaunchesItems(
+    item: ILaunchesData[] | undefined
+  ): void {
     this.launchesItems = this.launchesItems.concat(
       arrLaunchesSchema.parse(item)
     )
   }
 
-  setRocketsItems(item: any[]): void {
+  setRocketsItems(item: IRocketsData[] | undefined): void {
     this.rocketsItems = arrRocketsSchema.parse(item)
   }
 
@@ -130,17 +132,23 @@ class Main {
     this.setIsLoading(true)
 
     if (type === 'Launches') {
-      yield api.fetchLaunches(page).then((item) => {
-        this.setLaunchesItems(item)
-        this.setIsLoading(false)
-      })
+      yield api
+        .fetchLaunches(page)
+        .then((item?: ILaunchesData[]) => {
+          this.setLaunchesItems(item)
+          this.setIsLoading(false)
+        })
+        .catch((e) => console.log(e, 'Error'))
     }
 
     if (type === 'Rockets') {
-      yield api.fetchRockets().then((item) => {
-        this.setRocketsItems(item)
-        this.setIsLoading(false)
-      })
+      yield api
+        .fetchRockets()
+        .then((item) => {
+          this.setRocketsItems(item)
+          this.setIsLoading(false)
+        })
+        .catch((e) => console.log(e, 'Error'))
     }
   }
 
