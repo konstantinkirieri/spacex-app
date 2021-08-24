@@ -20,35 +20,51 @@ export class Api {
       return await request.json()
     } catch (e) {
       console.error('getData Error: ', e)
+      return
     }
   }
 
-  async fetchRockets(): Promise<any[]> {
-    const result = await this._getData({
-      path: 'rockets/query',
-      data: {
-        options: {
-          limit: 4
-        }
-      },
-      config: {method: 'POST'}
-    })
-    return this._transformRocketsData(result.docs)
+  async fetchRockets(): Promise<any[] | undefined> {
+    try {
+      const result = await this._getData({
+        path: 'rockets/query',
+        data: {
+          options: {
+            limit: 4
+          }
+        },
+        config: {method: 'POST'}
+      })
+      return this._transformRocketsData(result.docs)
+    } catch (e) {
+      console.error('Loading rockets error: ', e)
+      return
+    }
   }
 
-  async fetchLaunches(page: number): Promise<any[]> {
-    const result = await this._getData({
-      path: 'launches/query',
-      data: {
-        options: {
-          limit: 15,
-          page,
-          pagination: true
-        }
-      },
-      config: {method: 'POST'}
-    })
-    return this._transformLaunchesData(result.docs)
+  async fetchLaunches(
+    page: number
+  ): Promise<any[] | undefined> {
+    try {
+      const result = await this._getData({
+        path: 'launches/query',
+        data: {
+          options: {
+            limit: 15,
+            sort: {
+              date_unix: 'desc'
+            },
+            page,
+            pagination: true
+          }
+        },
+        config: {method: 'POST'}
+      })
+      return this._transformLaunchesData(result.docs)
+    } catch (e) {
+      console.error('Loading rockets error: ', e)
+      return
+    }
   }
 
   _transformLaunchesData(data: any): any[] {
@@ -56,7 +72,7 @@ export class Api {
       return {
         ...item,
         dataType: 'Launches',
-        favoriteDate: 0,
+        favoriteDate: 0
       }
     })
   }
@@ -66,7 +82,7 @@ export class Api {
       return {
         ...item,
         dataType: 'Rockets',
-        favoriteDate: 0,
+        favoriteDate: 0
       }
     })
   }

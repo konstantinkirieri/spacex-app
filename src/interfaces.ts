@@ -4,23 +4,25 @@ export const launchSchema = z.object({
   name: z.string(),
   id: z.string(),
   dataType: z.literal('Launches'),
-  success: z.boolean(),
+  success: z.union([z.boolean(), z.null()]),
   flight_number: z.number(),
   links: z.object({
-    webcast: z.string(),
-    wikipedia: z.string(),
+    webcast: z.union([z.string(), z.null()]),
+    wikipedia: z.union([z.string(), z.null()]),
     patch: z.object({
-      small: z.string()
+      small: z.union([z.string(), z.null()])
     })
   }),
   rocket: z.string(),
+  date_local: z.string(),
+  date_unix: z.number(),
   details: z.string().nullable(),
-  favoriteDate: z.number(),
+  favoriteDate: z.number()
 })
 
 export const arrLaunchesSchema = z.array(launchSchema)
 
-export type ILaunchesData = z.infer<typeof launchSchema>;
+export type ILaunchesData = z.infer<typeof launchSchema>
 
 export const rocketSchema = z.object({
   name: z.string(),
@@ -37,7 +39,7 @@ export const rocketSchema = z.object({
   mass: z.object({
     kg: z.number()
   }),
-  favoriteDate: z.number(),
+  favoriteDate: z.number()
 })
 
 export const arrRocketsSchema = z.array(rocketSchema)

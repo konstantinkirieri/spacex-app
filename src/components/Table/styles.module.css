@@ -1,9 +1,10 @@
 .main {
     display: flex;
     flex: 1;
+    position: relative;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 960px) {
     .main {
         flex-direction: column;
     }
@@ -32,6 +33,7 @@
     justify-content: flex-start;
     height: 85vh;
     overflow-y: scroll;
+    margin-left: 10px;
 }
 
 .search_wrapper {
@@ -74,8 +76,22 @@
     background: rgb(131, 130, 130);
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 960px) {
     .list {
         width: inherit;
+        margin-left: 0;
     }
+    .sidebar_open {
+        position: absolute;
+        left: 0;
+        top: 82px;
+        z-index: 999;
+        display: block;
+        width: 300px;
+        box-shadow: 9px 0 14px 0 rgba(34, 60, 80, 0.23);
+    }
+    .sidebar_close {
+        display: none;
+    }
+
 }

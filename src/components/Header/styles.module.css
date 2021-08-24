@@ -4,26 +4,50 @@
   background-repeat: no-repeat;
   background-color: black;
   background-size: 100%;
-  flex: 0 0 15vh;
+  background-position-y: inherit;
+  flex: 0 0 12vh;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
 .headerTitle {
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 30px;
   font-size: 25px;
   color: #ffffff;
 }
 
 .headerTitle i {
   margin-right: 15px;
+  color: #ff0081;
 }
 
-@media screen and (max-width: 750px) {
+.button_burger {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
   .header {
     flex: 0 0 10vh;
     padding: 0;
+    justify-content: start;
+    background-position-y: 0;
+  }
+  .headerTitle {
+    flex-basis: 200px;
+    text-align: center;
+  }
+  .headerTitle i {
+    display: none
+  }
+
+  .button_burger {
+    display: block;
+    background-image: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 30px;
+    margin-left: 30px;
+    cursor: pointer;
   }
 }

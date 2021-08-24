@@ -1,40 +1,61 @@
 import {makeObservable, observable, action} from 'mobx'
-import { ILaunchesData, IRocketsData } from '../interfaces'
+import {ILaunchesData, IRocketsData} from '../interfaces'
 
 export class Favorites {
-  favoritesDataStore: Array<ILaunchesData | IRocketsData> = this.loadFromLocalStorage()
+  favoritesDataStore: Array<ILaunchesData | IRocketsData> =
+    Favorites.loadFromLocalStorage()
 
   constructor() {
     makeObservable(this, {
       favoritesDataStore: observable,
-      addToStore: action.bound,
-      deleteFromStore: action.bound,
-      loadFromLocalStorage: action.bound,
-      updateLocalStorage: action.bound
+      addItem: action.bound,
+      deleteItem: action.bound
     })
   }
 
-  addToStore(item: ILaunchesData | IRocketsData) {
+  private static loadFromLocalStorage(): Array<
+    ILaunchesData | IRocketsData
+  > {
+    const localStorageItem =
+      localStorage.getItem('favorites')
+
+    return !localStorageItem
+      ? []
+      : JSON.parse(localStorageItem).sort(
+          (
+            a: {favoriteDate: number},
+            b: {favoriteDate: number}
+          ) => b.favoriteDate - a.favoriteDate
+        )
+  }
+
+  private updateLocalStorage() {
+    localStorage.setItem(
+      'favorites',
+      JSON.stringify(this.favoritesDataStore)
+    )
+  }
+
+  set addToFavorites(item: ILaunchesData | IRocketsData) {
     item.favoriteDate = Date.now()
-    this.favoritesDataStore.push(item)
+    this.addItem(item)
     this.updateLocalStorage()
   }
 
-  deleteFromStore(id: string | null): void {
+  set deleteFromFavorites(id: string | null) {
     const index = this.favoritesDataStore.findIndex(
       (item: {id: string}) => item.id === id
     )
-    this.favoritesDataStore.splice(index, 1)
+    this.deleteItem(index)
     this.updateLocalStorage()
   }
 
-  loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
-    const localStorageItem = localStorage.getItem('favorites')
-    return !localStorageItem ? [] : JSON.parse(localStorageItem)
+  addItem(item: ILaunchesData | IRocketsData) {
+    this.favoritesDataStore.push(item)
   }
 
-  updateLocalStorage(): void {
-    localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore))
+  deleteItem(index: number) {
+    this.favoritesDataStore.splice(index, 1)
   }
 }
 
