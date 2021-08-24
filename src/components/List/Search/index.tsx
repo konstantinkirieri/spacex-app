@@ -10,14 +10,20 @@ export const Search = observer(() => {
     <div className={S.search}>
       <input
         type="text"
-        value={!searchStore.keyword ? '' : searchStore.keyword}
-        onChange={(e) => searchStore.addKeyword(e.target.value)}
+        value={
+          !searchStore.keyword ? '' : searchStore.keyword
+        }
+        onChange={(e) =>
+          searchStore.addKeyword(e.target.value)
+        }
       />
 
       <select
         value={searchStore.filterCategory}
         onChange={(e: React.ChangeEvent<{value: string}>) =>
-          searchStore.changeFilterCategory(e.target.value as string)
+          searchStore.changeFilterCategory(
+            e.target.value as string
+          )
         }>
         <option key={'000'} value="">
           All

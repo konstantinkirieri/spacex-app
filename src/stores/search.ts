@@ -1,9 +1,15 @@
-import {makeObservable, observable, action, computed} from 'mobx'
+import {
+  makeObservable,
+  observable,
+  action,
+  computed
+} from 'mobx'
 import {favoritesStore, mainStore} from './index'
 
 class SearchStore {
   keyword: string = ''
   filterCategory: string = ''
+
   constructor() {
     makeObservable(this, {
       keyword: observable,

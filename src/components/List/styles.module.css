@@ -55,6 +55,8 @@ button {
 .success {
     font-weight: 900;
     color: green;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
 .failure {

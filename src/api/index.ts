@@ -42,6 +42,9 @@ export class Api {
       data: {
         options: {
           limit: 15,
+          sort: {
+            date_unix: 'desc'
+          },
           page,
           pagination: true
         }
@@ -56,7 +59,7 @@ export class Api {
       return {
         ...item,
         dataType: 'Launches',
-        favoriteDate: 0,
+        favoriteDate: 0
       }
     })
   }
@@ -66,7 +69,7 @@ export class Api {
       return {
         ...item,
         dataType: 'Rockets',
-        favoriteDate: 0,
+        favoriteDate: 0
       }
     })
   }

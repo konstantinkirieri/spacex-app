@@ -8,7 +8,11 @@ export const Header: React.FC = observer(() => {
     <header className={S.header}>
       <button
         className={S.button_burger}
-        onClick={() => mainStore.toggleSidebar()}>
+        onClick={() => {
+          mainStore.sidebarIsOpen
+            ? mainStore.toggleSidebar(false)
+            : mainStore.toggleSidebar(true)
+        }}>
         {mainStore.sidebarIsOpen ? (
           <i className="fas fa-times" />
         ) : (

@@ -106,7 +106,7 @@
   display: none;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 960px) {
   .goBackButton {
     display: block;
     position: absolute;

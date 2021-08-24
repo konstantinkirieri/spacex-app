@@ -10,10 +10,11 @@ import {Description} from '../Description'
 import S from './styles.module.css'
 
 export const Table: React.FC<any> = observer(() => {
-  const scrollDiv = (e: any) => {
+  const handleScrollDiv = (e: any) => {
     if (
-      Math.floor(e.target.offsetHeight + e.target.scrollTop + 1) ===
-      e.target.scrollHeight
+      Math.floor(
+        e.target.offsetHeight + e.target.scrollTop + 1
+      ) === e.target.scrollHeight
     ) {
       mainStore.loadMoreLaunches()
     }
@@ -24,9 +25,11 @@ export const Table: React.FC<any> = observer(() => {
       <Categories />
       <div
         className={`${S.list} ${
-          mainStore.sidebarIsOpen ? S.sidebar_open : S.sidebar_close
+          mainStore.sidebarIsOpen
+            ? S.sidebar_open
+            : S.sidebar_close
         }`}
-        onScroll={scrollDiv}>
+        onScroll={handleScrollDiv}>
         <List />
       </div>
       <Description />

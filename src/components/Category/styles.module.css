@@ -37,7 +37,7 @@
    margin-left: auto;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 960px) {
    .category_wrapper {
        flex-direction: row;
        width: inherit;

@@ -17,13 +17,17 @@ export const Description: React.FC = observer(() => {
         src={
           'links' in currentItem
             ? currentItem.links.patch.small
+              ? currentItem.links.patch.small
+              : 'https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg'
             : currentItem.flickr_images[0]
         }
         alt={currentItem.name}
       />
 
       <div className={S.description__text}>
-        <h2 className={S.description__title}>{currentItem.name}</h2>
+        <h2 className={S.description__title}>
+          {currentItem.name}
+        </h2>
         <div className={S.description__about}>
           {'details' in currentItem
             ? currentItem.details
@@ -43,7 +47,8 @@ export const Description: React.FC = observer(() => {
           favoritesStore.favoritesDataStore?.some(
             (f: {id: string}) => f.id === currentItem.id
           )
-            ? (favoritesStore.deleteFromFavorites = currentItem.id)
+            ? (favoritesStore.deleteFromFavorites =
+                currentItem.id)
             : (favoritesStore.addToFavorites = currentItem)
         }>
         <i

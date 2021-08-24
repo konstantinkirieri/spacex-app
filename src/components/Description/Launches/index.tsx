@@ -10,7 +10,8 @@ import {observer} from 'mobx-react'
 export const DescriptionLaunches: React.FC<{
   launchesItem: ILaunchesData
 }> = observer(({launchesItem}) => {
-  const [showRocketInfo, setShowRocketInfo] = useState(false)
+  const [showRocketInfo, setShowRocketInfo] =
+    useState(false)
 
   useEffect(() => {
     mainStore.setRocketItem(launchesItem.rocket)
@@ -18,7 +19,10 @@ export const DescriptionLaunches: React.FC<{
 
   const rocketItem = mainStore.rocketItem
 
-  if (typeof launchesItem !== 'undefined' && typeof rocketItem !== 'undefined')
+  if (
+    typeof launchesItem !== 'undefined' &&
+    typeof rocketItem !== 'undefined'
+  )
     return (
       <div className={S.rocketList}>
         <div className={S.rocketList__item}>
@@ -29,10 +33,17 @@ export const DescriptionLaunches: React.FC<{
           <div key={rocketItem.id}>
             <button
               className={S.rocketList__button}
-              onClick={() => setShowRocketInfo(!showRocketInfo)}>
-              {rocketItem.name} {showRocketInfo ? '[↑]' : '[↓]'}
+              onClick={() =>
+                setShowRocketInfo(!showRocketInfo)
+              }>
+              {rocketItem.name}{' '}
+              {showRocketInfo ? '[↑]' : '[↓]'}
             </button>
-            {showRocketInfo && <DescriptionRockets rocketsItem={rocketItem} />}
+            {showRocketInfo && (
+              <DescriptionRockets
+                rocketsItem={rocketItem}
+              />
+            )}
           </div>
         </div>
         <div className={S.rocketList__item}>
@@ -49,18 +60,29 @@ export const DescriptionLaunches: React.FC<{
         </div>
         <div className={S.rocketList__item}>
           <strong>Webcast: </strong>
-          <a href={launchesItem.links.webcast} target="_blank" rel="noreferrer">
-            {launchesItem.links.webcast}
-          </a>
+          {launchesItem.links.webcast !== null ? (
+            <a
+              href={launchesItem.links.webcast}
+              target="_blank"
+              rel="noreferrer">
+              {launchesItem.links.webcast}
+            </a>
+          ) : (
+            'none'
+          )}
         </div>
         <div className={S.rocketList__item}>
-          <strong>Wikipedia: </strong>{' '}
-          <a
-            href={launchesItem.links.wikipedia}
-            target="_blank"
-            rel="noreferrer">
-            {launchesItem.links.wikipedia}
-          </a>
+          <strong>Wikipedia: </strong>
+          {launchesItem.links.wikipedia !== null ? (
+            <a
+              href={launchesItem.links.wikipedia}
+              target="_blank"
+              rel="noreferrer">
+              {launchesItem.links.wikipedia}
+            </a>
+          ) : (
+            'none'
+          )}
         </div>
       </div>
     )

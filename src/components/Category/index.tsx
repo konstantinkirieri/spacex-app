@@ -7,18 +7,24 @@ import {observer} from 'mobx-react'
 export const Categories: React.FC = observer(() => {
   return (
     <nav className={S.category_wrapper}>
-      {categories.map((item: {name: string; id: number}) => {
-        return (
-          <div
-            key={item.id}
-            className={`${S.item} ${
-              mainStore.currentCategory === item.name && S.item_active
-            }`}
-            onClick={() => (mainStore.changeCategory = item.name)}>
-            {item.name}
-          </div>
-        )
-      })}
+      {categories.map(
+        (item: {name: string; id: number}) => {
+          return (
+            <div
+              key={item.id}
+              className={`${S.item} ${
+                mainStore.currentCategory === item.name &&
+                S.item_active
+              }`}
+              onClick={() => {
+                mainStore.changeCategory = item.name
+                mainStore.toggleSidebar(true)
+              }}>
+              {item.name}
+            </div>
+          )
+        }
+      )}
     </nav>
   )
 })

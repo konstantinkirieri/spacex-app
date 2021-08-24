@@ -13,19 +13,27 @@ export class Favorites {
     })
   }
 
-  private static loadFromLocalStorage(): Array<ILaunchesData | IRocketsData> {
-    const localStorageItem = localStorage.getItem('favorites')
+  private static loadFromLocalStorage(): Array<
+    ILaunchesData | IRocketsData
+  > {
+    const localStorageItem =
+      localStorage.getItem('favorites')
 
     return !localStorageItem
       ? []
       : JSON.parse(localStorageItem).sort(
-          (a: {favoriteDate: number}, b: {favoriteDate: number}) =>
-            b.favoriteDate - a.favoriteDate
+          (
+            a: {favoriteDate: number},
+            b: {favoriteDate: number}
+          ) => b.favoriteDate - a.favoriteDate
         )
   }
 
   private updateLocalStorage() {
-    localStorage.setItem('favorites', JSON.stringify(this.favoritesDataStore))
+    localStorage.setItem(
+      'favorites',
+      JSON.stringify(this.favoritesDataStore)
+    )
   }
 
   set addToFavorites(item: ILaunchesData | IRocketsData) {

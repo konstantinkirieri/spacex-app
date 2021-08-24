@@ -1,4 +1,10 @@
-import {makeObservable, observable, computed, action, flow} from 'mobx'
+import {
+  makeObservable,
+  observable,
+  computed,
+  action,
+  flow
+} from 'mobx'
 import {Api} from '../api'
 
 import {favoritesStore} from './favorites'
@@ -46,8 +52,8 @@ class Main {
     })
   }
 
-  toggleSidebar() {
-    this.sidebarIsOpen = !this.sidebarIsOpen
+  toggleSidebar(status: boolean) {
+    this.sidebarIsOpen = status
   }
 
   get currentCategory() {
@@ -55,7 +61,8 @@ class Main {
   }
 
   get currentData(): Array<ILaunchesData | IRocketsData> {
-    if (this._selectedCategory === 'Rockets') return this.rocketsItems
+    if (this._selectedCategory === 'Rockets')
+      return this.rocketsItems
 
     if (this._selectedCategory === 'Favorites')
       if (!favoritesStore.favoritesDataStore) {
@@ -70,7 +77,8 @@ class Main {
   get currentItem(): ILaunchesData | IRocketsData {
     return (
       this.currentData.find(
-        (item: {id: string}) => item.id === this._selectedItemId
+        (item: {id: string}) =>
+          item.id === this._selectedItemId
       ) || this.currentData[0]
     )
   }
