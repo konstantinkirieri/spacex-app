@@ -12,9 +12,7 @@ import S from './styles.module.css'
 export const Table: React.FC<any> = observer(() => {
   const handleScrollDiv = (e: any) => {
     if (
-      Math.floor(
-        e.target.offsetHeight + e.target.scrollTop + 1
-      ) === e.target.scrollHeight
+      e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight
     ) {
       mainStore.loadMoreLaunches()
     }

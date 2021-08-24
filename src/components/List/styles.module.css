@@ -1,5 +1,5 @@
 .item {
-    width: 281px;
+    width: 100%;
     display: flex;
     padding: 10px 5px 15px 15px;
     align-items: center;
@@ -66,6 +66,21 @@ button {
 
 .search {
     display: flex;
+    height: 30px;
+    justify-content: center;
+}
+
+.search input {
+    height: inherit;
+    padding: 5px;
+    font-size: 16px;
+    font-size: 16px;
+}
+
+.search select {
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .formControl {
