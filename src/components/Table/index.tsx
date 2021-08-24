@@ -9,15 +9,7 @@ import {Description} from '../Description'
 
 import S from './styles.module.css'
 
-export const Table: React.FC<any> = observer(() => {
-  const handleScrollDiv = (e: any) => {
-    if (
-      e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight
-    ) {
-      mainStore.loadMoreLaunches()
-    }
-  }
-
+export const Table: React.FC = observer(() => {
   return (
     <main className={S.main}>
       <Categories />
@@ -27,7 +19,7 @@ export const Table: React.FC<any> = observer(() => {
             ? S.sidebar_open
             : S.sidebar_close
         }`}
-        onScroll={handleScrollDiv}>
+        onScroll={(e) => mainStore.handleScroll(e)}>
         <List />
       </div>
       <Description />

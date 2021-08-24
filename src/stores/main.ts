@@ -48,12 +48,9 @@ class Main {
       setRocketsItems: action.bound,
       setRocketItem: action.bound,
       setItemId: action.bound,
-      toggleSidebar: action.bound
+      toggleSidebar: action.bound,
+      handleScroll: action
     })
-  }
-
-  toggleSidebar(status: boolean) {
-    this.sidebarIsOpen = status
   }
 
   get currentCategory() {
@@ -150,6 +147,18 @@ class Main {
         })
         .catch((e) => console.log(e, 'Error'))
     }
+  }
+
+  toggleSidebar(status: boolean) {
+    this.sidebarIsOpen = status
+  }
+
+  handleScroll(e: any) {
+    return (
+      e.target.offsetHeight + e.target.scrollTop ===
+        e.target.scrollHeight &&
+      mainStore.loadMoreLaunches()
+    )
   }
 
   loadMoreLaunches() {

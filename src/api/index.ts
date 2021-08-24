@@ -52,7 +52,7 @@ export class Api {
           options: {
             limit: 15,
             sort: {
-              date_unix: 'desc'
+              date_local: 'desc'
             },
             page,
             pagination: true
