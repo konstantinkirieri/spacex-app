@@ -1,7 +1,7 @@
 import React from 'react'
 import S from './styles.module.css'
 import {categories} from './categories'
-import {mainStore} from '../../stores'
+import {favoritesStore, mainStore} from '../../stores'
 import {observer} from 'mobx-react'
 
 export const Categories: React.FC = observer(() => {
@@ -20,7 +20,12 @@ export const Categories: React.FC = observer(() => {
                 mainStore.changeCategory = item.name
                 mainStore.toggleSidebar(true)
               }}>
-              {item.name}
+              {item.name}{' '}
+              {item.name === 'Favorites' && (
+                <span className={S.favorites_count}>
+                  {favoritesStore.favoritesDataStore.length}
+                </span>
+              )}
             </div>
           )
         }
