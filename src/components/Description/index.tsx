@@ -63,7 +63,7 @@ export const Description: React.FC = observer(() => {
       </button>
     </div>
   ) : (
-    <div style={{width: '100%'}}>
+    <div className={S.description}>
       <h1
         style={{
           textAlign: 'center',
