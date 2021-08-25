@@ -1,5 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 import {
   favoritesStore,
   mainStore,
@@ -45,7 +46,7 @@ export const List: React.FC = observer(() => {
         <Search />
       )}
       {currentData ? (
-        searchStore.filteredData.map((item: any) => {
+        searchStore.filteredData.map((item: ILaunchesData | IRocketsData) => {
           return (
             <div
               key={item.id}

@@ -1,6 +1,6 @@
 import S from './styles.module.css'
 
-export const Loader = () => {
+export const Loader: React.FC = () => {
   return (
     <div className={S.container}>
       <div className={S.rocketContainer}>
