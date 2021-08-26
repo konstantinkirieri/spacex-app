@@ -24,7 +24,7 @@ export class Api {
     }
   }
 
-  async fetchRockets(): Promise<any[] | undefined> {
+  async fetchRockets(): Promise<Array<IRocketsData> | undefined> {
     try {
       const result = await this._getData({
         path: 'rockets/query',
@@ -44,7 +44,7 @@ export class Api {
 
   async fetchLaunches(
     page: number
-  ): Promise<any[] | undefined> {
+  ): Promise<Array<ILaunchesData> | undefined> {
     try {
       const result = await this._getData({
         path: 'launches/query',
@@ -67,7 +67,7 @@ export class Api {
     }
   }
 
-  _transformLaunchesData(data: any): any[] {
+  _transformLaunchesData(data: Array<ILaunchesData>): Array<ILaunchesData> {
     return data.map((item: ILaunchesData) => {
       return {
         ...item,
@@ -77,7 +77,7 @@ export class Api {
     })
   }
 
-  _transformRocketsData(data: any): any[] {
+  _transformRocketsData(data: Array<IRocketsData>): Array<IRocketsData> {
     return data.map((item: IRocketsData) => {
       return {
         ...item,

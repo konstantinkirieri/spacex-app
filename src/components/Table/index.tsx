@@ -9,7 +9,7 @@ import {Description} from '../Description'
 
 import S from './styles.module.css'
 
-export const Table: React.FC<any> = observer(() => {
+export const Table: React.FC = observer(() => {
   const handleScrollDiv = (e: any) => {
     if (
       e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight

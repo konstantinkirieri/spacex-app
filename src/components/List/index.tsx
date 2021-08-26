@@ -9,6 +9,7 @@ import {
 import {Search} from './Search'
 
 import S from './styles.module.css'
+import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 export const List: React.FC = observer(() => {
   const currentData = mainStore.currentData
@@ -45,7 +46,7 @@ export const List: React.FC = observer(() => {
         <Search />
       )}
       {currentData ? (
-        searchStore.filteredData.map((item: any) => {
+        searchStore.filteredData.map((item: ILaunchesData | IRocketsData) => {
           return (
             <div
               key={item.id}
