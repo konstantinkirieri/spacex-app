@@ -17,7 +17,8 @@
     margin: auto;
     height: 300px;
     width: 300px;
-    position: relative
+    position: relative;
+    display: block;
 }
 
 .rocketContainer {
