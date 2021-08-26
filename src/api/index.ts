@@ -6,12 +6,15 @@ export const BASE_URL = 'https://api.spacexdata.com/v4/'
 class Api {
   totalLaunches: number = 0
   totalRockets: number = 0
+  errorMessage: string = ''
   constructor() {
     makeObservable(this, {
       updateTotalLaunches: action.bound,
       updateTotalRockets: action.bound,
       totalLaunches: observable,
-      totalRockets: observable
+      totalRockets: observable,
+      errorMessage: observable,
+      updateErrorMessage: action.bound
     })
   }
 
@@ -31,8 +34,9 @@ class Api {
       })
       return await request.json()
     } catch (e) {
-      console.error('getData Error: ', e)
-      return
+      this.updateErrorMessage(
+        "Error! Don't get data from server"
+      )
     }
   }
 
@@ -51,7 +55,6 @@ class Api {
       return this._transformRocketsData(result.docs)
     } catch (e) {
       console.error('Loading rockets error: ', e)
-      return
     }
   }
 
@@ -77,7 +80,6 @@ class Api {
       return this._transformLaunchesData(result.docs)
     } catch (e) {
       console.error('Loading rockets error: ', e)
-      return
     }
   }
 
@@ -107,6 +109,10 @@ class Api {
 
   updateTotalRockets(total: number) {
     this.totalRockets = total
+  }
+
+  updateErrorMessage(message: string) {
+    this.errorMessage = message
   }
 }
 

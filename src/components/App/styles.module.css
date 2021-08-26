@@ -11,3 +11,9 @@
   height: 100vh;
   font-family: "Roboto Thin", Arial, serif;
 }
+
+.error_message {
+  margin:100px auto 0 auto;
+  padding: 20px 40px;
+  font-size: 24px;
+}

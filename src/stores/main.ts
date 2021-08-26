@@ -134,13 +134,16 @@ class Main {
           this.setLaunchesItems(item)
           this.setIsLoading(false)
         })
-        .catch((e) => console.log(e, 'Error'))
+        .catch((e) => {
+          console.log(e, 'Error FETCH')
+          return false
+        })
     }
 
     if (type === 'Rockets') {
       yield api
         .fetchRockets()
-        .then((item) => {
+        .then((item?: IRocketsData[]) => {
           this.setRocketsItems(item)
           this.setIsLoading(false)
         })

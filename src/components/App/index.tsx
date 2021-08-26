@@ -8,6 +8,7 @@ import {Table} from '../Table'
 import {Loader} from '../Loader'
 
 import S from './styles.module.css'
+import {api} from '../../api'
 
 export const App: React.FC = observer(() => {
   useEffect(() => {
@@ -15,11 +16,19 @@ export const App: React.FC = observer(() => {
     mainStore.fetchData('Rockets')
   }, [])
 
+  const loader = api.errorMessage ? (
+    <div className={S.error_message}>
+      {api.errorMessage}
+    </div>
+  ) : (
+    <Loader />
+  )
+
   return (
     <div className={S.app}>
       <Header />
       {mainStore.currentData.length === 0 ? (
-        <Loader />
+        loader
       ) : (
         <Table />
       )}
