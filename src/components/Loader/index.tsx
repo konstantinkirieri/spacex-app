@@ -1,20 +1,18 @@
-import S from './styles.module.css'
-
 export const Loader = () => {
   return (
-    <div className={S.container}>
-      <div className={S.rocketContainer}>
-        <div className={S.tip}></div>
-        <div className={S.rocket}></div>
-        <div className={S.window}></div>
-        <div className={S.dots}></div>
-        <div className={S.bum}></div>
-        <div className={`${S.wing} ${S.wingOne}`}></div>
-        <div className={`${S.wing} ${S.wingTwo}`}></div>
-        <div className={S.light}></div>
-        <div className={S.light2}></div>
-        <div className={S.flame}></div>
-        <div className={S.flame2}></div>
+    <div className="container">
+      <div className="rocketContainer">
+        <div className="tip"></div>
+        <div className="rocket"></div>
+        <div className="window"></div>
+        <div className="dots"></div>
+        <div className="bum"></div>
+        <div className="wing wingOne"></div>
+        <div className="wing wingTwo"></div>
+        <div className="light"></div>
+        <div className="light2"></div>
+        <div className="flame"></div>
+        <div className="flame2"></div>
       </div>
     </div>
   )
