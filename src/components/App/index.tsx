@@ -5,7 +5,7 @@ import {mainStore} from '../../stores'
 
 import {Header} from '../Header'
 import {Table} from '../Table'
-import {Loader} from '../Loader'
+// import {Loader} from '../Loader'
 
 import S from './styles.module.css'
 
@@ -18,8 +18,9 @@ export const App: React.FC = observer(() => {
   return (
     <div className={S.app}>
       <Header />
-      {mainStore.launchesItems.length === 0 ? (
-        <Loader />
+      {mainStore.currentData.length === 0 ? (
+        // <Loader />
+        <h1>...Loading</h1>
       ) : (
         <Table />
       )}
