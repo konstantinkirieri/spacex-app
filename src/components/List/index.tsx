@@ -1,44 +1,21 @@
 import React from 'react'
 import {observer} from 'mobx-react'
+
 import {
   favoritesStore,
   mainStore,
   searchStore
 } from '../../stores'
+import {listModel} from './Model'
 
 import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 import {Search} from './Search'
+
 import S from './styles.module.css'
 
 export const List: React.FC = observer(() => {
   const currentData = mainStore.currentData
-
-  const successFailure = (success: boolean | null) => {
-    if (success === null) return 'Status: No data'
-
-    if (success) {
-      return (
-        <>
-          Status:
-          <span className={S.success}> Success</span>
-        </>
-      )
-    } else {
-      return (
-        <>
-          Status:
-          <span className={S.failure}> Failure</span>
-        </>
-      )
-    }
-  }
-
-  const unixTimeToNormal = (unix_time: number) => {
-    const milliseconds = unix_time * 1000 // 1575909015000
-    const dateObject = new Date(milliseconds)
-    return dateObject.toLocaleString('ru-RU')
-  }
 
   return (
     <>
@@ -73,11 +50,13 @@ export const List: React.FC = observer(() => {
                     <div>
                       {item.dataType === 'Launches' &&
                       item.hasOwnProperty('success')
-                        ? successFailure(item.success)
-                        : 'Status: No data'}
+                        ? listModel.successFailure(
+                            item.success
+                          )
+                        : 'Status: Planned'}
                     </div>
                     {item.dataType === 'Launches'
-                      ? `Launch: ${unixTimeToNormal(
+                      ? `Launch: ${listModel.unixTimeToNormal(
                           item.date_unix
                         )}`
                       : item.description}

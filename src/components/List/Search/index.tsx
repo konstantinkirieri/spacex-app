@@ -16,6 +16,7 @@ export const Search = observer(() => {
         onChange={(e) =>
           searchStore.addKeyword(e.target.value)
         }
+        placeholder={'search...'}
       />
 
       <select

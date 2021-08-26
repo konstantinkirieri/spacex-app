@@ -5,7 +5,7 @@ import {
   action,
   flow
 } from 'mobx'
-import {Api} from '../api'
+import {api} from '../api'
 
 import {favoritesStore} from './favorites'
 import {
@@ -125,7 +125,6 @@ class Main {
   }
 
   *fetchData(type: string, page: number = this._page) {
-    const api = new Api()
     this.setIsLoading(true)
 
     if (type === 'Launches') {

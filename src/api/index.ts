@@ -1,8 +1,20 @@
+import {action, makeObservable, observable} from 'mobx'
 import {ILaunchesData, IRocketsData} from '../interfaces'
 
 export const BASE_URL = 'https://api.spacexdata.com/v4/'
 
-export class Api {
+class Api {
+  totalLaunches: number = 0
+  totalRockets: number = 0
+  constructor() {
+    makeObservable(this, {
+      updateTotalLaunches: action.bound,
+      updateTotalRockets: action.bound,
+      totalLaunches: observable,
+      totalRockets: observable
+    })
+  }
+
   async _getData(source: {
     path: string
     data?: any
@@ -35,6 +47,7 @@ export class Api {
         },
         config: {method: 'POST'}
       })
+      this.updateTotalRockets(result.totalDocs)
       return this._transformRocketsData(result.docs)
     } catch (e) {
       console.error('Loading rockets error: ', e)
@@ -60,6 +73,7 @@ export class Api {
         },
         config: {method: 'POST'}
       })
+      this.updateTotalLaunches(result.totalDocs)
       return this._transformLaunchesData(result.docs)
     } catch (e) {
       console.error('Loading rockets error: ', e)
@@ -86,4 +100,14 @@ export class Api {
       }
     })
   }
+
+  updateTotalLaunches(total: number) {
+    this.totalLaunches = total
+  }
+
+  updateTotalRockets(total: number) {
+    this.totalRockets = total
+  }
 }
+
+export const api = new Api()

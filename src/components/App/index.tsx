@@ -18,8 +18,7 @@ export const App: React.FC = observer(() => {
   return (
     <div className={S.app}>
       <Header />
-      {mainStore.launchesItems.length === 0 ||
-      mainStore.rocketsItems.length === 0 ? (
+      {!mainStore.currentData.length ? (
         <Loader />
       ) : (
         <Table />
