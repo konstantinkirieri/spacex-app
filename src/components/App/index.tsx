@@ -16,7 +16,7 @@ export const App: React.FC = observer(() => {
     mainStore.fetchData('Rockets')
   }, [])
 
-  const loader = api.errorMessage ? (
+  const loaderOrError = api.errorMessage ? (
     <div className={S.error_message}>
       {api.errorMessage}
     </div>
@@ -28,7 +28,7 @@ export const App: React.FC = observer(() => {
     <div className={S.app}>
       <Header />
       {mainStore.currentData.length === 0 ? (
-        loader
+        loaderOrError
       ) : (
         <Table />
       )}
