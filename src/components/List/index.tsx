@@ -10,7 +10,6 @@ import {
 import {Search} from './Search'
 
 import S from './styles.module.css'
-import {ILaunchesData, IRocketsData} from '../../interfaces'
 
 export const List: React.FC = observer(() => {
   const currentData = mainStore.currentData

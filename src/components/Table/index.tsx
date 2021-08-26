@@ -10,11 +10,7 @@ import {Description} from '../Description'
 import S from './styles.module.css'
 
 export const Table: React.FC = observer(() => {
-<<<<<<< HEAD
-  const handleScrollDiv = (e: any): void => {
-=======
   const handleScrollDiv = (e: React.SyntheticEvent<HTMLDivElement>) => {
->>>>>>> hhh
     if (
       e.currentTarget.offsetHeight + e.currentTarget.scrollTop === e.currentTarget.scrollHeight
     ) {
