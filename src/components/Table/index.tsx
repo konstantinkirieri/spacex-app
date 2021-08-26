@@ -10,9 +10,9 @@ import {Description} from '../Description'
 import S from './styles.module.css'
 
 export const Table: React.FC = observer(() => {
-  const handleScrollDiv = (e: any) => {
+  const handleScrollDiv = (e: React.SyntheticEvent<HTMLDivElement>) => {
     if (
-      e.target.offsetHeight + e.target.scrollTop === e.target.scrollHeight
+      e.currentTarget.offsetHeight + e.currentTarget.scrollTop === e.currentTarget.scrollHeight
     ) {
       mainStore.loadMoreLaunches()
     }
