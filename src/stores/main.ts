@@ -161,8 +161,10 @@ class Main {
   }
 
   loadMoreLaunches() {
-    this._page++
-    this.fetchData('Launches')
+    if (this.launchesItems.length < api.totalLaunches) {
+      this._page++
+      this.fetchData('Launches')
+    }
   }
 }
 
